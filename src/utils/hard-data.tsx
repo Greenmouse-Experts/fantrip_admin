@@ -1,0 +1,1 @@
+export const bgGrad = 'linear-gradient(90deg, #9847fe 0%, #fc819f 100%)'

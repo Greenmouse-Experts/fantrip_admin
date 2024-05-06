@@ -1,17 +1,13 @@
 
-// import SidebarLayout from "./sections/sidebar";
 import { Outlet, useNavigate } from "react-router-dom";
-// import useAuth from "@/hooks/authUser";
-// import useDialog from "@/hooks/useDialog";
-// import LogoutModal from "@/modules/auth/modals/logout-modal";
 import { useEffect } from "react";
 import useAuth from "../hooks/authUser";
 import SidebarLayout from "./components/sidebar";
-import useDialog from "../hooks/useDialog";
+// import useDialog from "../hooks/useDialog";
 
 const DashboardLayout = () => {
   const { firstName } = useAuth();
-  const { Dialog, setShowModal } = useDialog();
+  // const { Dialog, setShowModal } = useDialog();
   const token = sessionStorage.getItem('fantrip_admin_token')
   const navigate = useNavigate()
   useEffect(() => {
@@ -43,10 +39,9 @@ const DashboardLayout = () => {
           </div>
         </div>
       </div>
-      <Dialog title="" size="xs">
+      {/* <Dialog title="" size="xs">
         <>Hello peeople</>
-        {/* <LogoutModal CloseModal={() => setShowModal(false)} /> */}
-      </Dialog>
+      </Dialog> */}
     </>
   );
 };

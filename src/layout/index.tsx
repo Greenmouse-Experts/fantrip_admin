@@ -25,16 +25,15 @@ const DashboardLayout = () => {
   return (
     <>
       <div className="flex">
-        <div className="lg:w-[280px]">
+        <div className="lg:w-[280px] border-r border-[#1C1C1C1A]">
           <SidebarLayout />
         </div>
         <div className="w-full  lg:w-[calc(100%_-_280px)] min-h-screen py-4 lg:py-9">
           <div className="">
-            <div className="h-[60px] relative index-30">
+            <div className="h-[30px] border-b border-[#1C1C1C1A] relative index-30">
               <div className="fixed top-0 w-full lg:w-[calc(100%_-_280px)] pl-9 pr-5 py-4 lg:py-[23px] flex items-center justify-between">
                <div>
                <p className="fw-600 lg:text-xl">Welcome back, {firstName}</p>
-                <p className="fs-400" onClick={() => setShowModal(true)}>Manage and control all your activities on fantrip</p>
                </div>
               </div>
             </div>

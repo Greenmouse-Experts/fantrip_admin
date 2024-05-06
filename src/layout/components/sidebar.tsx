@@ -56,14 +56,16 @@ const SidebarLayout = () => {
             button: ({ level, active }) => {
               if (level === 0)
                 return {
-                  color: active ? "#9847FE" : "#AEB9E1",
-                  marginTop: "4px",
-                  padding: "3px 1px 3px 0px !important ",
-                  background: active ? "#E3E3E30D" : "",
+                  color: active ? "#1C1C1C" : "#1C1C1C",
+                  marginTop: "7px",
+                  padding: "3px 10px 3px 0px !important ",
+                  background: active ? "#1C1C1C0D" : "",
+                  borderRadius: "7px",
+                  display: "flex !important",
+                  height: "40px",
                   "&:hover": {
-                    color: "#9847FE",
-                    background: "#E3E3E30D",
-                    fontWeight: "500",
+                    color: "#1C1C1C",
+                    background: "#1C1C1C0D",
                   },
                 };
             },
@@ -117,6 +119,61 @@ const SidebarLayout = () => {
               Logout
             </div>
           </div> */}
+        </Menu>
+        <div className="mt-5">
+          <p className="text-[#1C1C1C66] fs-500">General</p>
+        </div>
+        <Menu
+          className="overflow-y-auto relative scroll-pro"
+          transitionDuration={600}
+          menuItemStyles={{
+            button: ({ level, active }) => {
+              if (level === 0)
+                return {
+                  color: active ? "#1C1C1C" : "#1C1C1C",
+                  marginTop: "7px",
+                  padding: "3px 10px 3px 0px !important ",
+                  background: active ? "#1C1C1C0D" : "",
+                  borderRadius: "7px",
+                  height: "40px",
+                  "&:hover": {
+                    color: "#1C1C1C",
+                    background: "#1C1C1C0D",
+                  },
+                };
+            },
+          }}
+        >
+          {Routes.map((item) => {
+            return (
+              <div key={item.name}>
+                {!!item.submenu.length ? (
+                  <SubMenu label={item.name} icon={item.icon} key={item.name}>
+                    {item.submenu.map((item: RouteType, i) => (
+                      <MenuItem
+                        component={<Link to={item.route} />}
+                        active={path.pathname === item.route && true}
+                        key={i}
+                      >
+                        <p className="fs-400">{item.name}</p>
+                      </MenuItem>
+                    ))}
+                  </SubMenu>
+                ) : (
+                  <MenuItem
+                    component={<Link to={item.route} />}
+                    icon={item.icon}
+                    active={path.pathname === item.route && true}
+                    key={item.name}
+                  >
+                    <div className="flex pr-4 justify-between items-center">
+                      <p className="fs-400">{item.name}</p>
+                    </div>
+                  </MenuItem>
+                )}
+              </div>
+            );
+          })}
         </Menu>
       </Sidebar>
       <Dialog title="" size="xs">

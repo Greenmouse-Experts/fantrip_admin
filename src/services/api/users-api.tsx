@@ -1,10 +1,8 @@
 import axios from "axios";
-import { BASE_URL } from "../constant.tsx";
-import { USERS_LOGIN } from "../constant.tsx";
-import { getBearerToken, getToken } from "../helpers.tsx";
 import * as ENDPOINT from "../constant";
+import { getBearerToken, getToken } from "../helpers";
 
-axios.defaults.baseURL = BASE_URL;
+axios.defaults.baseURL = ENDPOINT.BASE_URL;
 axios.defaults.headers.common["Authorization"] = getBearerToken();
 axios.interceptors.request.use(
   function(config) {
@@ -32,20 +30,8 @@ axios.interceptors.response.use(
   }
 );
 
-export const loginUser = async (payload:any) => {
-  return axios
-    .post(`${USERS_LOGIN}`, payload)
-    .then((response) => response.data);
-};
-
-export const updateProfile = async (payload:any) => {
-  return axios
-    .post(`${ENDPOINT.UPDATE_PROFILE}`, payload)
-    .then((response) => response.data);
-};
-
-export const updatePassword = async (payload:any) => {
-  return axios
-    .post(`${ENDPOINT.UPDATE_PASSWORD}`, payload)
-    .then((response) => response.data);
-};
+export const getUser = async (type:ENDPOINT.USER_TYPES) => {
+    return axios
+      .get(`${ENDPOINT.GET_USERS}/${type}`)
+      .then((response) => response.data);
+  };

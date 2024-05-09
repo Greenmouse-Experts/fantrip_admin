@@ -1,5 +1,5 @@
 import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
-import { RouteType, Routes } from "./routes";
+import { RouteType, Routes, Routes2 } from "./routes";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../../public/favicon.png";
 import useAuth from "../../hooks/authUser";
@@ -7,19 +7,31 @@ import useDialog from "../../hooks/useDialog";
 import LogoutModal from "../../modules/auth/logout-modal";
 import ProfileAvatar from "../../components/ProfileAvatar";
 import QuickLinks from "./quick-links";
-
-const SidebarLayout = () => {
+import { FC } from "react";
+interface Props{
+  toggled: boolean;
+  collapsed: boolean;
+  setToggled: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const SidebarLayout:FC<Props> = ({toggled, setToggled, collapsed}) => {
   const path = useLocation();
   const { Dialog, setShowModal } = useDialog();
   const { user, firstName } = useAuth();
+  const isDarkMode = false
 
   return (
     <div className="left-0 top-0  fixed overflow-y-hidden">
       <Sidebar
         customBreakPoint="1024px"
         className="h-screen overflow-y-hidden !border-none scroll-pro px-4"
+        // backgroundColor=""
+        collapsed={collapsed}
+        width="276px"
         backgroundColor=""
-        width="260px"
+        toggled={toggled}
+        onBackdropClick={() => setToggled(false)}
+        breakPoint="always"
+        collapsedWidth="70px"
       >
         <div className="py-4 lg:py-6 lg:pb-8 items-center">
           <Link to="/" className="gap-x-3 flex">
@@ -56,16 +68,16 @@ const SidebarLayout = () => {
             button: ({ level, active }) => {
               if (level === 0)
                 return {
-                  color: active ? "#1C1C1C" : "#1C1C1C",
+                  color: active ? `${isDarkMode? "white" : "#1C1C1C" }` : `${isDarkMode? "white" : "#1C1C1C" }`,
                   marginTop: "7px",
                   padding: "3px 10px 3px 0px !important ",
-                  background: active ? "#1C1C1C0D" : "",
+                  background: active ? `${isDarkMode? "#E3E3E30D" : "#1C1C1C0D" }` : "",
                   borderRadius: "7px",
                   display: "flex !important",
                   height: "40px",
                   "&:hover": {
-                    color: "#1C1C1C",
-                    background: "#1C1C1C0D",
+                    color: `${isDarkMode? "white" : "#1C1C1C" }`,
+                    background: `${isDarkMode? "#E3E3E30D" : "#1C1C1C0D" }`,
                   },
                 };
             },
@@ -73,7 +85,7 @@ const SidebarLayout = () => {
         >
           {Routes.map((item) => {
             return (
-              <div key={item.name}>
+              <div key={item.name} className="">
                 {!!item.submenu.length ? (
                   <SubMenu label={item.name} icon={item.icon} key={item.name}>
                     {item.submenu.map((item: RouteType, i) => (
@@ -144,7 +156,7 @@ const SidebarLayout = () => {
             },
           }}
         >
-          {Routes.map((item) => {
+          {Routes2.map((item) => {
             return (
               <div key={item.name}>
                 {!!item.submenu.length ? (

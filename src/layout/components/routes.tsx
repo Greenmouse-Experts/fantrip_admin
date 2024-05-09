@@ -1,5 +1,9 @@
 
+import { BsGear } from "react-icons/bs";
+import { GrTransaction } from "react-icons/gr";
+import { IoChatbubblesOutline, IoExtensionPuzzleSharp } from "react-icons/io5";
 import { PiBookOpen, PiChartPieSliceFill, PiShoppingBagOpen } from "react-icons/pi";
+import { RiProfileLine } from "react-icons/ri";
 export interface RouteType {
   name: string;
   icon: any;
@@ -36,22 +40,81 @@ export const Routes = [
     route: "/area",
     submenu: [],
   },
-  // {
-  //   name: "Locations",
-  //   icon: <IoLocationOutline className="text-xl" />,
-  //   route: "/host/locations",
-  //   submenu: [],
-  // },
-  // {
-  //   name: "Transactions",
-  //   icon: <FaDollarSign className="text-xl" />,
-  //   route: "/host/transact",
-  //   submenu: [],
-  // },
-  // {
-  //   name: "Inbox",
-  //   icon: <IoExtensionPuzzleSharp className="text-xl" />,
-  //   route: "/host/inbox",
-  //   submenu: [],
-  // },
 ];
+
+export const Routes2 = [
+  {
+    name: "Profile",
+    icon: <RiProfileLine className="text-xl" />,
+    route: "/",
+    submenu: [
+      {
+        name: "Users",
+        icon: <RiProfileLine className="text-xl" />,
+        route: "/users",
+        submenu: [],
+      },
+      {
+        name: "Listings",
+        icon: <RiProfileLine className="text-xl" />,
+        route: "/",
+        submenu: [],
+      },
+      {
+        name: "Messages",
+        icon: <RiProfileLine className="text-xl" />,
+        route: "/",
+        submenu: [],
+      },
+      {
+        name: "Notifications",
+        icon: <RiProfileLine className="text-xl" />,
+        route: "/",
+        submenu: [],
+      },
+      {
+        name: "Settings",
+        icon: <RiProfileLine className="text-xl" />,
+        route: "/",
+        submenu: [],
+      },
+    ],
+  },
+  {
+    name: "Transactions",
+    icon: <GrTransaction className="text-xl" />,
+    route: "/transact",
+    submenu: [],
+  },
+  {
+    name: "Analytics",
+    icon: <IoExtensionPuzzleSharp className="text-xl" />,
+    route: "/",
+    submenu: [],
+  },
+  {
+    name: "Reports",
+    icon: <IoChatbubblesOutline className="text-xl"/>,
+    route: "/",
+    submenu: [],
+  },
+  {
+    name: "Settings",
+    icon: <BsGear className="text-xl"/>,
+    route: "/settings",
+    submenu: [
+      {
+        name: "Properties",
+        icon: <IoChatbubblesOutline className="text-xl"/>,
+        route: "/settings/properties",
+        submenu: [],
+      },
+      {
+        name: "Amenities",
+        icon: <IoChatbubblesOutline className="text-xl"/>,
+        route: "/settings/amenities",
+        submenu: [],
+      }
+    ],
+  }
+]

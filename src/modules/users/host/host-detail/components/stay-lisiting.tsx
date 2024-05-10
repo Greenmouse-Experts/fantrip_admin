@@ -1,4 +1,3 @@
-import React from "react";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoExpandSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";

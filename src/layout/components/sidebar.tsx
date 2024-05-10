@@ -1,7 +1,7 @@
 import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
 import { RouteType, Routes, Routes2 } from "./routes";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../../../public/favicon.png";
+import logo from "/favicon.png";
 import useAuth from "../../hooks/authUser";
 import useDialog from "../../hooks/useDialog";
 import LogoutModal from "../../modules/auth/logout-modal";

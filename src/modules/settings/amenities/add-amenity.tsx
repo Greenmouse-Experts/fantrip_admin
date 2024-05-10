@@ -9,6 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { uploadImage } from "../../../services/api/routine";
 import { toast } from "react-toastify";
 import { createAmenity } from "../../../services/api/amenities-api";
+import { useRefetch } from "../../../hooks/useRefetch";
 
 interface Props {
   close: () => void;
@@ -16,6 +17,7 @@ interface Props {
 const AddAmenity: FC<Props> = ({ close }) => {
   const [isBusy, setIsBusy] = useState(false);
   const [selectedImg, setSelectedImg] = useState<File[] | undefined>();
+  const {revalidateRoute} = useRefetch()
   const {
     control,
     watch,
@@ -43,6 +45,7 @@ const AddAmenity: FC<Props> = ({ close }) => {
         onSuccess: () => {
           toast.success("Amenity added Successfully");
           setIsBusy(false);
+          revalidateRoute("get-amenties");
           close()
         },
         onError: () => {

@@ -1,6 +1,7 @@
 export interface AmenityItemInput {
   name: string;
   imageUrl?: string;
+  isPublished?: boolean;
 }
 
 export interface AmenityItemUpdate {
@@ -23,6 +24,7 @@ export interface AmenityItem {
 export interface PropertyItemInput {
   name: string;
   imageUrl?: string;
+  isPublished?: boolean
 }
 
 export interface PropertyItemUpdate {

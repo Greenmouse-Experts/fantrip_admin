@@ -4,6 +4,8 @@ import { DynamicTable } from "../../../../components/DynamicTable";
 import { createColumnHelper } from "@tanstack/react-table";
 import ProfileAvatar from "../../../../components/ProfileAvatar";
 import dayjs from "dayjs";
+import { Link } from "react-router-dom";
+import { MdReadMore } from "react-icons/md";
 
 interface Props {
   data: UserItem[];
@@ -21,6 +23,7 @@ const GuestTableListing: FC<Props> = ({ data, count }) => {
             name={`${info.row.original.firstName} ${info.row.original.lastName}`}
             font={18}
             size={40}
+            type="dark"
           />
           <p>{`${info.row.original.firstName} ${info.row.original.lastName}`}</p>
         </div>
@@ -59,6 +62,18 @@ const GuestTableListing: FC<Props> = ({ data, count }) => {
     columnHelper.accessor((row) => row.createdDate, {
       id: "Date Joined",
       cell: (info) => dayjs(info.getValue()).format("DD-MMM-YYYY"),
+      header: (info) => info.column.id,
+    }),
+    columnHelper.accessor((row) => row.id, {
+      id: "Action",
+      cell: (info) => (
+        <Link
+          to={`/users/guest/${info.getValue()}`}
+          className="flex items-center gap-x-1"
+        >
+          View Details <MdReadMore className="text-xl" />
+        </Link>
+      ),
       header: (info) => info.column.id,
     }),
   ];

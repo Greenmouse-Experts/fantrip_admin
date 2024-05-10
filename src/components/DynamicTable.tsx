@@ -30,18 +30,18 @@ interface Props {
     });
     return (
       <div>
-        <div className="flex flex-col border-t-2 border-l border-b border-gray-400">
-          <div className=" overflow-x-auto">
+        <div className="flex flex-col border-t-2 border-l border-b border-gray-400 dark:border-gray-800">
+          <div className="overflow-x-auto">
             <div className="align-middle inline-block min-w-full ">
               <table className="items-center w-full bg-transparent border-collapse">
-                <thead className="thead-light bg-light">
+                <thead className="thead-light bg-light dark:bg-[#131313]">
                   {table.getHeaderGroups().map((headerGroup) => (
                     <tr key={headerGroup.id}>
                       {headerGroup.headers.map((header) => (
                         <th
                           key={header.id}
                           scope="col"
-                          className="px-6 align-middle border-r-2 border-b-2 border-gray-400 py-3 fs-500 whitespace-nowrap text-left"
+                          className="px-6 align-middle border-r-2 border-b-2 border-gray-400 dark:border-gray-800 py-3 fs-500 whitespace-nowrap text-left"
                         >
                           {header.isPlaceholder
                             ? null
@@ -60,7 +60,7 @@ interface Props {
                       {row.getVisibleCells().map((cell) => (
                         <td
                           key={cell.id}
-                          className="align-middle fs-500 border-r-2 border-b-2 border-gray-400 whitespace-nowrap px-6 py-4 text-left"
+                          className="align-middle fs-500 border-r-2 border-b-2 border-gray-400 dark:border-gray-800 whitespace-nowrap px-6 py-4 text-left"
                         >
                           {flexRender(
                             cell.column.columnDef.cell,
@@ -75,7 +75,7 @@ interface Props {
             </div>
           </div>
         </div>
-        <div className="lg:flex items-center justify-between px-6 border border-gray-400 py-2">
+        <div className="lg:flex items-center justify-between px-6 border border-gray-400 dark:border-gradient py-2">
           <div className="lg:flex w-full justify-between items-center gap-2">
             <div className="flex gap-x-2">
               <span className="flex items-center gap-1">

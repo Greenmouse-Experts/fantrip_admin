@@ -6,7 +6,7 @@ interface Props {
   label: string;
   setImage: React.Dispatch<React.SetStateAction<Array<File> | undefined>>;
   containerClass?: string;
-  prevValue?: string;
+  prevValue?: string | null;
 }
 const ImageInput: FC<Props> = ({
   label,

@@ -9,6 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { uploadImage } from "../../../services/api/routine";
 import { toast } from "react-toastify";
 import { createProperty } from "../../../services/api/properties-api";
+import { useRefetch } from "../../../hooks/useRefetch";
 
 interface Props {
   close: () => void;
@@ -16,6 +17,7 @@ interface Props {
 const AddProperty: FC<Props> = ({ close }) => {
   const [isBusy, setIsBusy] = useState(false);
   const [selectedImg, setSelectedImg] = useState<File[] | undefined>();
+  const {revalidateRoute} = useRefetch()
   const {
     control,
     watch,
@@ -43,7 +45,8 @@ const AddProperty: FC<Props> = ({ close }) => {
         onSuccess: () => {
           toast.success("Property added Successfully");
           setIsBusy(false);
-          close()
+          revalidateRoute("get-properties");
+          close();
         },
         onError: () => {
           toast.error("Something went wrong");

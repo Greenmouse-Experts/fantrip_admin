@@ -14,7 +14,7 @@ const Tabs: FC<Props> = ({ tabs, broadcastCurrentIndex, type }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navStyle = {
     charts:
-      "bg-light p-4 rounded-[10px] flex lg:space-x-2 space-x-2 overflow-x-auto",
+      "bg-light dark:bg-[#272727] p-4 rounded-[10px] flex lg:space-x-2 space-x-2 overflow-x-auto",
     norm: "flex lg:space-x-4 space-x-2 overflow-x-auto",
     "": "-mb-px tab-bar flex lg:space-x-2 space-x-2 overflow-x-auto",
   };
@@ -30,7 +30,7 @@ const Tabs: FC<Props> = ({ tabs, broadcastCurrentIndex, type }) => {
     "": "border-b-[4px] text-[#052b5e] cursor-pointer fw-600 border-[#052b5e] px-5",
   };
   const navInactiveClass = {
-    charts: "text-[#A6A6A6] bg-[#FAFAFA] hover:text-gray-700",
+    charts: "text-[#A6A6A6] bg-[#FAFAFA] dark:bg-[#131313] hover:text-gray-700",
     norm: "text-[#A6A6A6] border-b-[4px] border-[#FAFAFA] hover:text-gray-700",
   };
 

@@ -24,7 +24,7 @@ const ProfileAvatar: React.FC<Props> = ({ url, name, size, font, type }) => {
   } else
     return (
       <div
-        className={`circle flex gap-x-[1px] justify-center items-center fw-600 ${type === "dark"? 'bg-primary text-white' : 'bg-white text-primary'}`}
+        className={`circle flex gap-x-[1px] justify-center items-center fw-600 ${type === "dark"? 'bg-primary text-white' : 'bg-white dark:bg-[#131313] text-primary'}`}
         style={{ width: size, height: size }}
       >
         <p style={{ fontSize: font }} className="uppercase">

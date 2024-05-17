@@ -110,7 +110,7 @@ const AmenitiesTableListing: FC<Props> = ({ data }) => {
       cell: (info) => (
         <Menu placement="bottom-start">
           <MenuHandler>
-            <Button className="call-btn text-black text-lg">
+            <Button className="call-btn text-black dark:text-white text-lg">
               <BsThreeDotsVertical />
             </Button>
           </MenuHandler>

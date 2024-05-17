@@ -48,7 +48,7 @@ const HostStayListing = () => {
       <div className="mt-4">
         <div className="grid gap-3">
           {stays.map((item) => (
-            <div className="bg-[#fbdfe7] fs-500 flex gap-x-2 rounded drop-shadow-sm p-1">
+            <div className="bg-[#fbdfe7] dark:bg-[#1d1d1d] fs-500 flex gap-x-2 rounded drop-shadow-sm p-1">
               <img
                 src={item.room_img}
                 alt="room-img"

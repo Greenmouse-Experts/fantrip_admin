@@ -29,3 +29,9 @@ export const DELETE_AMENITY = `/amenities/delete-amenity`
 
 // stay endpoints
 export const GET_STAY_LISTING = `/stays`
+
+// place endpoints
+export const CREATE_PLACE = `/places/create-place`
+export const GET_PLACES = `/places`
+export const UPDATE_PLACE = `/places/update-place`
+export const DELETE_PLACE = `/places`

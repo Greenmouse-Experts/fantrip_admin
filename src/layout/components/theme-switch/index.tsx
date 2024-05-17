@@ -8,7 +8,7 @@ const ThemeSwitch = () => {
     window.matchMedia("(prefers-color-scheme:dark)").matches,
     "isDaskMode"
   );
-
+  
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add("dark");

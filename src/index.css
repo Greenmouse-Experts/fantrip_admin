@@ -13,6 +13,12 @@
 .monts {
   font-family: "Montserrat", sans-serif;
 }
+@media (prefers-color-scheme: dark){
+  .css-14xmt93 >.ps-menu-button{
+    background: #0e1624 !important;
+  }
+}
+
 .css-jn69v9{
   position: relative !important;
   top: -2px !important;

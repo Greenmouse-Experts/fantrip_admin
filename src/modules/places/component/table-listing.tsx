@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
-import { PropertyItem } from "../../../../contracts/routine";
-import { DynamicTable } from "../../../../components/DynamicTable";
+import { PlaceItem } from "../../../contracts/routine";
+import { DynamicTable } from "../../../components/DynamicTable";
 import { createColumnHelper } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import {
@@ -13,25 +13,25 @@ import {
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { BiEdit } from "react-icons/bi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
-import useDialog from "../../../../hooks/useDialog";
-import EditPropertyModal from "./edit-property";
-import ReusableModal from "../../../../components/ReusableModal";
-import { deleteProperty } from "../../../../services/api/properties-api";
+import useDialog from "../../../hooks/useDialog";
 import { toast } from "react-toastify";
-import { useRefetch } from "../../../../hooks/useRefetch";
+import { useRefetch } from "../../../hooks/useRefetch";
+import ReusableModal from "../../../components/ReusableModal";
+import { deletePlace } from "../../../services/api/place-api";
+import EditPlaceModal from "./edit-place";
 
 interface Props {
-  data: PropertyItem[];
+  data: PlaceItem[];
 }
-const PropertyTableListing: FC<Props> = ({ data }) => {
+const PlacesTableListing: FC<Props> = ({ data }) => {
   const { revalidateRoute } = useRefetch();
-  const [selected, setSelected] = useState<PropertyItem>();
+  const [selected, setSelected] = useState<PlaceItem>();
   const [selectedId, setSelectedId] = useState<string>();
   const [isBusy, setIsBusy] = useState<boolean>(false);
   const { Dialog: Edit, setShowModal: ShowEdit } = useDialog();
   const { Dialog: Delete, setShowModal: ShowDelete } = useDialog();
 
-  const openEdit = (item: PropertyItem) => {
+  const openEdit = (item: PlaceItem) => {
     setSelected(item);
     ShowEdit(true);
   };
@@ -42,12 +42,12 @@ const PropertyTableListing: FC<Props> = ({ data }) => {
   };
   const handleDelete = async () => {
     setIsBusy(true);
-    await deleteProperty(selectedId || "")
+    await deletePlace(selectedId || "")
       .then(() => {
-        toast.success("Property deleted Successfully");
+        toast.success("Place deleted Successfully");
         setIsBusy(false);
         ShowDelete(false);
-        revalidateRoute("get-properties");
+        revalidateRoute("get-places");
       })
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -55,10 +55,12 @@ const PropertyTableListing: FC<Props> = ({ data }) => {
         ShowDelete(false);
       });
   };
-  const columnHelper = createColumnHelper<PropertyItem>();
+
+  // table column configuration and formating
+  const columnHelper = createColumnHelper<PlaceItem>();
   const columns = [
     columnHelper.accessor((row) => row.name, {
-      id: "Property Type",
+      id: "Place Name",
       cell: (info) => info.getValue(),
       header: (info) => info.column.id,
     }),
@@ -66,13 +68,12 @@ const PropertyTableListing: FC<Props> = ({ data }) => {
       id: "Image",
       cell: (info) =>
         info.getValue() && (
-          <img src={info.getValue() || ""} alt="property" className="w-28" />
+          <img
+            src={info.getValue() || ""}
+            alt="property"
+            className="w-28 h-16 object-cover"
+          />
         ),
-      header: (info) => info.column.id,
-    }),
-    columnHelper.accessor((row) => row.by, {
-      id: "Created By",
-      cell: (info) => info.getValue(),
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.createdDate, {
@@ -80,7 +81,7 @@ const PropertyTableListing: FC<Props> = ({ data }) => {
       cell: (info) => dayjs(info.getValue()).format("DD-MMM-YYYY"),
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.isPublished, {
+    columnHelper.accessor((row) => row.isDisclosed, {
       id: "Status",
       cell: (info) => (
         <div>
@@ -104,7 +105,7 @@ const PropertyTableListing: FC<Props> = ({ data }) => {
       cell: (info) => (
         <Menu placement="bottom-start">
           <MenuHandler>
-            <Button className="call-btn dark:text-white text-black text-lg">
+            <Button className="call-btn text-black dark:text-white text-lg">
               <BsThreeDotsVertical />
             </Button>
           </MenuHandler>
@@ -142,11 +143,11 @@ const PropertyTableListing: FC<Props> = ({ data }) => {
         />
       </div>
       <Edit title="Edit Property Info" size="lg">
-        <EditPropertyModal item={selected} close={() => ShowEdit(false)} />
+        <EditPlaceModal item={selected} close={() => ShowEdit(false)} />
       </Edit>
       <Delete title="" size="sm">
         <ReusableModal
-          title="Are you sure you want to delete this property info"
+          title="Are you sure you want to delete this place info"
           action={() => handleDelete()}
           actionTitle="Yes, Delete"
           closeModal={() => ShowDelete(false)}
@@ -158,4 +159,4 @@ const PropertyTableListing: FC<Props> = ({ data }) => {
   );
 };
 
-export default PropertyTableListing;
+export default PlacesTableListing;

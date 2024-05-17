@@ -1,44 +1,44 @@
 import { FC, useState } from "react";
-import { AmenityItem, AmenityItemInput } from "../../../../contracts/routine";
 import { Controller, useForm } from "react-hook-form";
-import TextInput, { InputType } from "../../../../components/TextInput";
-import ImageInput from "../../../../components/ImageInput";
-import Button from "../../../../components/Button";
+import TextInput, { InputType } from "../../../components/TextInput";
+import ImageInput from "../../../components/ImageInput";
+import Button from "../../../components/Button";
 import { BeatLoader } from "react-spinners";
 import { Switch } from "@material-tailwind/react";
-import { updateAmenity } from "../../../../services/api/amenities-api";
 import { toast } from "react-toastify";
 import { useMutation } from "@tanstack/react-query";
-import { uploadImage } from "../../../../services/api/routine";
-import { useRefetch } from "../../../../hooks/useRefetch";
+import { uploadImage } from "../../../services/api/routine";
+import { useRefetch } from "../../../hooks/useRefetch";
+import { PlaceItem, PlaceItemUpdate } from "../../../contracts/routine";
+import { updatePlace } from "../../../services/api/place-api";
 
 interface Props {
-  item: AmenityItem | undefined;
+  item: PlaceItem | undefined;
   close: () => void;
 }
-const EditAmenityModal: FC<Props> = ({ item, close }) => {
+const EditPlaceModal: FC<Props> = ({ item, close }) => {
   const [isBusy, setIsBusy] = useState(false);
   const [selectedImg, setSelectedImg] = useState<File[] | undefined>();
-  const {revalidateRoute} = useRefetch()
+  const { revalidateRoute } = useRefetch();
   const {
     control,
     watch,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<AmenityItemInput>({
+  } = useForm<PlaceItemUpdate>({
     mode: "onChange",
     defaultValues: {
       name: item?.name || "",
       imageUrl: item?.imageUrl || "",
-      isPublished: item?.isPublished,
+      isDisclosed: item?.isDisclosed,
     },
   });
-  const updateAction = async (payload: AmenityItemInput) => {
-    await updateAmenity(item?.id || "", payload)
+  const updateAction = async (payload: PlaceItemUpdate) => {
+    await updatePlace(item?.id || "", payload)
       .then(() => {
-        toast.success("Amenity updated Successfully");
+        toast.success("Place updated Successfully");
         setIsBusy(false);
-        revalidateRoute("get-amenties");
+        revalidateRoute("get-places");
         close();
       })
       .catch(() => {
@@ -51,7 +51,7 @@ const EditAmenityModal: FC<Props> = ({ item, close }) => {
     onSuccess: (data) => {
       const payload = {
         name: watch("name"),
-        isPublished: watch("isPublished"),
+        isDisclosed: watch("isDisclosed"),
         imageUrl: data.image,
       };
       updateAction(payload);
@@ -62,7 +62,7 @@ const EditAmenityModal: FC<Props> = ({ item, close }) => {
     },
   });
 
-  const onSubmit = (data: AmenityItemInput) => {
+  const onSubmit = (data: PlaceItemUpdate) => {
     setIsBusy(true);
     if (!!selectedImg?.length) {
       const files = selectedImg[0];
@@ -82,7 +82,7 @@ const EditAmenityModal: FC<Props> = ({ item, close }) => {
           rules={{
             required: {
               value: true,
-              message: "Please enter Amenity name",
+              message: "Please enter PlaceupdatePlace name",
             },
           }}
           render={({ field }) => (
@@ -97,7 +97,7 @@ const EditAmenityModal: FC<Props> = ({ item, close }) => {
           )}
         />
         <Controller
-          name="isPublished"
+          name="isDisclosed"
           control={control}
           render={({ field }) => (
             <div className="flex gap-x-4 items-center">
@@ -114,7 +114,7 @@ const EditAmenityModal: FC<Props> = ({ item, close }) => {
         />
         <ImageInput
           prevValue={item?.imageUrl}
-          label="Amenity Image/Icon"
+          label="PlaceupdatePlace Image/Icon"
           setImage={setSelectedImg}
         />
         <div className="mt-7">
@@ -129,4 +129,4 @@ const EditAmenityModal: FC<Props> = ({ item, close }) => {
   );
 };
 
-export default EditAmenityModal;
+export default EditPlaceModal;

@@ -7,29 +7,28 @@ import "react-toastify/dist/ReactToastify.css";
 const router = createBrowserRouter([
   {
     path: "/login",
-    element: <LoginPage/>,
+    element: <LoginPage />,
   },
-  ...adminRooutes
+  ...adminRooutes,
 ]);
 function App() {
-
   return (
     <>
-     <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-        />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <RouterProvider router={router} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

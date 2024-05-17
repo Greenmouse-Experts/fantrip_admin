@@ -1,7 +1,10 @@
+import GuestDetailIndex from "../modules/users/guest/guest-detail"
 
 const GuestDetail = () => {
   return (
-    <div>GuestDetail</div>
+    <div>
+      <GuestDetailIndex/>
+    </div>
   )
 }
 

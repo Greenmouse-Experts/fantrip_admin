@@ -1,6 +1,7 @@
 import { FaQuoteRight } from "react-icons/fa6";
 import ProfileAvatar from "../../../../../components/ProfileAvatar";
 import { RiExchange2Line } from "react-icons/ri";
+import SocialLinks from "./social-links";
 
 const ProfileSidebar = () => {
   return (
@@ -43,8 +44,11 @@ const ProfileSidebar = () => {
             <p className="opacity-60">Alaska</p>
           </div>
           <div className="">
-            <p>Email:</p>
+            <p>Country:</p>
             <p className="opacity-60">United States</p>
+          </div>
+          <div>
+            <SocialLinks/>
           </div>
         </div>
       </div>

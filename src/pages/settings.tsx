@@ -1,7 +1,10 @@
+import SettingsIndex from "../modules/settings/profile"
 
 const ProfileSettings = () => {
   return (
-    <div>ProfileSettings</div>
+    <div>
+      <SettingsIndex/>
+    </div>
   )
 }
 

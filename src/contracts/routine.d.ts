@@ -24,7 +24,7 @@ export interface AmenityItem {
 export interface PropertyItemInput {
   name: string;
   imageUrl?: string;
-  isPublished?: boolean
+  isPublished?: boolean;
 }
 
 export interface PropertyItemUpdate {
@@ -49,5 +49,25 @@ export interface StayItem {
   isDisclosed: boolean;
   createdDate: boolean;
   property: PropertyItem;
-  amenities: AmenityItem[]
+  amenities: AmenityItem[];
+}
+
+export interface PlaceItemInput {
+  name: string;
+  imageUrl?: string;
+}
+
+export interface PlaceItem {
+  id: string;
+  isDisclosed: boolean;
+  createdDate: string;
+  name: string;
+  icon: string;
+  imageUrl: string | null;
+}
+
+export interface PlaceItemUpdate {
+  name?: string;
+  imageUrl?: string;
+  isDisclosed?: boolean;
 }

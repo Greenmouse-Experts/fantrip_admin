@@ -2,6 +2,7 @@
 import { BsGear } from "react-icons/bs";
 import { GrTransaction } from "react-icons/gr";
 import { IoChatbubblesOutline, IoExtensionPuzzleSharp } from "react-icons/io5";
+import { MdOutlineFeaturedPlayList } from "react-icons/md";
 import { PiBookOpen, PiChartPieSliceFill, PiShoppingBagOpen } from "react-icons/pi";
 import { RiProfileLine } from "react-icons/ri";
 export interface RouteType {
@@ -75,9 +76,28 @@ export const Routes2 = [
       {
         name: "Settings",
         icon: <RiProfileLine className="text-xl" />,
-        route: "/",
+        route: "/settings",
         submenu: [],
       },
+    ],
+  },
+  {
+    name: "Features",
+    icon: <MdOutlineFeaturedPlayList className="text-xl"/>,
+    route: "",
+    submenu: [
+      {
+        name: "Places",
+        icon: <IoChatbubblesOutline className="text-xl"/>,
+        route: "/places",
+        submenu: [],
+      },
+      {
+        name: "Sport Content",
+        icon: <IoChatbubblesOutline className="text-xl"/>,
+        route: "/sport-contents",
+        submenu: [],
+      }
     ],
   },
   {

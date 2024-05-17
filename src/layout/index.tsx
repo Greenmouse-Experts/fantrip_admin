@@ -27,7 +27,7 @@ const DashboardLayout = () => {
   return (
     <>
       <div className="flex dark:bg-[#0D0D0D] dark:text-white">
-        <div className={`${collapsed? 'lg:w-[70px]' : 'lg:w-[280px]'} border-r border-[#1C1C1C1A]`}>
+        <div className={`${collapsed? 'lg:w-[70px]' : 'lg:w-[280px]'} border-r border-[#1C1C1C1A] dark:border-gray-800`}>
           <SidebarLayout
             toggled={toggled}
             collapsed={collapsed}

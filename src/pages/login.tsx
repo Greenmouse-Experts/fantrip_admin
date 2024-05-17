@@ -46,6 +46,7 @@ const LoginPage = () => {
           id: data.data.id,
           account: data.data.role,
           joined: data.data.createdDate,
+          bio: data.data.bio
         });
         navigate("/");
       },

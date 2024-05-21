@@ -3,6 +3,7 @@ import StayAmenities from "../pages/amenities";
 import AdminDashboard from "../pages/dashboard";
 import GuestDetail from "../pages/guest-detail";
 import HostDetail from "../pages/host-detail";
+import StayLisiting from "../pages/listing";
 import PlacesPage from "../pages/places";
 import StayProperties from "../pages/properties";
 import ProfileSettings from "../pages/settings";
@@ -44,6 +45,10 @@ export const adminRooutes = [
           {
             path: 'places',
             element: <PlacesPage/>
+          },
+          {
+            path: 'listing',
+            element: <StayLisiting/>
           },
         ],
       },

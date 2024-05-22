@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { getListing } from "../../../services/api/stay-api";
+import { getStayListing } from "../../../services/api/stay-api";
 import StayTableListing from "./component/table-list";
 import HueSpinner from "../../../components/loaders/hue-spinner";
 
 const ListingTable = () => {
   const { isLoading, data } = useQuery({
-    queryFn: getListing,
+    queryFn: getStayListing,
     queryKey: ["get-isiting"],
   });
   return (

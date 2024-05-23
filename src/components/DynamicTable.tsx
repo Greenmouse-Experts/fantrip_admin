@@ -7,8 +7,6 @@ import {
   import { FC } from "react";
   import { TbArrowBackUp,  TbArrowForwardUp } from "react-icons/tb";
 import { getPageCount } from "../utils/formatHelp";
-// import { getPageCount } from "../../utils";
-// import { getPageCount } from "./utils";
   
 interface Props {
     data: any[];

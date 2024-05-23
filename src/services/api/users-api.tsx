@@ -30,8 +30,14 @@ axios.interceptors.response.use(
   }
 );
 
-export const getUser = async (type:ENDPOINT.USER_TYPES) => {
+export const getUser = async (type:ENDPOINT.USER_TYPES, page:number) => {
     return axios
-      .get(`${ENDPOINT.GET_USERS}/${type}`)
+      .get(`${ENDPOINT.GET_USERS}/${type}?page=${page}`)
+      .then((response) => response.data);
+  };
+
+  export const verifyHost = async (id:string) => {
+    return axios
+      .patch(`${ENDPOINT.VERIFY_HOST}/${id}`)
       .then((response) => response.data);
   };

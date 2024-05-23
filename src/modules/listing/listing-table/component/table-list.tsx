@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { createColumnHelper } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import {
@@ -12,61 +12,71 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { BiEdit } from "react-icons/bi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { StayItem } from "../../../../contracts/stay";
-// import { useRefetch } from "../../../../hooks/useRefetch";
+import { useRefetch } from "../../../../hooks/useRefetch";
 import { DynamicTable } from "../../../../components/DynamicTable";
 import ProfileAvatar from "../../../../components/ProfileAvatar";
 import { formatNumber } from "../../../../utils/formatHelp";
+import useDialog from "../../../../hooks/useDialog";
+import { softDeleteStay } from "../../../../services/api/stay-api";
+import { toast } from "react-toastify";
+import ReusableModal from "../../../../components/ReusableModal";
+import { FcApproval } from "react-icons/fc";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   data: StayItem[];
 }
 const StayTableListing: FC<Props> = ({ data }) => {
-//   const { revalidateRoute } = useRefetch();
-//   const [selected, setSelected] = useState<StayItem>();
-//   const [selectedId, setSelectedId] = useState<string>();
-//   const [isBusy, setIsBusy] = useState<boolean>(false);
-//   const { Dialog: Edit, setShowModal: ShowEdit } = useDialog();
-//   const { Dialog: Delete, setShowModal: ShowDelete } = useDialog();
+  const { revalidateRoute } = useRefetch();
+  const navigate = useNavigate();
+  const [selectedId, setSelectedId] = useState<string>();
+  const [isBusy, setIsBusy] = useState<boolean>(false);
+  const { Dialog: Delete, setShowModal: ShowDelete } = useDialog();
 
-//   const openEdit = (item: PlaceItem) => {
-//     setSelected(item);
-//     ShowEdit(true);
-//   };
-  // handle delete
-//   const openDelete = (id: string) => {
-//     setSelectedId(id);
-//     ShowDelete(true);
-//   };
-//   const handleDelete = async () => {
-//     setIsBusy(true);
-//     await deletePlace(selectedId || "")
-//       .then(() => {
-//         toast.success("Place deleted Successfully");
-//         setIsBusy(false);
-//         ShowDelete(false);
-//         revalidateRoute("get-places");
-//       })
-//       .catch((err) => {
-//         toast.error(err.response.data.message);
-//         setIsBusy(false);
-//         ShowDelete(false);
-//       });
-//   };
+  const openDelete = (id: string) => {
+    setSelectedId(id);
+    ShowDelete(true);
+  };
+  const handleDelete = async () => {
+    setIsBusy(true);
+    await softDeleteStay(selectedId || "")
+      .then(() => {
+        toast.success("Stay lisiting deleted Successfully");
+        setIsBusy(false);
+        revalidateRoute("get-listing");
+        ShowDelete(false);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+        setIsBusy(false);
+        ShowDelete(false);
+      });
+  };
 
   // table column configuration and formating
   const columnHelper = createColumnHelper<StayItem>();
   const columns = [
     columnHelper.accessor((row) => row.name, {
       id: "Stay Name",
-      cell: (info) => <div className="min-w-[230px] flex gap-x-2 items-center">
-        {!!info.row.original.photos.length && <img src={info.row.original.photos[0]} alt="condo-img" className="w-[80px] h-[60px] rounded-lg"/>}
-        <p className="w-[160px] whitespace-nowrap">{info.getValue()}</p>
-      </div>,
+      cell: (info) => (
+        <div className="min-w-[230px] flex gap-x-2 items-center">
+          {!!info.row.original.photos.length && (
+            <img
+              src={info.row.original.photos[0]}
+              alt="condo-img"
+              className="w-[80px] h-[60px] rounded-lg"
+            />
+          )}
+          <p className="w-[160px] whitespace-nowrap">{info.getValue()}</p>
+        </div>
+      ),
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.description, {
       id: "Description",
-      cell: (info) => <p className="whitespace-normal w-[230px]">{info.getValue()}</p>,
+      cell: (info) => (
+        <p className="whitespace-normal w-[230px]">{info.getValue()}</p>
+      ),
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.address, {
@@ -76,16 +86,18 @@ const StayTableListing: FC<Props> = ({ data }) => {
     }),
     columnHelper.accessor((row) => row.host.picture, {
       id: "Host Name",
-      cell: (info) => <div className="flex items-center gap-x-2 min-w-[180px]">
-      <ProfileAvatar
-        url={info.getValue()}
-        name={`${info.row.original.host.firstName} ${info.row.original.host.lastName}`}
-        font={18}
-        size={40}
-        type="dark"
-      />
-      <p>{`${info.row.original.host.firstName} ${info.row.original.host.lastName}`}</p>
-    </div>,
+      cell: (info) => (
+        <div className="flex items-center gap-x-2 min-w-[180px]">
+          <ProfileAvatar
+            url={info.getValue()}
+            name={`${info.row.original.host.firstName} ${info.row.original.host.lastName}`}
+            font={18}
+            size={40}
+            type="dark"
+          />
+          <p>{`${info.row.original.host.firstName} ${info.row.original.host.lastName}`}</p>
+        </div>
+      ),
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.createdDate, {
@@ -97,17 +109,32 @@ const StayTableListing: FC<Props> = ({ data }) => {
       id: "Approval Status",
       cell: (info) => (
         <div>
-          {info.getValue() ? (
-            <p className="flex gap-x-2 items-center">
-              <span className="w-3 h-3 bg-green-600 circle"></span>{" "}
-              <span className="text-green-600">Active</span>
-            </p>
-          ) : (
-            <p className="flex gap-x-2 items-center">
-              <span className="w-3 h-3 bg-orange-600 circle"></span>{" "}
-              <span className="text-orange-600">Inactive</span>
-            </p>
-          )}
+          <Menu placement="bottom-start">
+            <MenuHandler>
+              <Button className="call-btn text-black dark:text-white text-lg">
+                {info.getValue() ? (
+                  <p className="flex gap-x-2 capitalize fw-400 fs-600 items-center">
+                    <span className="w-3 h-3 bg-green-600 circle"></span>{" "}
+                    <span className="text-green-600">Active</span>
+                  </p>
+                ) : (
+                  <p className="flex gap-x-2 capitalize fw-400 fs-600 items-center">
+                    <span className="w-3 h-3 bg-orange-600 circle"></span>{" "}
+                    <span className="text-orange-600">Inactive</span>
+                  </p>
+                )}
+              </Button>
+            </MenuHandler>
+            <MenuList>
+              <MenuItem
+                className="flex text-black gap-x-2 items-center"
+                //   onClick={() => openEdit(info.row.original)}
+              >
+                <FcApproval className="text-xl relative top-[1px]" />
+                Approve Stay
+              </MenuItem>
+            </MenuList>
+          </Menu>
         </div>
       ),
       header: (info) => info.column.id,
@@ -143,7 +170,7 @@ const StayTableListing: FC<Props> = ({ data }) => {
     }),
     columnHelper.accessor((row) => row.id, {
       id: "Action",
-      cell: () => (
+      cell: (info) => (
         <Menu placement="bottom-start">
           <MenuHandler>
             <Button className="call-btn text-black dark:text-white text-lg">
@@ -153,17 +180,17 @@ const StayTableListing: FC<Props> = ({ data }) => {
           <MenuList>
             <MenuItem
               className="flex gap-x-2 items-center"
-            //   onClick={() => openEdit(info.row.original)}
+              onClick={() => navigate(`/listing/${info.getValue()}`)}
             >
               <BiEdit className="text-lg" />
-              Edit
+              View Stay
             </MenuItem>
             <MenuItem
               className="flex gap-x-2 items-center"
-            //   onClick={() => openDelete(info.getValue())}
+              onClick={() => openDelete(info.getValue())}
             >
               <RiDeleteBin5Fill className="text-lg" />
-              Delete
+              Delete Stay
             </MenuItem>
           </MenuList>
         </Menu>
@@ -183,19 +210,16 @@ const StayTableListing: FC<Props> = ({ data }) => {
           count={5}
         />
       </div>
-      {/* <Edit title="Edit Property Info" size="lg">
-        <EditPlaceModal item={selected} close={() => ShowEdit(false)} />
-      </Edit>
       <Delete title="" size="sm">
         <ReusableModal
-          title="Are you sure you want to delete this place info"
+          title="Are you sure you want to delete this stay info"
           action={() => handleDelete()}
           actionTitle="Yes, Delete"
           closeModal={() => ShowDelete(false)}
           cancelTitle="No, Close"
           isBusy={isBusy}
         />
-      </Delete> */}
+      </Delete>
     </div>
   );
 };

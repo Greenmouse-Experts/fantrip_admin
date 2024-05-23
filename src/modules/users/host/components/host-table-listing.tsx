@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { UserItem } from "../../../../contracts/users";
 import { DynamicTable } from "../../../../components/DynamicTable";
 import { createColumnHelper } from "@tanstack/react-table";
@@ -6,12 +6,51 @@ import ProfileAvatar from "../../../../components/ProfileAvatar";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import { MdReadMore } from "react-icons/md";
+import {
+  Button,
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
+} from "@material-tailwind/react";
+import { FcApproval } from "react-icons/fc";
+import useDialog from "../../../../hooks/useDialog";
+import { verifyHost } from "../../../../services/api/users-api";
+import { toast } from "react-toastify";
+import ReusableModal from "../../../../components/ReusableModal";
 
 interface Props {
   data: UserItem[];
   count: number;
+  prev: () => void;
+  next: () => void;
+  refetch: () => void;
 }
-const HostTableListing: FC<Props> = ({ data, count }) => {
+const HostTableListing: FC<Props> = ({ data, count, next, prev, refetch }) => {
+  const [selectedId, setSelectedId] = useState("");
+  const [isBusy, setIsBusy] = useState(false);
+  const { Dialog: Verify, setShowModal: ShowVerify } = useDialog();
+
+  const openVerify = (id: string) => {
+    setSelectedId(id);
+    ShowVerify(true);
+  };
+
+  // function to verify host
+  const verifyHostAction = async () => {
+    setIsBusy(true)
+    await verifyHost(selectedId)
+      .then((res) => {
+        setIsBusy(false);
+        toast.success(res.message);
+        refetch();
+        ShowVerify(false);
+      })
+      .catch((err: any) => {
+        setIsBusy(false);
+        toast.error(err.response.data.message);
+      });
+  };
   const columnHelper = createColumnHelper<UserItem>();
   const columns = [
     columnHelper.accessor((row) => row.picture, {
@@ -63,17 +102,32 @@ const HostTableListing: FC<Props> = ({ data, count }) => {
       id: "Verification",
       cell: (info) => (
         <div>
-          {info.getValue() ? (
-            <p className="flex gap-x-2 items-center">
-              <span className="w-3 h-3 bg-green-600 circle"></span>{" "}
-              <span className="text-green-600">Verified</span>
-            </p>
-          ) : (
-            <p className="flex gap-x-2 items-center">
-              <span className="w-3 h-3 bg-orange-600 circle"></span>{" "}
-              <span className="text-orange-600">Awaiting</span>
-            </p>
-          )}
+          <Menu placement="bottom-start">
+            <MenuHandler>
+              <Button className="call-btn text-black dark:text-white text-lg">
+                {info.getValue() ? (
+                  <p className="flex gap-x-2 capitalize fw-400 fs-600 items-center">
+                    <span className="w-3 h-3 bg-green-600 circle"></span>{" "}
+                    <span className="text-green-600">Verified</span>
+                  </p>
+                ) : (
+                  <p className="flex gap-x-2 capitalize fw-400 fs-600 items-center">
+                    <span className="w-3 h-3 bg-orange-600 circle"></span>{" "}
+                    <span className="text-orange-600">Awaiting</span>
+                  </p>
+                )}
+              </Button>
+            </MenuHandler>
+            <MenuList>
+              <MenuItem
+                className="flex text-black gap-x-2 items-center"
+                onClick={() => openVerify(info.row.original.id)}
+              >
+                <FcApproval className="text-xl relative top-[1px]" />
+                Verify Host
+              </MenuItem>
+            </MenuList>
+          </Menu>
         </div>
       ),
       header: (info) => info.column.id,
@@ -102,12 +156,22 @@ const HostTableListing: FC<Props> = ({ data, count }) => {
         <DynamicTable
           columns={columns}
           data={data}
-          next={() => false}
-          prev={() => false}
+          next={next}
+          prev={prev}
           page={1}
           count={count}
         />
       </div>
+      <Verify title="" size="md">
+        <ReusableModal
+          title="Do you want to verify this host?"
+          action={() => verifyHostAction()}
+          actionTitle="Verify Host"
+          cancelTitle="Close"
+          closeModal={() => ShowVerify(false)}
+          isBusy={isBusy}
+        />
+      </Verify>
     </div>
   );
 };

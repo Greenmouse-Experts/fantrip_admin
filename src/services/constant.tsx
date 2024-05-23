@@ -12,6 +12,7 @@ export const UPDATE_PASSWORD = `/auth/update-password`
 
 // user endpoints
 export const GET_USERS = `/user/clients`
+export const VERIFY_HOST = `user/validate-host`
 
 // properties endpoints
 export const CREATE_PROPERTY = `properties/add-property`

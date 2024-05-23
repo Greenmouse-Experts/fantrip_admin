@@ -6,7 +6,7 @@ import HueSpinner from "../../../components/loaders/hue-spinner";
 const ListingTable = () => {
   const { isLoading, data } = useQuery({
     queryFn: getStayListing,
-    queryKey: ["get-isiting"],
+    queryKey: ["get-listing"],
   });
   return (
     <div>

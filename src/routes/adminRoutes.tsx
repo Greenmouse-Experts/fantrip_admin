@@ -4,6 +4,7 @@ import AdminDashboard from "../pages/dashboard";
 import GuestDetail from "../pages/guest-detail";
 import HostDetail from "../pages/host-detail";
 import StayLisiting from "../pages/listing";
+import ListingDetailPage from "../pages/listing-detail";
 import PlacesPage from "../pages/places";
 import StayProperties from "../pages/properties";
 import ProfileSettings from "../pages/settings";
@@ -50,6 +51,10 @@ export const adminRooutes = [
             path: 'listing',
             element: <StayLisiting/>
           },
+          {
+            path: 'listing/:id',
+            element: <ListingDetailPage/>
+          }
         ],
       },
 ]

@@ -18,6 +18,9 @@ export interface StayItem {
   deletedDate: string | null;
   isDisclosed: boolean;
   createdDate: string;
+  availableFrom: string;
+  availableTo: string;
+  maxNights: number;
   property: PropertyItem;
   host: UserItem;
   amenities: AmenityItem[];

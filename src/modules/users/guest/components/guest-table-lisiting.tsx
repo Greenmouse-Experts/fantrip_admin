@@ -10,8 +10,10 @@ import { MdReadMore } from "react-icons/md";
 interface Props {
   data: UserItem[];
   count: number;
+  prev: () => void;
+  next: () => void;
 }
-const GuestTableListing: FC<Props> = ({ data, count }) => {
+const GuestTableListing: FC<Props> = ({ data, count, next, prev }) => {
   const columnHelper = createColumnHelper<UserItem>();
   const columns = [
     columnHelper.accessor((row) => row.picture, {
@@ -83,8 +85,8 @@ const GuestTableListing: FC<Props> = ({ data, count }) => {
         <DynamicTable
           columns={columns}
           data={data}
-          next={() => false}
-          prev={() => false}
+          next={next}
+          prev={prev}
           page={1}
           count={count}
         />

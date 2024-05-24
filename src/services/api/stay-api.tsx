@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as ENDPOINT from "../constant";
+import { ApproveStayInputItem } from "../../contracts/routine";
 
 export const getStayListing = async () => {
   return axios
@@ -10,6 +11,12 @@ export const getStayListing = async () => {
 export const getSingleStayListing = async (id: string) => {
   return axios
     .get(`${ENDPOINT.GET_STAY_LISTING}/${id}`)
+    .then((response) => response.data);
+};
+
+export const approveStay = async (id: string, payload:ApproveStayInputItem) => {
+  return axios
+    .patch(`${ENDPOINT.APPROVE_STAY}/${id}`, payload)
     .then((response) => response.data);
 };
 

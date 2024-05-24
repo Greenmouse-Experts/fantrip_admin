@@ -18,6 +18,7 @@ import useDialog from "../../../../hooks/useDialog";
 import { verifyHost } from "../../../../services/api/users-api";
 import { toast } from "react-toastify";
 import ReusableModal from "../../../../components/ReusableModal";
+import SuspendUser from "../../user-action/suspend-user";
 
 interface Props {
   data: UserItem[];
@@ -38,7 +39,7 @@ const HostTableListing: FC<Props> = ({ data, count, next, prev, refetch }) => {
 
   // function to verify host
   const verifyHostAction = async () => {
-    setIsBusy(true)
+    setIsBusy(true);
     await verifyHost(selectedId)
       .then((res) => {
         setIsBusy(false);
@@ -82,19 +83,7 @@ const HostTableListing: FC<Props> = ({ data, count, next, prev, refetch }) => {
     columnHelper.accessor((row) => row.isSuspended, {
       id: "Status",
       cell: (info) => (
-        <div>
-          {!info.getValue() ? (
-            <p className="flex gap-x-2 items-center">
-              <span className="w-3 h-3 bg-green-600 circle"></span>{" "}
-              <span className="text-green-600">Active</span>
-            </p>
-          ) : (
-            <p className="flex gap-x-2 items-center">
-              <span className="w-3 h-3 bg-orange-600 circle"></span>{" "}
-              <span className="text-orange-600">Inactive</span>
-            </p>
-          )}
-        </div>
+        <SuspendUser id={info.row.original.id} status={info.getValue()} />
       ),
       header: (info) => info.column.id,
     }),

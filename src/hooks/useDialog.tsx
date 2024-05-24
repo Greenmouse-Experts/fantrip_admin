@@ -15,7 +15,7 @@ const useDialog = () => {
     return (
       <>
        {showModal && <div
-          className="relative z-10"
+          className="relative z-[2000]"
           aria-labelledby="modal-title"
           role="dialog"
           aria-modal="true"

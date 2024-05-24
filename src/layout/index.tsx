@@ -36,8 +36,8 @@ const DashboardLayout = () => {
         </div>
         <div className={`${collapsed? 'lg:w-[calc(100%_-_70px)]' : 'lg:w-[calc(100%_-_280px)]'} w-full min-h-screen py-4 lg:py-9`}>
           <div className="">
-            <div className="h-[30px] border-b border-[#1C1C1C1A] relative index-30">
-              <div className={`${collapsed? 'lg:w-[calc(100%_-_70px)]' : 'lg:w-[calc(100%_-_280px)]'} fixed top-0 w-full pl-9 pr-5 py-4 lg:py-[23px] flex items-center justify-between`}>
+            <div className="h-[33px]  z-[50] border-b border-[#1C1C1C1A] relative">
+              <div className={`${collapsed? 'lg:w-[calc(100%_-_70px)]' : 'lg:w-[calc(100%_-_280px)]'} bg-white dark:bg-[#0D0D0D] fixed top-0 w-full pl-9 pr-5 py-4 lg:pt-[20px] lg:py-[18px] flex items-center justify-between`}>
                 <div className="flex gap-x-2 items-center">
                   <PiSidebarDuotone
                     className="text-xl"

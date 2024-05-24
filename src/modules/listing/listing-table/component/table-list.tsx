@@ -9,7 +9,6 @@ import {
   MenuList,
 } from "@material-tailwind/react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { BiEdit } from "react-icons/bi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { StayItem } from "../../../../contracts/stay";
 import { useRefetch } from "../../../../hooks/useRefetch";
@@ -20,8 +19,9 @@ import useDialog from "../../../../hooks/useDialog";
 import { softDeleteStay } from "../../../../services/api/stay-api";
 import { toast } from "react-toastify";
 import ReusableModal from "../../../../components/ReusableModal";
-import { FcApproval } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
+import { IoMdExpand } from "react-icons/io";
+import ApproveStay from "../../listing-action/approve-stay";
 
 interface Props {
   data: StayItem[];
@@ -105,37 +105,10 @@ const StayTableListing: FC<Props> = ({ data }) => {
       cell: (info) => dayjs(info.getValue()).format("DD-MMM-YYYY"),
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.isDisclosed, {
+    columnHelper.accessor((row) => row.approved, {
       id: "Approval Status",
       cell: (info) => (
-        <div>
-          <Menu placement="bottom-start">
-            <MenuHandler>
-              <Button className="call-btn text-black dark:text-white text-lg">
-                {info.getValue() ? (
-                  <p className="flex gap-x-2 capitalize fw-400 fs-600 items-center">
-                    <span className="w-3 h-3 bg-green-600 circle"></span>{" "}
-                    <span className="text-green-600">Active</span>
-                  </p>
-                ) : (
-                  <p className="flex gap-x-2 capitalize fw-400 fs-600 items-center">
-                    <span className="w-3 h-3 bg-orange-600 circle"></span>{" "}
-                    <span className="text-orange-600">Inactive</span>
-                  </p>
-                )}
-              </Button>
-            </MenuHandler>
-            <MenuList>
-              <MenuItem
-                className="flex text-black gap-x-2 items-center"
-                //   onClick={() => openEdit(info.row.original)}
-              >
-                <FcApproval className="text-xl relative top-[1px]" />
-                Approve Stay
-              </MenuItem>
-            </MenuList>
-          </Menu>
-        </div>
+       <ApproveStay id={info.row.original.id} status={info.getValue()}/>
       ),
       header: (info) => info.column.id,
     }),
@@ -182,7 +155,7 @@ const StayTableListing: FC<Props> = ({ data }) => {
               className="flex gap-x-2 items-center"
               onClick={() => navigate(`/listing/${info.getValue()}`)}
             >
-              <BiEdit className="text-lg" />
+              <IoMdExpand className="text-lg" />
               View Stay
             </MenuItem>
             <MenuItem

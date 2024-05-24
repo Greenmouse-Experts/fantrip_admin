@@ -34,3 +34,7 @@ export interface UserItem{
   roomPicture: string
   createdDate: string
 }
+
+export interface SuspendUserPayload{
+  isSuspended: boolean
+}

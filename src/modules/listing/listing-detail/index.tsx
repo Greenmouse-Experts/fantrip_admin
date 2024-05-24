@@ -28,7 +28,7 @@ const StayDetailsIndex: FC<Props> = ({ data }) => {
   return (
     <div>
       <div className="lg:flex gap-7 lg:gap-x-12">
-        <div className="lg:w-8/12 relative">
+        <div className="lg:w-7/12 relative">
           <StayGallery data={photos} />
           <div className="absolute z-20 top-3 left-3 w-[150px]">
             <div className="bg-[#FFEDF2] rounded-t-[10px] text-center p-4 pb-7">
@@ -45,8 +45,11 @@ const StayDetailsIndex: FC<Props> = ({ data }) => {
             </div>
           </div>
         </div>
+        <div>
+          <p className="fw-500">Extra Information</p>
+        </div>
       </div>
-      <div className="mt-7 lg:w-8/12">
+      <div className="mt-7 lg:w-7/12">
         <CondoDetails
           name={name}
           desc={description}

@@ -71,3 +71,7 @@ export interface PlaceItemUpdate {
   imageUrl?: string;
   isDisclosed?: boolean;
 }
+
+export interface ApproveStayInputItem{
+  approved: boolean
+}

@@ -13,6 +13,7 @@ export const UPDATE_PASSWORD = `/auth/update-password`
 // user endpoints
 export const GET_USERS = `/user/clients`
 export const VERIFY_HOST = `user/validate-host`
+export const SUSUPEND_USER = `/user/suspend-unsuspend-user`
 
 // properties endpoints
 export const CREATE_PROPERTY = `properties/add-property`
@@ -30,6 +31,7 @@ export const DELETE_AMENITY = `/amenities/delete-amenity`
 
 // stay endpoints
 export const GET_STAY_LISTING = `/stays`
+export const APPROVE_STAY = `/stays/change-status`
 
 // place endpoints
 export const CREATE_PLACE = `/places/create-place`

@@ -17,6 +17,7 @@ export interface StayItem {
   updatedDate: string;
   deletedDate: string | null;
   isDisclosed: boolean;
+  approved: boolean;
   createdDate: string;
   availableFrom: string;
   availableTo: string;

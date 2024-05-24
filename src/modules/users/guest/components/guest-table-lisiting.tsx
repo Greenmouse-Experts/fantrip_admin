@@ -6,6 +6,7 @@ import ProfileAvatar from "../../../../components/ProfileAvatar";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import { MdReadMore } from "react-icons/md";
+import SuspendUser from "../../user-action/suspend-user";
 
 interface Props {
   data: UserItem[];
@@ -45,19 +46,7 @@ const GuestTableListing: FC<Props> = ({ data, count, next, prev }) => {
     columnHelper.accessor((row) => row.isSuspended, {
       id: "Status",
       cell: (info) => (
-        <div>
-          {!info.getValue() ? (
-            <p className="flex gap-x-2 items-center">
-              <span className="w-3 h-3 bg-green-600 circle"></span>{" "}
-              <span className="text-green-600">Active</span>
-            </p>
-          ) : (
-            <p className="flex gap-x-2 items-center">
-            <span className="w-3 h-3 bg-orange-600 circle"></span>{" "}
-            <span className="text-orange-600">Inactive</span>
-          </p>
-          )}
-        </div>
+        <SuspendUser id={info.row.original.id} status={info.getValue()}/>
       ),
       header: (info) => info.column.id,
     }),

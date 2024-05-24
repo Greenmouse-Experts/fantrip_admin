@@ -4,7 +4,7 @@ import { GrTransaction } from "react-icons/gr";
 import { IoChatbubblesOutline, IoExtensionPuzzleSharp } from "react-icons/io5";
 import { MdOutlineFeaturedPlayList } from "react-icons/md";
 import { PiBookOpen, PiChartPieSliceFill, PiShoppingBagOpen } from "react-icons/pi";
-import { RiProfileLine } from "react-icons/ri";
+import { RiHotelLine, RiProfileLine } from "react-icons/ri";
 export interface RouteType {
   name: string;
   icon: any;
@@ -23,14 +23,26 @@ export const Routes = [
     submenu: [],
   },
   {
-    name: "Billing",
-    icon: <PiShoppingBagOpen className="text-xl" />,
+    name: "Stay",
+    icon: <RiHotelLine className="text-xl" />,
     route: "/",
     submenu: [
       {
-        name: "Condo Billing",
+        name: "Listings",
         icon: <PiShoppingBagOpen className="text-xl" />,
-        route: "/",
+        route: "/listing",
+        submenu: [],
+      },
+      {
+        name: "Reservations",
+        icon: <PiShoppingBagOpen className="text-xl" />,
+        route: "/reservation",
+        submenu: [],
+      },
+      {
+        name: "Bookings",
+        icon: <PiShoppingBagOpen className="text-xl" />,
+        route: "/booking",
         submenu: [],
       },
     ],
@@ -53,12 +65,6 @@ export const Routes2 = [
         name: "Users",
         icon: <RiProfileLine className="text-xl" />,
         route: "/users",
-        submenu: [],
-      },
-      {
-        name: "Listings",
-        icon: <RiProfileLine className="text-xl" />,
-        route: "/listing",
         submenu: [],
       },
       {

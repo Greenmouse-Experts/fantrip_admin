@@ -3,15 +3,15 @@ import active from "../../../assets/svg/active.svg";
 import saved from "../../../assets/svg/saved.svg";
 import cancel from "../../../assets/svg/cancel.svg";
 
-const ListingAnalytics = () => {
-  const listing = [
+const BookingAnalytics = () => {
+  const booking = [
     {
-      name: "Total Listing",
+      name: "Total Bookings",
       number: "200",
       img: <img src={all} alt="" />,
     },
     {
-      name: "Active Listing",
+      name: "Active Bookings",
       number: "102",
       img: <img src={active} alt="" />,
     },
@@ -21,14 +21,14 @@ const ListingAnalytics = () => {
       img: <img src={saved} alt="" />,
     },
     {
-      name: "Cancelled Listing",
+      name: "Cancelled Bookings",
       number: "200",
       img: <img src={cancel} alt="" />,
     },
   ];
   return (
     <div className="grid grid-cols-4 gap-5">
-      {listing.map((item) => (
+      {booking.map((item) => (
         <div className="border border-gray-200 dark:border-[#343B4F] flex gap-x-2 p-4 rounded-[8px]">
           <div>{item.img}</div>
           <div>
@@ -43,4 +43,4 @@ const ListingAnalytics = () => {
   );
 };
 
-export default ListingAnalytics;
+export default BookingAnalytics;

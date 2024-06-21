@@ -41,3 +41,5 @@ export const DELETE_PLACE = `/places`
 
 // reservation endpoints
 export const GET_RESERVATION = `/reservations`
+export const GET_BOOKINGS = `/bookings/fetch-guest-trx`
+export const GET_SINGLE_BOOKING = `/bookings/fetch-trx`

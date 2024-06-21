@@ -5,33 +5,43 @@ import { createColumnHelper } from "@tanstack/react-table";
 import ProfileAvatar from "../../../components/ProfileAvatar";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import { formatStatus } from "../../../utils/formatHelp";
 
 interface Props {
   data: ReservationItem[];
+  page: number;
+  count: number;
+  next: () => void;
+  prev: () => void
 }
-const ReservationTableListing: FC<Props> = ({ data }) => {
+const ReservationTableListing: FC<Props> = ({ data, page, count, next, prev }) => {
   // table column configuration and formating
   const columnHelper = createColumnHelper<ReservationItem>();
   const columns = [
     columnHelper.accessor((row) => row.stay.name, {
-        id: "Stay Name",
-        cell: (info) => (
-          <div className="min-w-[230px] flex gap-x-2 items-center">
-            {!!info.row.original.stay.photos.length && (
-              <img
-                src={info.row.original.stay.photos[0]}
-                alt="condo-img"
-                className="w-[80px] h-[60px] rounded-lg"
-              />
-            )}
-            <div>
+      id: "Stay Name",
+      cell: (info) => (
+        <div className="min-w-[230px] flex gap-x-2 items-center">
+          {!!info.row.original.stay.photos.length && (
+            <img
+              src={info.row.original.stay.photos[0]}
+              alt="condo-img"
+              className="w-[80px] h-[60px] rounded-lg"
+            />
+          )}
+          <div>
             <p className="w-[160px] whitespace-nowrap">{info.getValue()}</p>
-            <Link to={`/lisiting/${info.row.original.stay.id}`} className="block mt-1 fw-600 syne text-pri underline">View Stay</Link>
-            </div>
+            <Link
+              to={`/lisiting/${info.row.original.stay.id}`}
+              className="block mt-1 fw-600 syne text-pri underline"
+            >
+              View Stay
+            </Link>
           </div>
-        ),
-        header: (info) => info.column.id,
-      }),
+        </div>
+      ),
+      header: (info) => info.column.id,
+    }),
     columnHelper.accessor((row) => row.guest.picture, {
       id: "Guest Profile",
       cell: (info) => (
@@ -48,24 +58,34 @@ const ReservationTableListing: FC<Props> = ({ data }) => {
       ),
       header: (info) => info.column.id,
     }),
+    columnHelper.accessor((row) => row.status, {
+      id: "Status",
+      cell: (info) =>
+        formatStatus[
+          info.getValue().toLowerCase() as keyof typeof formatStatus
+        ],
+      header: (info) => info.column.id,
+    }),
     columnHelper.accessor((row) => row.checkIn, {
       id: "Check In",
       cell: (info) => info.getValue(),
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.checkOut, {
-        id: "Check Out",
-        cell: (info) => info.getValue(),
-        header: (info) => info.column.id,
-      }),
-      columnHelper.accessor((row) => row.adults, {
-        id: "Guest Count",
-        cell: (info) => <div>
-            <p>{info.getValue()} Adults</p>
-            <p>{info.row.original.children} Children</p>
-        </div>,
-        header: (info) => info.column.id,
-      }),
+      id: "Check Out",
+      cell: (info) => info.getValue(),
+      header: (info) => info.column.id,
+    }),
+    columnHelper.accessor((row) => row.adults, {
+      id: "Guest Count",
+      cell: (info) => (
+        <div>
+          <p>{info.getValue()} Adults</p>
+          <p>{info.row.original.children} Children</p>
+        </div>
+      ),
+      header: (info) => info.column.id,
+    }),
     columnHelper.accessor((row) => row.createdDate, {
       id: "Created Date",
       cell: (info) => dayjs(info.getValue()).format("DD-MMM-YYYY"),
@@ -78,10 +98,10 @@ const ReservationTableListing: FC<Props> = ({ data }) => {
         <DynamicTable
           columns={columns}
           data={data}
-          next={() => false}
-          prev={() => false}
-          page={1}
-          count={5}
+          next={next}
+          prev={prev}
+          page={page}
+          count={count}
         />
       </div>
     </div>

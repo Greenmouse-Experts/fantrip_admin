@@ -1,6 +1,7 @@
 import DashboardLayout from "../layout";
 import StayAmenities from "../pages/amenities";
 import BookingPage from "../pages/booking";
+import BookingDetails from "../pages/booking-detail";
 import AdminDashboard from "../pages/dashboard";
 import GuestDetail from "../pages/guest-detail";
 import HostDetail from "../pages/host-detail";
@@ -55,7 +56,7 @@ export const adminRooutes = [
           },
           {
             path: 'booking/:id',
-            element: <ListingDetailPage/>
+            element: <BookingDetails/>
           },
           {
             path: 'reservation',

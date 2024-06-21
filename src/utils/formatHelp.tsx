@@ -1,4 +1,3 @@
-import { MdArrowUpward } from 'react-icons/md';
 
 export const capitalizeFirstLetter = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -28,23 +27,6 @@ export const formatAsNgnMoney = (value: number | string) => {
     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
 };
 
-export const formatRate = (value: string | number, stat: string) => {
-  if (stat === 'up') {
-    return (
-      <div className="flex items-center bg-[#0DA54E] text-white py-[8px] px-[10px] gap-x-1 rounded-[8px]">
-        <MdArrowUpward />
-        <p className="text-sm fw-500">{`${value}%`}</p>
-      </div>
-    );
-  } else if (stat === 'down') {
-    return (
-      <div className="flex items-center text-white bg-[#0DA54E] py-[8px] px-[10px] gap-x-1 rounded-[8px]">
-        <MdArrowUpward />
-        <p className="text-sm fw-500">{`${value}%`}</p>
-      </div>
-    );
-  } else return '';
-};
 
 export const isNumber = (value: string | number) => {
   return typeof value === 'number';
@@ -93,4 +75,82 @@ export const generatePaginationNumbers = (
     }
   }
   return paginationNumbers;
+};
+
+export const formatStatus = {
+  active: (
+    <p className="flex gap-x-2 items-center">
+      <span className="w-3 h-3 block circle bg-green-500"></span>
+      <span className="syne fw-600 text-green-500">Active</span>
+    </p>
+  ),
+  confirmed: (
+    <p className="flex gap-x-2 items-center">
+      <span className="w-3 h-3 block circle bg-green-500"></span>
+      <span className="syne fw-600 text-green-500">Cofirmed</span>
+    </p>
+  ),
+  draft: (
+    <p className="flex gap-x-2 items-center">
+      <span className="w-3 h-3 block circle bg-purple-500"></span>
+      <span className="syne fw-600 text-purple-500">Undisclosed</span>
+    </p>
+  ),
+  inactive: (
+    <p className="flex gap-x-2 items-center">
+      <span className="w-3 h-3 block circle bg-red-500"></span>
+      <span className="syne fw-600 text-red-500">Inactive</span>
+    </p>
+  ),
+  pending: (
+    <p className="flex gap-x-2 items-center">
+      <span className="w-3 h-3 block circle bg-[#fc819f]"></span>
+      <span className="syne fw-600 text-[#fc819f]">Pending</span>
+    </p>
+  ),
+  checkedin: (
+    <p className="flex gap-x-2 items-center">
+      <span className="w-3 h-3 block circle bg-purple-600"></span>
+      <span className="syne fw-600 text-purple-600">Checked-In</span>
+    </p>
+  ),
+  checkedout: (
+    <p className="flex gap-x-2 items-center">
+      <span className="w-3 h-3 block circle bg-blue-600"></span>
+      <span className="syne fw-600 text-blue-600">Checked-Out</span>
+    </p>
+  ),
+  cancelled: (
+    <p className="flex gap-x-2 items-center">
+      <span className="w-3 h-3 block circle bg-red-500"></span>
+      <span className="syne fw-600 text-red-500">Cancelled</span>
+    </p>
+  ),
+};
+
+export const formatStayStatus = {
+  pending: (
+    <p className="flex gap-x-2 items-center">
+      <span className="w-3 h-3 block circle bg-[#fc819f]"></span>
+      <span className="syne fw-600 text-[#fc819f]">Awaiting</span>
+    </p>
+  ),
+  checkedin: (
+    <p className="flex gap-x-2 items-center">
+      <span className="w-3 h-3 block circle bg-purple-600"></span>
+      <span className="syne fw-600 text-purple-600">Checked-In</span>
+    </p>
+  ),
+  checkedout: (
+    <p className="flex gap-x-2 items-center">
+      <span className="w-3 h-3 block circle bg-blue-600"></span>
+      <span className="syne fw-600 text-blue-600">Checked-Out</span>
+    </p>
+  ),
+  cancelled: (
+    <p className="flex gap-x-2 items-center">
+      <span className="w-3 h-3 block circle bg-red-500"></span>
+      <span className="syne fw-600 text-red-500">Cancelled</span>
+    </p>
+  ),
 };

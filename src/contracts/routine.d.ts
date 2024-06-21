@@ -75,3 +75,10 @@ export interface PlaceItemUpdate {
 export interface ApproveStayInputItem{
   approved: boolean
 }
+
+export interface FetchParam {
+  isDisclosed?: number,
+  page?:  number,
+  isPublished?: boolean,
+  status?: string
+}

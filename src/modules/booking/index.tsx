@@ -1,4 +1,5 @@
 import BookingAnalytics from "./booking-analytics";
+import BookingListing from "./booking-table";
 
 const BookingIndex = () => {
   return (
@@ -6,7 +7,9 @@ const BookingIndex = () => {
         <div>
           <BookingAnalytics />
         </div>
-        <div className="mt-6">{/* <ListingTable /> */}</div>
+        <div className="mt-6">
+          <BookingListing/>
+        </div>
     </div>
   );
 };

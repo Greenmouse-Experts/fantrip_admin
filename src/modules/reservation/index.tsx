@@ -3,7 +3,7 @@ import ReservationListing from "./reservation-listing";
 
 const ReservationIndex = () => {
   return (
-    <div>
+    <div className="relative">
       <div>
         <PagesHeader name="Stay Reservations" />
       </div>

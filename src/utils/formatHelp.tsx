@@ -154,3 +154,20 @@ export const formatStayStatus = {
     </p>
   ),
 };
+
+export const formatPhoneNumber = (phoneNumberString:string) => {
+  let cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+
+  // Extract the first digit (if present) and keep it separate
+  let firstDigit = cleaned.length > 0 ? cleaned.charAt(0) : '';
+  cleaned = cleaned.substring(1); // Remove the first digit from the cleaned string
+
+  // Format the remaining digits
+  let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+
+  if (match) {
+    return '+' + firstDigit + ' (' + match[1] + ') ' + match[2] + '-' + match[3];
+  }
+
+  return null;
+}

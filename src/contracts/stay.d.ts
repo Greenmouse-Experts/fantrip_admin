@@ -24,5 +24,6 @@ export interface StayItem {
   maxNights: number;
   property: PropertyItem;
   host: UserItem;
+  currency: string;
   amenities: AmenityItem[];
 }

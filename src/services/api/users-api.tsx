@@ -37,6 +37,12 @@ export const getUser = async (type: ENDPOINT.USER_TYPES, page: number) => {
     .then((response) => response.data);
 };
 
+export const getUserDetails = async (id:string, type: ENDPOINT.USER_TYPES) => {
+  return axios
+    .get(`${ENDPOINT.GET_USER_DETAIL}/${id}/${type}`)
+    .then((response) => response.data);
+};
+
 export const verifyHost = async (id: string) => {
   return axios
     .patch(`${ENDPOINT.VERIFY_HOST}/${id}`)

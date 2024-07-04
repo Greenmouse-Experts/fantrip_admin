@@ -72,13 +72,27 @@ export interface PlaceItemUpdate {
   isDisclosed?: boolean;
 }
 
-export interface ApproveStayInputItem{
-  approved: boolean
+export interface ApproveStayInputItem {
+  approved: boolean;
 }
 
 export interface FetchParam {
-  isDisclosed?: number,
-  page?:  number,
-  isPublished?: boolean,
-  status?: string
+  isDisclosed?: number;
+  page?: number;
+  isPublished?: boolean;
+  status?: string;
+}
+
+export interface AddTaxItem {
+  rate: number;
+  country: string;
+  isActive?: boolean;
+}
+
+export interface TaxItem {
+  rate: string;
+  country: string;
+  id: string;
+  isActive: boolean;
+  createdDate: string;
 }

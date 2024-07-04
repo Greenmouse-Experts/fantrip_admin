@@ -140,6 +140,12 @@ export const Routes2 = [
         icon: <IoChatbubblesOutline className="text-xl"/>,
         route: "/settings/amenities",
         submenu: [],
+      },
+      {
+        name: "Taxes",
+        icon: <IoChatbubblesOutline className="text-xl"/>,
+        route: "/settings/taxes",
+        submenu: [],
       }
     ],
   }

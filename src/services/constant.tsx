@@ -30,6 +30,10 @@ export const GET_SINGLE_AMENITY = `/amenities`
 export const UPDATE_AMENITY = `/amenities/update-amenity`
 export const DELETE_AMENITY = `/amenities/delete-amenity`
 
+// tax endpoints
+export const CREATE_TAX = `/tax-rates/create`
+export const GET_TAXES = `/tax-rates`
+
 // stay endpoints
 export const GET_STAY_LISTING = `/stays`
 export const APPROVE_STAY = `/stays/change-status`

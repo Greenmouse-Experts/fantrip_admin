@@ -11,6 +11,7 @@ import PlacesPage from "../pages/places";
 import StayProperties from "../pages/properties";
 import ReservationPage from "../pages/reservation";
 import ProfileSettings from "../pages/settings";
+import StayTaxes from "../pages/taxes";
 import UsersPage from "../pages/users";
 
 export const adminRooutes = [
@@ -45,6 +46,10 @@ export const adminRooutes = [
           {
             path: 'settings/properties',
             element: <StayProperties/>
+          },
+          {
+            path: 'settings/taxes',
+            element: <StayTaxes/>
           },
           {
             path: 'places',

@@ -10,7 +10,7 @@ const PlacesPage = () => {
       <div>
         <div>
           <PagesHeader
-            name="Fantrip Places"
+            name="Area Guide Spot Categories"
             btnName="Add New"
             btnAction={() => setShowModal(true)}
           />

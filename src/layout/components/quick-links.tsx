@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const QuickLinks = () => {
   const [active, setActive] = useState(1);
+  const navigate = useNavigate();
+
   return (
     <div className="dark:text-white">
       <div>
@@ -32,13 +35,13 @@ const QuickLinks = () => {
         {active === 1 && (
           <div>
             <ul className="grid gap-4">
-              <li className="flex items-center cursor-pointer gap-x-2">
+              <li className="flex items-center cursor-pointer gap-x-2" onClick={() => navigate('/')}>
                 <span className="w-2 h-2 circle bg-[#1C1C1C33] dark:bg-gray-50"></span>
                 <span className="text-[14px] text-[#1C1C1C] dark:text-white">
                   Overview
                 </span>
               </li>
-              <li className="flex items-center cursor-pointer gap-x-2">
+              <li className="flex items-center cursor-pointer gap-x-2" onClick={() => navigate('/users')}>
                 <span className="w-2 h-2 circle bg-[#1C1C1C33] dark:bg-gray-50"></span>
                 <span className="text-[14px] text-[#1C1C1C] dark:text-white">
                   Users

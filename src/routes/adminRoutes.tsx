@@ -9,6 +9,7 @@ import StayLisiting from "../pages/listing";
 import ListingDetailPage from "../pages/listing-detail";
 import PlacesPage from "../pages/places";
 import StayProperties from "../pages/properties";
+import ReccomendationsPage from "../pages/reccomendations";
 import ReservationPage from "../pages/reservation";
 import ProfileSettings from "../pages/settings";
 import StayTaxes from "../pages/taxes";
@@ -74,7 +75,15 @@ export const adminRooutes = [
           {
             path: 'listing/:id',
             element: <ListingDetailPage/>
-          }
+          },
+          {
+            path: 'spot-categories',
+            element: <PlacesPage/>
+          },
+          {
+            path: 'reccomendations',
+            element: <ReccomendationsPage/>
+          },
         ],
       },
 ]

@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import HueSpinner from "../../components/loaders/hue-spinner";
-import { getSpots } from "../../services/api/place-api";
-import PlacesTableListing from "./component/table-listing";
+import { getPlaces } from "../../services/api/place-api";
+import ReccomendationsTableListing from "./component/table-listing";
 
-const PlacesListing = () => {
+const ReccomendationsListing = () => {
   const { isLoading, data } = useQuery({
-    queryKey: ["get-spots"],
-    queryFn: getSpots,
+    queryKey: ["get-places"],
+    queryFn: getPlaces,
   });
   return (
     <div>
@@ -16,10 +16,10 @@ const PlacesListing = () => {
         </div>
       )}
       {!isLoading && !!data?.data?.length && (
-        <PlacesTableListing data={data?.data} />
+        <ReccomendationsTableListing data={data?.data} />
       )}
     </div>
   );
 };
 
-export default PlacesListing;
+export default ReccomendationsListing;

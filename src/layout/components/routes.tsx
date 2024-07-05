@@ -51,7 +51,20 @@ export const Routes = [
     name: "Area Guide",
     icon: <PiBookOpen className="text-xl" />,
     route: "/area",
-    submenu: [],
+    submenu: [
+      {
+        name: "Spot Categories",
+        icon: <PiShoppingBagOpen className="text-xl" />,
+        route: "/spot-categories",
+        submenu: [],
+      },
+      {
+        name: "Reccomended Spots",
+        icon: <PiShoppingBagOpen className="text-xl" />,
+        route: "/reccomendations",
+        submenu: [],
+      },
+    ],
   },
 ];
 

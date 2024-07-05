@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { PlaceItem } from "../../../contracts/routine";
 import { DynamicTable } from "../../../components/DynamicTable";
 import { createColumnHelper } from "@tanstack/react-table";
@@ -12,49 +12,11 @@ import {
 } from "@material-tailwind/react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { BiEdit } from "react-icons/bi";
-import { RiDeleteBin5Fill } from "react-icons/ri";
-import useDialog from "../../../hooks/useDialog";
-import { toast } from "react-toastify";
-import { useRefetch } from "../../../hooks/useRefetch";
-import ReusableModal from "../../../components/ReusableModal";
-import { deleteSpot } from "../../../services/api/place-api";
-import EditPlaceModal from "./edit-place";
 
 interface Props {
   data: PlaceItem[];
 }
-const PlacesTableListing: FC<Props> = ({ data }) => {
-  const { revalidateRoute } = useRefetch();
-  const [selected, setSelected] = useState<PlaceItem>();
-  const [selectedId, setSelectedId] = useState<string>();
-  const [isBusy, setIsBusy] = useState<boolean>(false);
-  const { Dialog: Edit, setShowModal: ShowEdit } = useDialog();
-  const { Dialog: Delete, setShowModal: ShowDelete } = useDialog();
-
-  const openEdit = (item: PlaceItem) => {
-    setSelected(item);
-    ShowEdit(true);
-  };
-  // handle delete
-  const openDelete = (id: string) => {
-    setSelectedId(id);
-    ShowDelete(true);
-  };
-  const handleDelete = async () => {
-    setIsBusy(true);
-    await deleteSpot(selectedId || "")
-      .then(() => {
-        toast.success("Place deleted Successfully");
-        setIsBusy(false);
-        ShowDelete(false);
-        revalidateRoute("get-places");
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
-        setIsBusy(false);
-        ShowDelete(false);
-      });
-  };
+const ReccomendationsTableListing: FC<Props> = ({ data }) => {
 
   // table column configuration and formating
   const columnHelper = createColumnHelper<PlaceItem>();
@@ -112,17 +74,10 @@ const PlacesTableListing: FC<Props> = ({ data }) => {
           <MenuList>
             <MenuItem
               className="flex gap-x-2 items-center"
-              onClick={() => openEdit(info.row.original)}
+              onClick={() => console.log(info.row.original)}
             >
               <BiEdit className="text-lg" />
               Edit
-            </MenuItem>
-            <MenuItem
-              className="flex gap-x-2 items-center"
-              onClick={() => openDelete(info.getValue())}
-            >
-              <RiDeleteBin5Fill className="text-lg" />
-              Delete
             </MenuItem>
           </MenuList>
         </Menu>
@@ -142,21 +97,8 @@ const PlacesTableListing: FC<Props> = ({ data }) => {
           count={5}
         />
       </div>
-      <Edit title="Edit Spot Category Info" size="lg">
-        <EditPlaceModal item={selected} close={() => ShowEdit(false)} />
-      </Edit>
-      <Delete title="" size="sm">
-        <ReusableModal
-          title="Are you sure you want to delete this spot info"
-          action={() => handleDelete()}
-          actionTitle="Yes, Delete"
-          closeModal={() => ShowDelete(false)}
-          cancelTitle="No, Close"
-          isBusy={isBusy}
-        />
-      </Delete>
     </div>
   );
 };
 
-export default PlacesTableListing;
+export default ReccomendationsTableListing;

@@ -10,7 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { uploadImage } from "../../../services/api/routine";
 import { useRefetch } from "../../../hooks/useRefetch";
 import { PlaceItem, PlaceItemUpdate } from "../../../contracts/routine";
-import { updatePlace } from "../../../services/api/place-api";
+import { updateSpot } from "../../../services/api/place-api";
 
 interface Props {
   item: PlaceItem | undefined;
@@ -34,11 +34,11 @@ const EditPlaceModal: FC<Props> = ({ item, close }) => {
     },
   });
   const updateAction = async (payload: PlaceItemUpdate) => {
-    await updatePlace(item?.id || "", payload)
+    await updateSpot(item?.id || "", payload)
       .then(() => {
         toast.success("Place updated Successfully");
         setIsBusy(false);
-        revalidateRoute("get-places");
+        revalidateRoute("get-spots");
         close();
       })
       .catch(() => {
@@ -114,7 +114,7 @@ const EditPlaceModal: FC<Props> = ({ item, close }) => {
         />
         <ImageInput
           prevValue={item?.imageUrl}
-          label="PlaceupdatePlace Image/Icon"
+          label="Spot Image/Icon"
           setImage={setSelectedImg}
         />
         <div className="mt-7">

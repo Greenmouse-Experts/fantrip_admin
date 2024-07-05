@@ -39,10 +39,11 @@ export const GET_STAY_LISTING = `/stays`
 export const APPROVE_STAY = `/stays/change-status`
 
 // place endpoints
-export const CREATE_PLACE = `/places/create-place`
+export const CREATE_SPOT = `/spots/create-spot`
 export const GET_PLACES = `/places`
-export const UPDATE_PLACE = `/places/update-place`
-export const DELETE_PLACE = `/places`
+export const GET_SPOTS = `/spots`
+export const UPDATE_SPOT = `/spots/update-spot`
+export const DELETE_SPOT = `/spots`
 
 // reservation endpoints
 export const GET_RESERVATION = `/reservations`

@@ -2,14 +2,18 @@ import axios from "axios";
 import * as ENDPOINT from "../constant";
 import { PlaceItemInput, PlaceItemUpdate } from "../../contracts/routine";
 
-export const createPlace = async (payload: PlaceItemInput) => {
+export const createSpot = async (payload: PlaceItemInput) => {
   return axios
-    .post(`${ENDPOINT.CREATE_PLACE}`, payload)
+    .post(`${ENDPOINT.CREATE_SPOT}`, payload)
     .then((response) => response.data);
 };
 
 export const getPlaces = async () => {
   return axios.get(`${ENDPOINT.GET_PLACES}`).then((response) => response.data);
+};
+
+export const getSpots = async () => {
+  return axios.get(`${ENDPOINT.GET_SPOTS}`).then((response) => response.data);
 };
 
 export const getSinglePlace = async (id: string) => {
@@ -18,14 +22,14 @@ export const getSinglePlace = async (id: string) => {
     .then((response) => response.data);
 };
 
-export const updatePlace = async (id: string, payload: PlaceItemUpdate) => {
+export const updateSpot = async (id: string, payload: PlaceItemUpdate) => {
   return axios
-    .patch(`${ENDPOINT.UPDATE_PLACE}/${id}`, payload)
+    .patch(`${ENDPOINT.UPDATE_SPOT}/${id}`, payload)
     .then((response) => response.data);
 };
 
-export const deletePlace = async (id: string) => {
+export const deleteSpot = async (id: string) => {
   return axios
-    .delete(`${ENDPOINT.DELETE_PLACE}/${id}`)
+    .delete(`${ENDPOINT.DELETE_SPOT}/${id}`)
     .then((response) => response.data);
 };

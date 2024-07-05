@@ -9,7 +9,7 @@ import { uploadImage } from "../../services/api/routine";
 import { toast } from "react-toastify";
 import { useRefetch } from "../../hooks/useRefetch";
 import { PlaceItemInput } from "../../contracts/routine";
-import { createPlace } from "../../services/api/place-api";
+import { createSpot } from "../../services/api/place-api";
 
 interface Props {
   close: () => void;
@@ -31,8 +31,8 @@ const AddPlace: FC<Props> = ({ close }) => {
     },
   });
   const addAction = useMutation({
-    mutationFn: createPlace,
-    mutationKey: ["add-place"],
+    mutationFn: createSpot,
+    mutationKey: ["add-spots"],
   });
   const mutation = useMutation({
     mutationFn: uploadImage,
@@ -45,7 +45,7 @@ const AddPlace: FC<Props> = ({ close }) => {
         onSuccess: () => {
           toast.success("Place added Successfully");
           setIsBusy(false);
-          revalidateRoute("get-places");
+          revalidateRoute("get-spots");
           close()
         },
         onError: (err:any) => {
@@ -104,7 +104,7 @@ const AddPlace: FC<Props> = ({ close }) => {
             />
           )}
         />
-        <ImageInput label="Place Image/Icon" setImage={setSelectedImg} />
+        <ImageInput label="Spot Image/Icon" setImage={setSelectedImg} />
         <div className="mt-7">
           <Button
             title={isBusy ? <BeatLoader size={12} color="white" /> : "Submit"}

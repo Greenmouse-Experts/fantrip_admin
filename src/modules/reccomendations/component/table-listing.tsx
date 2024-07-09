@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { PlaceItem } from "../../../contracts/routine";
 import { DynamicTable } from "../../../components/DynamicTable";
 import { createColumnHelper } from "@tanstack/react-table";
 import dayjs from "dayjs";
@@ -12,30 +11,53 @@ import {
 } from "@material-tailwind/react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { BiEdit } from "react-icons/bi";
+import { ReccomendationItem } from "../../../contracts/reccomendation";
+import UserInfoAvatar from "../../../utils/user-info";
 
 interface Props {
-  data: PlaceItem[];
+  data: ReccomendationItem[];
+  count: number;
+  page: number;
+  next: () => void;
+  prev: () => void;
 }
-const ReccomendationsTableListing: FC<Props> = ({ data }) => {
-
+const ReccomendationsTableListing: FC<Props> = ({
+  data,
+  page,
+  count,
+  next,
+  prev,
+}) => {
   // table column configuration and formating
-  const columnHelper = createColumnHelper<PlaceItem>();
+  const columnHelper = createColumnHelper<ReccomendationItem>();
   const columns = [
+    columnHelper.accessor((row) => row?.user?.picture, {
+      id: "Guest Name",
+      cell: (info) => (
+        <>
+          {" "}
+          <UserInfoAvatar
+            url={info.getValue() || ""}
+            fname={info.row.original?.user?.firstName || ""}
+            lname={info.row.original?.user?.lastName || ""}
+          />
+        </>
+      ),
+      header: (info) => info.column.id,
+    }),
+    columnHelper.accessor((row) => row.spot?.name, {
+      id: "Reccomemdation Type",
+      cell: (info) => info.getValue(),
+      header: (info) => info.column.id,
+    }),
     columnHelper.accessor((row) => row.name, {
       id: "Place Name",
       cell: (info) => info.getValue(),
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.imageUrl, {
-      id: "Image",
-      cell: (info) =>
-        info.getValue() && (
-          <img
-            src={info.getValue() || ""}
-            alt="property"
-            className="w-28 h-16 object-cover"
-          />
-        ),
+    columnHelper.accessor((row) => row.location, {
+      id: "Location",
+      cell: (info) => info.getValue(),
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.createdDate, {
@@ -77,7 +99,7 @@ const ReccomendationsTableListing: FC<Props> = ({ data }) => {
               onClick={() => console.log(info.row.original)}
             >
               <BiEdit className="text-lg" />
-              Edit
+              View Details
             </MenuItem>
           </MenuList>
         </Menu>
@@ -91,10 +113,10 @@ const ReccomendationsTableListing: FC<Props> = ({ data }) => {
         <DynamicTable
           columns={columns}
           data={data}
-          next={() => false}
-          prev={() => false}
-          page={1}
-          count={5}
+          next={next}
+          prev={prev}
+          page={page}
+          count={count}
         />
       </div>
     </div>

@@ -89,7 +89,7 @@ export const Routes2 = [
       {
         name: "Notifications",
         icon: <RiProfileLine className="text-xl" />,
-        route: "/",
+        route: "/notifications",
         submenu: [],
       },
       {

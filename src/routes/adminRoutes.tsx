@@ -7,6 +7,7 @@ import GuestDetail from "../pages/guest-detail";
 import HostDetail from "../pages/host-detail";
 import StayLisiting from "../pages/listing";
 import ListingDetailPage from "../pages/listing-detail";
+import NotificationPage from "../pages/notification";
 import PlacesPage from "../pages/places";
 import StayProperties from "../pages/properties";
 import ReccomendationsPage from "../pages/reccomendations";
@@ -89,6 +90,10 @@ export const adminRooutes = [
             path: 'reccomendations/:id',
             element: <RecommendationDetailPage/>
           },
+          {
+            path: 'notifications',
+            element: <NotificationPage/>
+          }
         ],
       },
 ]

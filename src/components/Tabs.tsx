@@ -16,7 +16,7 @@ const Tabs: FC<Props> = ({ tabs, broadcastCurrentIndex, type }) => {
     charts:
       "bg-light dark:bg-[#272727] p-4 rounded-[10px] flex lg:space-x-2 space-x-2 overflow-x-auto",
     norm: "flex lg:space-x-4 space-x-2 overflow-x-auto",
-    "": "-mb-px tab-bar flex lg:space-x-2 space-x-2 overflow-x-auto",
+    "": "-mb-px border-b tab-bar flex lg:space-x-2 space-x-2 overflow-x-auto",
   };
   const navClass = {
     charts:

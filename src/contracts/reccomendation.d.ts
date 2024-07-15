@@ -7,6 +7,7 @@ export interface ReccomendationItem {
   id: string;
   isDisclosed: boolean;
   location: string;
+  tags: string;
   name: string;
   photos: string;
   spot: PlaceItem;

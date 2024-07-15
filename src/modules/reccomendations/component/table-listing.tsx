@@ -13,6 +13,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { BiEdit } from "react-icons/bi";
 import { ReccomendationItem } from "../../../contracts/reccomendation";
 import UserInfoAvatar from "../../../utils/user-info";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   data: ReccomendationItem[];
@@ -28,6 +29,7 @@ const ReccomendationsTableListing: FC<Props> = ({
   next,
   prev,
 }) => {
+  const navigate = useNavigate()
   // table column configuration and formating
   const columnHelper = createColumnHelper<ReccomendationItem>();
   const columns = [
@@ -96,7 +98,7 @@ const ReccomendationsTableListing: FC<Props> = ({
           <MenuList>
             <MenuItem
               className="flex gap-x-2 items-center"
-              onClick={() => console.log(info.row.original)}
+              onClick={() => navigate(`/reccomendations/${info.row.original.id}`)}
             >
               <BiEdit className="text-lg" />
               View Details

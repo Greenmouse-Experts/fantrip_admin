@@ -10,6 +10,7 @@ import ListingDetailPage from "../pages/listing-detail";
 import PlacesPage from "../pages/places";
 import StayProperties from "../pages/properties";
 import ReccomendationsPage from "../pages/reccomendations";
+import RecommendationDetailPage from "../pages/recommend-details";
 import ReservationPage from "../pages/reservation";
 import ProfileSettings from "../pages/settings";
 import StayTaxes from "../pages/taxes";
@@ -83,6 +84,10 @@ export const adminRooutes = [
           {
             path: 'reccomendations',
             element: <ReccomendationsPage/>
+          },
+          {
+            path: 'reccomendations/:id',
+            element: <RecommendationDetailPage/>
           },
         ],
       },

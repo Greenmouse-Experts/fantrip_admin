@@ -2,27 +2,33 @@ import all from "../../../assets/svg/all.svg";
 import active from "../../../assets/svg/active.svg";
 import saved from "../../../assets/svg/saved.svg";
 import cancel from "../../../assets/svg/cancel.svg";
+import { useQuery } from "@tanstack/react-query";
+import { getBookingStat } from "../../../services/api/booking-api";
 
 const BookingAnalytics = () => {
+  const {data} = useQuery({
+    queryKey: ['get-booking-stat'],
+    queryFn: getBookingStat
+  })
   const booking = [
     {
-      name: "Total Bookings",
-      number: "200",
+      name: "Pending Bookings",
+      number: data?.pending || 0,
       img: <img src={all} alt="" />,
     },
     {
-      name: "Active Bookings",
-      number: "102",
+      name: "Checked In",
+      number: data?.checkIn || 0,
       img: <img src={active} alt="" />,
     },
     {
-      name: "Drafts",
-      number: "20",
+      name: "Checked Out",
+      number: data?.checkOut || 0,
       img: <img src={saved} alt="" />,
     },
     {
       name: "Cancelled Bookings",
-      number: "200",
+      number: data?.cancelled || 0,
       img: <img src={cancel} alt="" />,
     },
   ];

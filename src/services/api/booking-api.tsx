@@ -14,6 +14,12 @@ export const getBookings = async (params: FetchParam) => {
     .then((response) => response.data);
 };
 
+export const getBookingStat = async () => {
+  return axios
+    .get(`${ENDPOINT.GET_BOOKING_STAT}`)
+    .then((response) => response.data);
+};
+
 export const getSingleBooking = async (id: string) => {
   return axios
     .get(`${ENDPOINT.GET_SINGLE_BOOKING}/${id}`)

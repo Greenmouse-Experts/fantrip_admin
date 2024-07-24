@@ -8,6 +8,12 @@ export const getStayListing = async () => {
     .then((response) => response.data);
 };
 
+export const getStayStats = async () => {
+  return axios
+    .get(`${ENDPOINT.GET_STAY_STAT}`)
+    .then((response) => response.data);
+};
+
 export const getSingleStayListing = async (id: string) => {
   return axios
     .get(`${ENDPOINT.GET_STAY_LISTING}/${id}`)

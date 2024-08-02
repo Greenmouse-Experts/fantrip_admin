@@ -22,6 +22,7 @@ const useAuth = () => {
     firstName,
     lastName,
     isLoggedIn,
+    token,
     saveUser,
     signOut
   }

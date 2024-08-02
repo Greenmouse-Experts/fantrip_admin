@@ -2,6 +2,7 @@ import DashboardLayout from "../layout";
 import StayAmenities from "../pages/amenities";
 import BookingPage from "../pages/booking";
 import BookingDetails from "../pages/booking-detail";
+import ChatRoom from "../pages/chat-room";
 import AdminDashboard from "../pages/dashboard";
 import GuestDetail from "../pages/guest-detail";
 import HostDetail from "../pages/host-detail";
@@ -18,82 +19,86 @@ import StayTaxes from "../pages/taxes";
 import UsersPage from "../pages/users";
 
 export const adminRooutes = [
-    {
-        path: '/',
-        element: <DashboardLayout/>,
-        children: [
-          {
-            index: true,
-            element: <AdminDashboard/>,
-          },
-          {
-            path: 'users',
-            element: <UsersPage/>
-          },
-          {
-            path: 'users/guest/:id',
-            element: <GuestDetail/>
-          },
-          {
-            path: 'users/host/:id',
-            element: <HostDetail/>
-          },
-          {
-            path: 'settings',
-            element: <ProfileSettings/>
-          },
-          {
-            path: 'settings/amenities',
-            element: <StayAmenities/>
-          },
-          {
-            path: 'settings/properties',
-            element: <StayProperties/>
-          },
-          {
-            path: 'settings/taxes',
-            element: <StayTaxes/>
-          },
-          {
-            path: 'places',
-            element: <PlacesPage/>
-          },
-          {
-            path: 'booking',
-            element: <BookingPage/>
-          },
-          {
-            path: 'booking/:id',
-            element: <BookingDetails/>
-          },
-          {
-            path: 'reservation',
-            element: <ReservationPage/>
-          },
-          {
-            path: 'listing',
-            element: <StayLisiting/>
-          },
-          {
-            path: 'listing/:id',
-            element: <ListingDetailPage/>
-          },
-          {
-            path: 'spot-categories',
-            element: <PlacesPage/>
-          },
-          {
-            path: 'reccomendations',
-            element: <ReccomendationsPage/>
-          },
-          {
-            path: 'reccomendations/:id',
-            element: <RecommendationDetailPage/>
-          },
-          {
-            path: 'notifications',
-            element: <NotificationPage/>
-          }
-        ],
+  {
+    path: "/",
+    element: <DashboardLayout />,
+    children: [
+      {
+        index: true,
+        element: <AdminDashboard />,
       },
-]
+      {
+        path: "users",
+        element: <UsersPage />,
+      },
+      {
+        path: "users/guest/:id",
+        element: <GuestDetail />,
+      },
+      {
+        path: "users/host/:id",
+        element: <HostDetail />,
+      },
+      {
+        path: "settings",
+        element: <ProfileSettings />,
+      },
+      {
+        path: "settings/amenities",
+        element: <StayAmenities />,
+      },
+      {
+        path: "settings/properties",
+        element: <StayProperties />,
+      },
+      {
+        path: "settings/taxes",
+        element: <StayTaxes />,
+      },
+      {
+        path: "places",
+        element: <PlacesPage />,
+      },
+      {
+        path: "booking",
+        element: <BookingPage />,
+      },
+      {
+        path: "booking/:id",
+        element: <BookingDetails />,
+      },
+      {
+        path: "reservation",
+        element: <ReservationPage />,
+      },
+      {
+        path: "listing",
+        element: <StayLisiting />,
+      },
+      {
+        path: "listing/:id",
+        element: <ListingDetailPage />,
+      },
+      {
+        path: "spot-categories",
+        element: <PlacesPage />,
+      },
+      {
+        path: "reccomendations",
+        element: <ReccomendationsPage />,
+      },
+      {
+        path: "reccomendations/:id",
+        element: <RecommendationDetailPage />,
+      },
+      {
+        path: "notifications",
+        element: <NotificationPage />,
+      },
+      {
+        path: "chat-room",
+        element: <ChatRoom />,
+      },
+    ],
+  },
+];

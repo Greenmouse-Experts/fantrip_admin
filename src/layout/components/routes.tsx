@@ -1,5 +1,5 @@
 
-import { BsGear } from "react-icons/bs";
+import { BsChatDots, BsGear } from "react-icons/bs";
 import { GrTransaction } from "react-icons/gr";
 import { IoChatbubblesOutline, IoExtensionPuzzleSharp } from "react-icons/io5";
 import { MdOutlineFeaturedPlayList } from "react-icons/md";
@@ -66,6 +66,12 @@ export const Routes = [
       },
     ],
   },
+  {
+    name: "Chat Room",
+    icon: <BsChatDots className="text-xl" />,
+    route: "/chat-room",
+    submenu: [],
+  },
 ];
 
 export const Routes2 = [
@@ -106,17 +112,11 @@ export const Routes2 = [
     route: "",
     submenu: [
       {
-        name: "Places",
+        name: "",
         icon: <IoChatbubblesOutline className="text-xl"/>,
         route: "/places",
         submenu: [],
       },
-      {
-        name: "Sport Content",
-        icon: <IoChatbubblesOutline className="text-xl"/>,
-        route: "/sport-contents",
-        submenu: [],
-      }
     ],
   },
   {

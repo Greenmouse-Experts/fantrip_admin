@@ -21,7 +21,7 @@ export interface UserItem {
   isActive: boolean;
   verifiedAsHost: boolean;
   isSuspended: boolean;
-  role: string[];
+  role: string;
   picture: string;
   address: string;
   state: string;

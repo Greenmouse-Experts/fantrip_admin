@@ -3,7 +3,7 @@ import ChatBody from "./chat-body";
 import ChatFooter from "./chat-footer";
 import ChatHeader from "./chat-header";
 import io from "socket.io-client";
-import { SOCKET_URL } from "@/services/constant";
+import { SOCKET_URL } from "../../../../../services/constant";
 
 interface Props {
   close: () => void;

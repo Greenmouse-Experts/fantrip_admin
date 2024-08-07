@@ -29,6 +29,7 @@ const HostKycInformation: FC<Props> = ({ user }) => {
     linkedinUrl,
     instagramUrl,
     governmentID,
+    roomPicture,
   } = user;
 
   const { Dialog: Verify, setShowModal: ShowVerify } = useDialog();
@@ -123,6 +124,12 @@ const HostKycInformation: FC<Props> = ({ user }) => {
           <p className="whitespace-nowrap">Government Id:</p>
           <Link className="text-primary" to={governmentID} target="_blank">
             {governmentID}
+          </Link>
+        </div>
+        <div className="flex gap-x-2">
+          <p className="whitespace-nowrap">Display picture:</p>
+          <Link className="text-primary" to={roomPicture} target="_blank">
+            <img src={roomPicture} alt="room-picture" className="rounded-lg w-28 h-20"/>
           </Link>
         </div>
       </div>

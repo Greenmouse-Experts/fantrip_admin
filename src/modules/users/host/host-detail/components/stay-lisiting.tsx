@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { FC } from "react";
 import { StayItem } from "../../../../../contracts/stay";
 
-interface Props{
-  stay: StayItem[]
+interface Props {
+  stay: StayItem[];
 }
-const HostStayListing:FC<Props> = ({stay}) => {
+const HostStayListing: FC<Props> = ({ stay }) => {
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -27,8 +27,11 @@ const HostStayListing:FC<Props> = ({stay}) => {
               />
               <div className="w-full">
                 <div className="flex justify-between items-center pr-3">
-                  <p className="fw-500">{item.name} ({item.currency}{item.price})</p>
-                  <Link to={""}>
+                  <p className="fw-500">
+                    {item.name} ({item.currency}
+                    {item.price})
+                  </p>
+                  <Link to={`/listing/${item.id}`}>
                     <IoExpandSharp className="text-primary" />
                   </Link>
                 </div>

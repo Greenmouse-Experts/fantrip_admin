@@ -22,8 +22,27 @@ export interface StayItem {
   availableFrom: string;
   availableTo: string;
   maxNights: number;
+  maxGuests: number;
   property: PropertyItem;
   host: UserItem;
   currency: string;
   amenities: AmenityItem[];
+  totalReviews: number;
+  avgRating: number | null;
+}
+
+export interface ReviewResult {
+  comment: string;
+  createdDate: string;
+  id: string;
+  muted: boolean;
+  place: ReccomendationItem;
+  rating: number;
+  reviewFor: string;
+  user: UserItem;
+}
+export interface ReviewItem {
+  avgRating: string;
+  results: ReviewResult[];
+  totalRating: string;
 }

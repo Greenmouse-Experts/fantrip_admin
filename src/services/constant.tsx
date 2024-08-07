@@ -39,6 +39,7 @@ export const GET_TAXES = `/tax-rates`
 export const GET_STAY_LISTING = `/stays`
 export const APPROVE_STAY = `/stays/change-status`
 export const GET_STAY_STAT = `/stays/count`;
+export const FETCH_STAY_REVIEW = `/reviews/view-reviews`;
 
 // place endpoints
 export const CREATE_SPOT = `/spots/create-spot`
@@ -46,6 +47,7 @@ export const GET_PLACES = `/places`
 export const GET_SPOTS = `/spots`
 export const UPDATE_SPOT = `/spots/update-spot`
 export const DELETE_SPOT = `/spots`
+export const FETCH_REVIEW = `/reviews/view-reviews`;
 
 // reservation endpoints
 export const GET_RESERVATION = `/reservations`

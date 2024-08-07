@@ -33,3 +33,9 @@ export const deleteSpot = async (id: string) => {
     .delete(`${ENDPOINT.DELETE_SPOT}/${id}`)
     .then((response) => response.data);
 };
+
+export const getReviews = async (id: string) => {
+  return axios
+    .get(`${ENDPOINT.FETCH_REVIEW}/${id}?reviewFor=place`)
+    .then((response) => response.data);
+};

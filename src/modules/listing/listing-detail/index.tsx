@@ -5,12 +5,14 @@ import CondoRatings from "./components/ratings";
 import Availability from "./components/availability";
 import { FC } from "react";
 import { StayItem } from "../../../contracts/stay";
+import ExtraInfo from "./components/extra-info";
 
 interface Props {
   data: StayItem;
 }
 const StayDetailsIndex: FC<Props> = ({ data }) => {
   const {
+    id,
     photos,
     price,
     amenities,
@@ -44,29 +46,29 @@ const StayDetailsIndex: FC<Props> = ({ data }) => {
               </div>
             </div>
           </div>
+          <div className="mt-7">
+            <CondoDetails
+              name={name}
+              desc={description}
+              property_name={property.name}
+              amenities={amenities}
+              unique={uniqueFeature}
+              special={specialOffers}
+              address={address}
+              price={price}
+              percent={percentageOff}
+            />
+          </div>
+          <div className="mt-7">
+            <CondoRatings id={id} />
+          </div>
+          <div className="mt-7">
+            <Availability from={availableFrom} to={availableTo} />
+          </div>
         </div>
-        <div>
-          <p className="fw-500">Extra Information</p>
+        <div className="w-5/12">
+          <ExtraInfo stay={data}/>
         </div>
-      </div>
-      <div className="mt-7 lg:w-7/12">
-        <CondoDetails
-          name={name}
-          desc={description}
-          property_name={property.name}
-          amenities={amenities}
-          unique={uniqueFeature}
-          special={specialOffers}
-          address={address}
-          price={price}
-        percent={percentageOff}
-        />
-      </div>
-      <div className="mt-7 lg:w-7/12">
-        <CondoRatings />
-      </div>
-      <div className="mt-7 lg:w-7/12">
-        <Availability from={availableFrom} to={availableTo}/>
       </div>
       <div className="mt-12 lg:mt-20 bg-[#EDEDFF] p-4 lg:px-8 lg:py-12 rounded-[11px]">
         <p className="text-[#494949] lg:w-9/12 mx-auto text-center">

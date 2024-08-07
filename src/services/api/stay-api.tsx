@@ -31,3 +31,9 @@ export const softDeleteStay = async (id: string) => {
     .delete(`${ENDPOINT.GET_STAY_LISTING}/${id}`)
     .then((response) => response.data);
 };
+
+export const getStayReviews = async (id: string) => {
+  return axios
+    .get(`${ENDPOINT.FETCH_STAY_REVIEW}/${id}?reviewFor=stay`)
+    .then((response) => response.data);
+};

@@ -1,42 +1,42 @@
-import { FC, useEffect, useRef, useState } from "react";
-import ChatBubble from "./component/chat-bubble";
-import useAuth from "../../../../../../hooks/authUser";
-import { ChatItem2 } from "../../../../../../contracts/chat";
-import { useChat } from "../../../../../../hooks/useChat";
+import { FC, useRef } from "react";
+// import ChatBubble from "./component/chat-bubble";
+// import useAuth from "../../../../../../hooks/authUser";
+// import { ChatItem2 } from "../../../../../../contracts/chat";
+// import { useChat } from "../../../../../../hooks/useChat";
 
 interface Props {
   socket: any;
 }
-const ChatBody: FC<Props> = ({ socket }) => {
+const ChatBody: FC<Props> = ({ }) => {
   // const { hostId, chatWithHost, hostInfo, chatWithHostPage, saveChatWithHost } =
   //   useChat();
-  const { token, userId } = useAuth();
-  const [newMsg, setNewMsg] = useState<ChatItem2>();
-  const [isLoaded, setIsLoaded] = useState(false)
+  // const { userId } = useAuth();
+  // const [newMsg, setNewMsg] = useState<ChatItem2>();
+  // const [isLoaded, setIsLoaded] = useState(false)
 
   // on load get previous messages or message history
-  const getMessages = () => {
-    const onListenEvent = (value: any) => {
-      setIsLoaded(true)
-      // saveChatWithHost(value.data.result);
-    };
-    socket.on(`messagesRetrieved:${userId}`, onListenEvent);
+  // const getMessages = () => {
+  //   const onListenEvent = (value: any) => {
+  //     setIsLoaded(true)
+  //     // saveChatWithHost(value.data.result);
+  //   };
+  //   socket.on(`messagesRetrieved:${userId}`, onListenEvent);
 
-    // Remove event listener on component unmount
-    return () => socket.off(`messagesRetrieved:${userId}`);
-  };
+  //   // Remove event listener on component unmount
+  //   return () => socket.off(`messagesRetrieved:${userId}`);
+  // };
 
   // get current updates fro sent messages or received msgs
-  const getUpdates = () => {
-    const onListenEvent = (value: any) => {
-      console.log(value.data, 'inside listener');
-      setNewMsg(value.data);
-    };
+  // const getUpdates = () => {
+    // const onListenEvent = (value: any) => {
+    //   console.log(value.data, 'inside listener');
+    //   setNewMsg(value.data);
+    // };
     // socket.on(`messageSent:${chatWithHost[0].chat.id}`, onListenEvent);
 
     // Remove event listener on component unmount
     // return () => socket.off(`messageSent:${chatWithHost[0].chat.id}`);
-  };
+  // };
 
    // connect to the chat room once page loads or when chat id is changed
   // useEffect(() => {
@@ -54,22 +54,22 @@ const ChatBody: FC<Props> = ({ socket }) => {
   //   }
   // }, [socket, hostId]);
 
-  useEffect(() => {
-    if (isLoaded) {
-      getUpdates();
-    }
-  }, [socket, isLoaded]);
+  // useEffect(() => {
+  //   if (isLoaded) {
+  //     getUpdates();
+  //   }
+  // }, [socket, isLoaded]);
 
    // add updated messages to the chat message array
-   useEffect(() => {
-    if (newMsg) {
-      // const filtered = chatWithHost.filter((where) => where.id === newMsg.id);
-      // if (!filtered.length) {
-      //   const newChat = [...chatWithHost, newMsg];
-      //   saveChatWithHost(newChat);
-      // }
-    }
-  }, [newMsg, socket]);
+  //  useEffect(() => {
+  //   if (newMsg) {
+  //     const filtered = chatWithHost.filter((where) => where.id === newMsg.id);
+  //     if (!filtered.length) {
+  //       const newChat = [...chatWithHost, newMsg];
+  //       saveChatWithHost(newChat);
+  //     }
+  //   }
+  // }, [newMsg, socket]);
   
 
     // Scroll to the bottom of the div when new message is added

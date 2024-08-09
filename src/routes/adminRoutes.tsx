@@ -6,7 +6,7 @@ import ChatRoom from "../pages/chat-room";
 import AdminDashboard from "../pages/dashboard";
 import GuestDetail from "../pages/guest-detail";
 import HostDetail from "../pages/host-detail";
-import StayLisiting from "../pages/listing";
+import StayListing from "../pages/listing";
 import ListingDetailPage from "../pages/listing-detail";
 import NotificationPage from "../pages/notification";
 import PlacesPage from "../pages/places";
@@ -73,7 +73,7 @@ export const adminRooutes = [
       },
       {
         path: "listing",
-        element: <StayLisiting />,
+        element: <StayListing />,
       },
       {
         path: "listing/:id",

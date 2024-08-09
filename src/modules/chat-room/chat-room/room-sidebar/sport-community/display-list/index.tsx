@@ -1,20 +1,15 @@
 import { FC, useEffect, useState } from "react";
 import useAuth from "../../../../../../hooks/authUser";
+import { CommunityItemTyping } from "../community-list";
 import ItemRender from "./item-render";
 
-export interface CommunityItemTyping {
-  id: string;
-  name: string;
-  icon: string;
-  isDisclosed: boolean;
-  type: string;
-  createdDate: string;
-  updatedDate: string;
+interface Props {
+  socket: any;
+  close: () => void;
+  change: string;
+  setChange: React.Dispatch<React.SetStateAction<string>>;
 }
-interface Props{
-  socket:any
-}
-const CommunityList:FC<Props> = ({socket}) => {
+const DisplayList: FC<Props> = ({ socket, change, setChange }) => {
   const [prevCommunities, setPrevCommunities] = useState<CommunityItemTyping[]>(
     []
   );
@@ -41,15 +36,22 @@ const CommunityList:FC<Props> = ({socket}) => {
 
   useEffect(() => {
     getCommunities();
-  }, [socket]);
-  
+  }, [socket, change]);
+
   return (
-    <div className="mt-3 grid gap-1">
-      {prevCommunities.map((item: CommunityItemTyping) => (
-        <ItemRender item={item} key={item.id} />
-      ))}
+    <div>
+      <div className="mt-3 grid gap-1">
+        {prevCommunities.map((item: CommunityItemTyping) => (
+          <ItemRender
+            socket={socket}
+            item={item}
+            key={item.id}
+            setChange={setChange}
+          />
+        ))}
+      </div>
     </div>
   );
 };
 
-export default CommunityList;
+export default DisplayList;

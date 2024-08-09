@@ -32,7 +32,7 @@ const ReservationTableListing: FC<Props> = ({ data, page, count, next, prev }) =
           <div>
             <p className="w-[160px] whitespace-nowrap">{info.getValue()}</p>
             <Link
-              to={`/lisiting/${info.row.original.stay.id}`}
+              to={`/listing/${info.row.original.stay.id}`}
               className="block mt-1 fw-600 syne text-pri underline"
             >
               View Stay

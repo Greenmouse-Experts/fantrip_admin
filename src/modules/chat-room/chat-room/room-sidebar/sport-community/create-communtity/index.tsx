@@ -1,6 +1,4 @@
-import { useState } from "react";
-import io from "socket.io-client";
-import { SOCKET_URL } from "../../../../../../services/constant";
+import { FC, useState } from "react";
 import useAuth from "../../../../../../hooks/authUser";
 import { useMutation } from "@tanstack/react-query";
 import { uploadImage } from "../../../../../../services/api/routine";
@@ -17,8 +15,12 @@ export interface CreateProps {
   icon: string;
   isDisclosed: boolean;
 }
-const socket = io(`${SOCKET_URL}`);
-const CreateCommunity = () => {
+
+interface Props{
+  socket:any
+  close: () => void;
+}
+const CreateCommunity:FC<Props> = ({socket, close}) => {
   const { token } = useAuth();
   const [isBusy, setIsBusy] = useState(false);
   const [iconInput, setIconInput] = useState<File[] | undefined>([]);
@@ -43,6 +45,8 @@ const CreateCommunity = () => {
       isDisclosed: true,
       token: `${token}`,
     });
+    setIsBusy(false)
+    close()
   };
 
   const mutation = useMutation({

@@ -1,6 +1,6 @@
 import ListingIndex from "../modules/listing"
 
-const StayLisiting = () => {
+const StayListing = () => {
   return (
     <div>
         <ListingIndex/>
@@ -8,4 +8,4 @@ const StayLisiting = () => {
   )
 }
 
-export default StayLisiting
+export default StayListing

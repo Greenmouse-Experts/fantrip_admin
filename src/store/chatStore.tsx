@@ -1,11 +1,14 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { ChatUserItem } from "../contracts/chat";
+import { ChatUserItem, CommunityItem } from "../contracts/chat";
 
 interface Props {
+  community: CommunityItem;
   guest: ChatUserItem;
+  saveCommunity: (data: CommunityItem) => void;
   saveGuestChat: (data: ChatUserItem) => void;
   clearGuest: () => void;
+  clearCommunity: () => void;
 }
 const chatInitState = {
   guest: {
@@ -22,11 +25,24 @@ const chatInitState = {
     },
     chats: [],
   },
+  community: {
+    activeId: "all",
+    name: "all"
+  }
 };
 const useChatStore = create<Props>()(
   persist(
     (set) => ({
       guest: chatInitState.guest,
+      community: chatInitState.community,
+      saveCommunity: (data: CommunityItem) =>
+        set(() => ({
+          community: data,
+        })),
+      clearCommunity: () =>
+        set(() => ({
+          community: chatInitState.community,
+        })),
       saveGuestChat: (data: ChatUserItem) =>
         set(() => ({
           guest: data,

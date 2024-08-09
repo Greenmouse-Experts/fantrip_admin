@@ -6,10 +6,10 @@ import { useQuery } from "@tanstack/react-query";
 import { getBookingStat } from "../../../services/api/booking-api";
 
 const BookingAnalytics = () => {
-  const {data} = useQuery({
-    queryKey: ['get-booking-stat'],
-    queryFn: getBookingStat
-  })
+  const { data } = useQuery({
+    queryKey: ["get-booking-stat"],
+    queryFn: getBookingStat,
+  });
   const booking = [
     {
       name: "Pending Bookings",
@@ -34,8 +34,11 @@ const BookingAnalytics = () => {
   ];
   return (
     <div className="grid grid-cols-4 gap-5">
-      {booking.map((item) => (
-        <div className="border border-gray-200 dark:border-[#343B4F] flex gap-x-2 p-4 rounded-[8px]">
+      {booking.map((item, i) => (
+        <div
+          key={i}
+          className="border border-gray-200 dark:border-[#343B4F] flex gap-x-2 p-4 rounded-[8px]"
+        >
           <div>{item.img}</div>
           <div>
             <p className="fw-500">{item.name}</p>

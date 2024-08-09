@@ -89,3 +89,8 @@ export interface ChatStoreItem {
   host: ChatUserItem;
   guest: ChatUserItem;
 }
+
+export interface CommunityItem {
+  activeId: string;
+  name: string;
+}

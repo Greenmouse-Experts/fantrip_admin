@@ -41,7 +41,7 @@ const StayTableListing: FC<Props> = ({ data }) => {
     setIsBusy(true);
     await softDeleteStay(selectedId || "")
       .then(() => {
-        toast.success("Stay lisiting deleted Successfully");
+        toast.success("Stay listing deleted Successfully");
         setIsBusy(false);
         revalidateRoute("get-listing");
         ShowDelete(false);

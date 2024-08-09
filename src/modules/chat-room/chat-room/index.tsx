@@ -17,7 +17,7 @@ const AdminChatRoomIndex = () => {
         <div className="">
          <div className="lg:flex gap-x-4 h-[80vh]">
          <div className="lg:w-[28%] border-r-2 border-[#D2D2D2]">
-            <RoomSidebarIndex />
+            <RoomSidebarIndex socket={socket}/>
           </div>
           <div className="lg:w-[48%]">
             <RoomBodyIndex />

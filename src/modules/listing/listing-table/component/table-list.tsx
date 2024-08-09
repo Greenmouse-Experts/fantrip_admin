@@ -14,7 +14,7 @@ import { StayItem } from "../../../../contracts/stay";
 import { useRefetch } from "../../../../hooks/useRefetch";
 import { DynamicTable } from "../../../../components/DynamicTable";
 import ProfileAvatar from "../../../../components/ProfileAvatar";
-import { formatNumber } from "../../../../utils/formatHelp";
+import { formatName, formatNumber } from "../../../../utils/formatHelp";
 import useDialog from "../../../../hooks/useDialog";
 import { softDeleteStay } from "../../../../services/api/stay-api";
 import { toast } from "react-toastify";
@@ -67,7 +67,7 @@ const StayTableListing: FC<Props> = ({ data }) => {
               className="w-[80px] h-[60px] rounded-lg"
             />
           )}
-          <p className="w-[160px] whitespace-nowrap">{info.getValue()}</p>
+          <p className="w-[160px] whitespace-nowrap">{formatName(info.getValue(), 20)}</p>
         </div>
       ),
       header: (info) => info.column.id,

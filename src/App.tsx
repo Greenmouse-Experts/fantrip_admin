@@ -3,6 +3,7 @@ import { adminRooutes } from "./routes/adminRoutes";
 import LoginPage from "./pages/login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ChatProvider from "./layout/provider/chat-provider";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ function App() {
         theme="colored"
       />
       <RouterProvider router={router} />
+      <ChatProvider/>
     </>
   );
 }

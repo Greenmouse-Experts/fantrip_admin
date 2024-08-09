@@ -11,8 +11,8 @@ const useDialog = () => {
   const setShowModal = (state: boolean) => setModal(state);
   const closeModal = () => setModal(false);
   const formatWidth = {
-    xl: "w-11/12 lg:w-[900px]",
-    lg: "w-11/12 lg:w-[750px]",
+    xl: "w-11/12 lg:w-[700px]",
+    lg: "w-11/12 lg:w-[650px]",
     md: "w-11/12 lg:w-[550px]",
     sm: "w-11/12 lg:w-[450px]",
     xs: "w-11/12 lg:w-[350px]",

@@ -5,7 +5,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import ProfileAvatar from "../../../components/ProfileAvatar";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
-import { formatStatus } from "../../../utils/formatHelp";
+import { formatName, formatStatus } from "../../../utils/formatHelp";
 
 interface Props {
   data: ReservationItem[];
@@ -22,7 +22,7 @@ const ReservationTableListing: FC<Props> = ({ data, page, count, next, prev }) =
       id: "Stay Name",
       cell: (info) => (
         <div className="min-w-[230px] flex gap-x-2 items-center">
-          {!!info.row.original.stay.photos.length && (
+          {!!info.row.original?.stay?.photos?.length && (
             <img
               src={info.row.original.stay.photos[0]}
               alt="condo-img"
@@ -30,7 +30,7 @@ const ReservationTableListing: FC<Props> = ({ data, page, count, next, prev }) =
             />
           )}
           <div>
-            <p className="w-[160px] whitespace-nowrap">{info.getValue()}</p>
+            <p className="w-[160px] whitespace-nowrap">{formatName(info.getValue(), 20)}</p>
             <Link
               to={`/listing/${info.row.original.stay.id}`}
               className="block mt-1 fw-600 syne text-pri underline"
@@ -42,18 +42,18 @@ const ReservationTableListing: FC<Props> = ({ data, page, count, next, prev }) =
       ),
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.guest.picture, {
+    columnHelper.accessor((row) => row.guest?.picture, {
       id: "Guest Profile",
       cell: (info) => (
         <div className="flex items-center gap-x-2 min-w-[180px]">
           <ProfileAvatar
             url={info.getValue()}
-            name={`${info.row.original.guest.firstName} ${info.row.original.guest.lastName}`}
+            name={`${info.row.original.guest?.firstName} ${info.row.original.guest?.lastName}`}
             font={18}
             size={40}
             type="dark"
           />
-          <p>{`${info.row.original.guest.firstName} ${info.row.original.guest.lastName}`}</p>
+          <p>{`${info.row.original.guest?.firstName} ${info.row.original.guest?.lastName}`}</p>
         </div>
       ),
       header: (info) => info.column.id,

@@ -1,32 +1,39 @@
-// import useAuth from "@/hooks/authUser";
-// import { useChat } from "@/hooks/useChat";
 import { FC, useState } from "react";
 import { IoSend } from "react-icons/io5";
+import { useChat } from "../../../../../../hooks/useChat";
+import useAuth from "../../../../../../hooks/authUser";
 
 interface Props {
   socket: any;
 }
-const ChatFooter: FC<Props> = ({}) => {
-  // const { hostId } = useChat();
-  // const { token } = useAuth();
+const ChatFooter: FC<Props> = ({socket}) => {
+  const { guestInfo } = useChat();
+  const { token } = useAuth();
   const [msgInput, setMsgInput] = useState("");
-  // const handleSend = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   if (msgInput === "") {
-  //     return;
-  //   }
-  //   socket.emit("sendMessage", {
-  //     chatBuddy: hostId,
-  //     message: msgInput,
-  //     file: null,
-  //     token: `${token}`,
-  //   });
-  //   setMsgInput("");
-  // };
+  const handleSend = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (msgInput === "") {
+      return;
+    }
+    console.log({
+      chatBuddy: guestInfo.id,
+      message: msgInput,
+      file: null,
+      token: `${token}`,
+    });
+    
+    socket.emit("sendMessage", {
+      chatBuddy: guestInfo.id,
+      message: msgInput,
+      file: null,
+      token: `${token}`,
+    });
+    setMsgInput("");
+  };
   return (
     <div className="p-2">
       <form
-        // onSubmit={handleSend}
+        onSubmit={handleSend}
         className="border border-gray-500 rounded-full flex"
       >
         <input
@@ -38,7 +45,7 @@ const ChatFooter: FC<Props> = ({}) => {
         />
         <button
           className="w-16 shrink-0 place-center bg-[#9847fe] rounded-r-full text-white"
-          // onClick={handleSend}
+          onClick={handleSend}
         >
           <IoSend className="text-xl" />
         </button>

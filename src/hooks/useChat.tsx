@@ -12,6 +12,7 @@ export function useChat() {
   const guestInfo = guest.user;
   const guestId = guest.activeId;
   const chatWithGuest = guest.chats;
+  const chatWithGuestPage = guest.page
 
   const saveGuestInfo = (item: UserChatInfo, id: string) => {
     saveGuest({
@@ -40,6 +41,7 @@ export function useChat() {
     guestId,
     guestInfo,
     chatWithGuest,
+    chatWithGuestPage,
     community,
     saveCommunity,
     saveGuestInfo,

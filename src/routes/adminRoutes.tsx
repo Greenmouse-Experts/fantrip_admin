@@ -15,6 +15,7 @@ import ReccomendationsPage from "../pages/reccomendations";
 import RecommendationDetailPage from "../pages/recommend-details";
 import ReservationPage from "../pages/reservation";
 import ProfileSettings from "../pages/settings";
+import SpecialListing from "../pages/special-listing";
 import StayTaxes from "../pages/taxes";
 import UsersPage from "../pages/users";
 
@@ -98,6 +99,10 @@ export const adminRooutes = [
       {
         path: "chat-room",
         element: <ChatRoom />,
+      },
+      {
+        path: "special-listing",
+        element: <SpecialListing />,
       },
     ],
   },

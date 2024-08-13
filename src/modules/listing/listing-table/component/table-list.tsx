@@ -25,8 +25,12 @@ import ApproveStay from "../../listing-action/approve-stay";
 
 interface Props {
   data: StayItem[];
+  page: number;
+  count: number;
+  next: () => void;
+  prev: () => void
 }
-const StayTableListing: FC<Props> = ({ data }) => {
+const StayTableListing: FC<Props> = ({ data, page, count, next, prev }) => {
   const { revalidateRoute } = useRefetch();
   const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState<string>();
@@ -177,10 +181,10 @@ const StayTableListing: FC<Props> = ({ data }) => {
         <DynamicTable
           columns={columns}
           data={data}
-          next={() => false}
-          prev={() => false}
-          page={1}
-          count={5}
+          next={next}
+          prev={prev}
+          page={page}
+          count={count}
         />
       </div>
       <Delete title="" size="sm">

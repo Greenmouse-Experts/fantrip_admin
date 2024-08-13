@@ -1,19 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-import { getStayListing } from "../../../services/api/stay-api";
-import StayTableListing from "./component/table-list";
+import { getSpecialStays } from "../../../services/api/stay-api";
 import HueSpinner from "../../../components/loaders/hue-spinner";
+import SpecialStayTable from "./special-stay-table";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-const ListingTable = () => {
+const SpecialStayIndex = () => {
   const [params, setParams] = useState({
     page: 1,
   });
   const { isLoading, data } = useQuery({
-    queryFn: () => getStayListing(params),
-    queryKey: ["get-listing", params],
+    queryFn: () => getSpecialStays(params),
+    queryKey: ["get-billboard"],
   });
-  const count = data?.count;
+  const count = data?.count || 0;
   const handleNext = () => {
     if (params.page * 10 >= count) {
       toast.info("This is the last page");
@@ -42,13 +42,16 @@ const ListingTable = () => {
         </div>
       )}
       {!isLoading && !!data?.data?.length && (
-        <StayTableListing data={data?.data} page={params.page}
-        count={count || 0}
-        next={handleNext}
-        prev={handlePrev} />
+        <SpecialStayTable
+          data={data?.data}
+          page={params.page}
+          count={count}
+          next={handleNext}
+          prev={handlePrev}
+        />
       )}
     </div>
   );
 };
 
-export default ListingTable;
+export default SpecialStayIndex;

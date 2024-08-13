@@ -1,10 +1,10 @@
 import axios from "axios";
 import * as ENDPOINT from "../constant";
-import { ApproveStayInputItem } from "../../contracts/routine";
+import { ApproveStayInputItem, FetchParam } from "../../contracts/routine";
 
-export const getStayListing = async () => {
+export const getStayListing = async (params: FetchParam) => {
   return axios
-    .get(`${ENDPOINT.GET_STAY_LISTING}`)
+    .get(`${ENDPOINT.GET_STAY_LISTING}?page=${params.page}`)
     .then((response) => response.data);
 };
 
@@ -35,5 +35,23 @@ export const softDeleteStay = async (id: string) => {
 export const getStayReviews = async (id: string) => {
   return axios
     .get(`${ENDPOINT.FETCH_STAY_REVIEW}/${id}?reviewFor=stay`)
+    .then((response) => response.data);
+};
+
+export const getSpecialStays = async (params: FetchParam) => {
+  return axios
+    .get(`${ENDPOINT.GET_SPECIAL_STAYS}?page=${params.page}`)
+    .then((response) => response.data);
+};
+
+export const addSpecialStay = async (payload:{stay: string[]}) => {
+  return axios
+    .post(`${ENDPOINT.ADD_SPECIAL_STAYS}`, payload)
+    .then((response) => response.data);
+};
+
+export const removeSpecialStay = async (id: string) => {
+  return axios
+    .delete(`${ENDPOINT.REMOVE_SPECIAL_STAY}/${id}`)
     .then((response) => response.data);
 };

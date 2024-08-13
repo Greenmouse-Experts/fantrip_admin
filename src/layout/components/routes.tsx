@@ -34,6 +34,12 @@ export const Routes = [
         submenu: [],
       },
       {
+        name: "Billboard",
+        icon: <PiShoppingBagOpen className="text-xl" />,
+        route: "/special-listing",
+        submenu: [],
+      },
+      {
         name: "Reservations",
         icon: <PiShoppingBagOpen className="text-xl" />,
         route: "/reservation",

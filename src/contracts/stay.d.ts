@@ -46,3 +46,11 @@ export interface ReviewItem {
   results: ReviewResult[];
   totalRating: string;
 }
+
+export interface SpecialStayItem {
+  createdDate: string;
+  id: string;
+  published: boolean;
+  stay: StayItem;
+  stayId: string;
+}

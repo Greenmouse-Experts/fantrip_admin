@@ -40,6 +40,9 @@ export const GET_STAY_LISTING = `/stays`
 export const APPROVE_STAY = `/stays/change-status`
 export const GET_STAY_STAT = `/stays/count`;
 export const FETCH_STAY_REVIEW = `/reviews/view-reviews`;
+export const GET_SPECIAL_STAYS = `/special-stays`
+export const ADD_SPECIAL_STAYS = `/special-stays/create`
+export const REMOVE_SPECIAL_STAY = `/special-stays/remove`
 
 // place endpoints
 export const CREATE_SPOT = `/spots/create-spot`

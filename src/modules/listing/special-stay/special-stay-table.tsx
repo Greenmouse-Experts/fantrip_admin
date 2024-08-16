@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { useRefetch } from "../../../hooks/useRefetch";
 import useDialog from "../../../hooks/useDialog";
 import ReusableModal from "../../../components/ReusableModal";
+import ToggleStayStaus from "./componrents/toggle-actions";
 
 interface Props {
   data: StayItem[];
@@ -37,7 +38,7 @@ const SpecialStayTable: FC<Props> = ({ data, page, count, next, prev }) => {
         toast.success(res.message);
         setIsBusy(false);
         revalidateRoute("get-billboard");
-        close();
+        setShowModal(false);
       })
       .catch((err: any) => {
         setIsBusy(false);
@@ -131,20 +132,13 @@ const SpecialStayTable: FC<Props> = ({ data, page, count, next, prev }) => {
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.published, {
-      id: "Host Status",
+      id: "Status",
       cell: (info) => (
         <div>
-          {info.getValue() ? (
-            <p className="flex gap-x-2 items-center">
-              <span className="w-3 h-3 bg-green-600 circle"></span>{" "}
-              <span className="text-green-600">Active</span>
-            </p>
-          ) : (
-            <p className="flex gap-x-2 items-center">
-              <span className="w-3 h-3 bg-orange-600 circle"></span>{" "}
-              <span className="text-orange-600">Inactive</span>
-            </p>
-          )}
+          <ToggleStayStaus
+            status={info.getValue()}
+            id={info.row.original.stayId}
+          />
         </div>
       ),
       header: (info) => info.column.id,

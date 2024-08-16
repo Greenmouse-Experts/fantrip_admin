@@ -71,7 +71,7 @@ export const Routes = [
         submenu: [],
       },
       {
-        name: "Places",
+        name: "Top Places",
         icon: <PiShoppingBagOpen className="text-xl" />,
         route: "/places",
         submenu: [],

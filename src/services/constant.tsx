@@ -43,6 +43,7 @@ export const FETCH_STAY_REVIEW = `/reviews/view-reviews`;
 export const GET_SPECIAL_STAYS = `/special-stays`
 export const ADD_SPECIAL_STAYS = `/special-stays/create`
 export const REMOVE_SPECIAL_STAY = `/special-stays/remove`
+export const TOGGLE_SPECIAL_STAY = `/special-stays/change-status`
 
 // place endpoints
 export const CREATE_SPOT = `/spots/create-spot`

@@ -24,7 +24,7 @@ const ReusableModal: FC<Props> = ({
       <div className="bg-red-100 w-24 h-24 circle mx-auto place-center">
         <RiDeleteBin5Fill className="text-3xl text-red-600" />
       </div>
-      <div className="px-6 mt-3 text-black text-center">{title}</div>
+      <div className="w-9/12 whitespace-normal mx-auto mt-3 text-black text-center">{title}</div>
       <div className="w-full mt-8 flex justify-between">
         <Button
           altClassName="py-2 px-3 lg:px-6  bg-gray-600 rounded-full text-white"

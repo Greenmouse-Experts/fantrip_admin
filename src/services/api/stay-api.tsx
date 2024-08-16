@@ -20,7 +20,10 @@ export const getSingleStayListing = async (id: string) => {
     .then((response) => response.data);
 };
 
-export const approveStay = async (id: string, payload:ApproveStayInputItem) => {
+export const approveStay = async (
+  id: string,
+  payload: ApproveStayInputItem
+) => {
   return axios
     .patch(`${ENDPOINT.APPROVE_STAY}/${id}`, payload)
     .then((response) => response.data);
@@ -44,7 +47,7 @@ export const getSpecialStays = async (params: FetchParam) => {
     .then((response) => response.data);
 };
 
-export const addSpecialStay = async (payload:{stay: string[]}) => {
+export const addSpecialStay = async (payload: { stay: string[] }) => {
   return axios
     .post(`${ENDPOINT.ADD_SPECIAL_STAYS}`, payload)
     .then((response) => response.data);
@@ -53,5 +56,14 @@ export const addSpecialStay = async (payload:{stay: string[]}) => {
 export const removeSpecialStay = async (id: string) => {
   return axios
     .delete(`${ENDPOINT.REMOVE_SPECIAL_STAY}/${id}`)
+    .then((response) => response.data);
+};
+
+export const toggleSpecialStay = async (
+  id: string,
+  payload: { published: boolean }
+) => {
+  return axios
+    .put(`${ENDPOINT.TOGGLE_SPECIAL_STAY}/${id}`, payload)
     .then((response) => response.data);
 };

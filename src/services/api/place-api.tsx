@@ -1,10 +1,22 @@
 import axios from "axios";
 import * as ENDPOINT from "../constant";
-import { PlaceItemInput, PlaceItemUpdate } from "../../contracts/routine";
+import { PlaceItemInput, PlaceItemLocation, PlaceItemUpdate } from "../../contracts/routine";
 
 export const createSpot = async (payload: PlaceItemInput) => {
   return axios
     .post(`${ENDPOINT.CREATE_SPOT}`, payload)
+    .then((response) => response.data);
+};
+
+export const createPlace = async (payload: PlaceItemLocation) => {
+  return axios
+    .post(`${ENDPOINT.CREATE_PLACE}`, payload)
+    .then((response) => response.data);
+};
+
+export const getTopPlaces = async () => {
+  return axios
+    .get(`${ENDPOINT.GET_TOP_PLACES}`)
     .then((response) => response.data);
 };
 
@@ -19,6 +31,17 @@ export const getSpots = async () => {
 export const getSinglePlace = async (id: string) => {
   return axios
     .get(`${ENDPOINT.GET_PLACES}/${id}`)
+    .then((response) => response.data);
+};
+
+export const updateTopPlace = async (id: string, payload: PlaceItemUpdate) => {
+  return axios
+    .patch(`${ENDPOINT.UPDATE_TOP_PLACES}/${id}`, payload)
+    .then((response) => response.data);
+};
+export const deleteTopPlace = async (id: string, ) => {
+  return axios
+    .delete(`${ENDPOINT.DELETE_TOP_PLACE}/${id}`)
     .then((response) => response.data);
 };
 

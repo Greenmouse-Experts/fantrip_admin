@@ -46,6 +46,10 @@ export const REMOVE_SPECIAL_STAY = `/special-stays/remove`
 
 // place endpoints
 export const CREATE_SPOT = `/spots/create-spot`
+export const CREATE_PLACE = `/top-places/create`
+ export const GET_TOP_PLACES = `/top-places`
+ export const UPDATE_TOP_PLACES = `/top-places/update`
+ export const DELETE_TOP_PLACE = `/top-places`
 export const GET_PLACES = `/places`
 export const GET_SPOTS = `/spots`
 export const UPDATE_SPOT = `/spots/update-spot`

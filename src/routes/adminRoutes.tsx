@@ -9,6 +9,7 @@ import HostDetail from "../pages/host-detail";
 import StayListing from "../pages/listing";
 import ListingDetailPage from "../pages/listing-detail";
 import NotificationPage from "../pages/notification";
+import PlacesLocationPage from "../pages/place-location";
 import PlacesPage from "../pages/places";
 import StayProperties from "../pages/properties";
 import ReccomendationsPage from "../pages/reccomendations";
@@ -56,10 +57,10 @@ export const adminRooutes = [
         path: "settings/taxes",
         element: <StayTaxes />,
       },
-      {
-        path: "places",
-        element: <PlacesPage />,
-      },
+      // {
+      //   path: "places",
+      //   element: <PlacesPage />,
+      // },
       {
         path: "booking",
         element: <BookingPage />,
@@ -91,6 +92,10 @@ export const adminRooutes = [
       {
         path: "reccomendations/:id",
         element: <RecommendationDetailPage />,
+      },
+      {
+        path: "places",
+        element: <PlacesLocationPage />,
       },
       {
         path: "notifications",

@@ -52,10 +52,33 @@ export interface StayItem {
   amenities: AmenityItem[];
 }
 
+export interface PlaceItemLocation {
+  id: string;
+  location: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  spot: string | any;
+  imageUrl?: string;
+  published:boolean;
+  picture:string;
+  createdDate:string;
+}
+
+
+export interface PlaceLocation {
+  id: string;
+  isDisclosed: boolean;
+  createdDate: string;
+  location: string;
+  icon: string;
+  picture: string | null;
+}
+
+
 export interface PlaceItemInput {
   name: string;
   imageUrl?: string;
 }
+
 
 export interface PlaceItem {
   id: string;

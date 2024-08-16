@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { PlaceItem } from "../../../contracts/routine";
+import { PlaceItemLocation } from "../../../contracts/routine";
 import { DynamicTable } from "../../../components/DynamicTable";
 import { createColumnHelper } from "@tanstack/react-table";
 import dayjs from "dayjs";
@@ -17,21 +17,21 @@ import useDialog from "../../../hooks/useDialog";
 import { toast } from "react-toastify";
 import { useRefetch } from "../../../hooks/useRefetch";
 import ReusableModal from "../../../components/ReusableModal";
-import { deleteSpot } from "../../../services/api/place-api";
+import { deleteTopPlace } from "../../../services/api/place-api";
 import EditPlaceModal from "./edit-place";
 
 interface Props {
-  data: PlaceItem[];
+  data: PlaceItemLocation[];
 }
 const PlacesTableListing: FC<Props> = ({ data }) => {
   const { revalidateRoute } = useRefetch();
-  const [selected, setSelected] = useState<PlaceItem>();
+  const [selected, setSelected] = useState<PlaceItemLocation>();
   const [selectedId, setSelectedId] = useState<string>();
   const [isBusy, setIsBusy] = useState<boolean>(false);
   const { Dialog: Edit, setShowModal: ShowEdit } = useDialog();
   const { Dialog: Delete, setShowModal: ShowDelete } = useDialog();
 
-  const openEdit = (item: PlaceItem) => {
+  const openEdit = (item: PlaceItemLocation) => {
     setSelected(item);
     ShowEdit(true);
   };
@@ -42,12 +42,12 @@ const PlacesTableListing: FC<Props> = ({ data }) => {
   };
   const handleDelete = async () => {
     setIsBusy(true);
-    await deleteSpot(selectedId || "")
+    await deleteTopPlace(selectedId || "")
       .then(() => {
         toast.success("Place deleted Successfully");
         setIsBusy(false);
         ShowDelete(false);
-        revalidateRoute("get-spots");
+        revalidateRoute("get-top-places");
       })
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -57,14 +57,14 @@ const PlacesTableListing: FC<Props> = ({ data }) => {
   };
 
   // table column configuration and formating
-  const columnHelper = createColumnHelper<PlaceItem>();
+  const columnHelper = createColumnHelper<PlaceItemLocation>();
   const columns = [
-    columnHelper.accessor((row) => row.name, {
-      id: "Place Name",
+    columnHelper.accessor((row) => row.location, {
+      id: "Location Name",
       cell: (info) => info.getValue(),
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.imageUrl, {
+    columnHelper.accessor((row) => row.picture, {
       id: "Image",
       cell: (info) =>
         info.getValue() && (
@@ -81,7 +81,7 @@ const PlacesTableListing: FC<Props> = ({ data }) => {
       cell: (info) => dayjs(info.getValue()).format("DD-MMM-YYYY"),
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.isDisclosed, {
+    columnHelper.accessor((row) => row.published, {
       id: "Status",
       cell: (info) => (
         <div>
@@ -147,7 +147,7 @@ const PlacesTableListing: FC<Props> = ({ data }) => {
       </Edit>
       <Delete title="" size="sm">
         <ReusableModal
-          title="Are you sure you want to delete this spot info"
+          title="Are you sure you want to delete this place info"
           action={() => handleDelete()}
           actionTitle="Yes, Delete"
           closeModal={() => ShowDelete(false)}

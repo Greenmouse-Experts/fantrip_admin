@@ -70,6 +70,12 @@ export const Routes = [
         route: "/reccomendations",
         submenu: [],
       },
+      {
+        name: "Places",
+        icon: <PiShoppingBagOpen className="text-xl" />,
+        route: "/places",
+        submenu: [],
+      },
     ],
   },
   {

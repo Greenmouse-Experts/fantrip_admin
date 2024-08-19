@@ -22,7 +22,6 @@ const CommunityList:FC<Props> = ({socket}) => {
 
   const getCommunities = () => {
     const onListenEvent = (value: any) => {
-      console.log(value);
       setPrevCommunities(value.data.result);
     };
     socket.on(`communitiesRetrieved:${"admin"}`, onListenEvent);

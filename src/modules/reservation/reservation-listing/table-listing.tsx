@@ -18,7 +18,7 @@ const ReservationTableListing: FC<Props> = ({ data, page, count, next, prev }) =
   // table column configuration and formating
   const columnHelper = createColumnHelper<ReservationItem>();
   const columns = [
-    columnHelper.accessor((row) => row.stay.name, {
+    columnHelper.accessor((row) => row.stay?.name, {
       id: "Stay Name",
       cell: (info) => (
         <div className="min-w-[230px] flex gap-x-2 items-center">
@@ -30,9 +30,9 @@ const ReservationTableListing: FC<Props> = ({ data, page, count, next, prev }) =
             />
           )}
           <div>
-            <p className="w-[160px] whitespace-nowrap">{formatName(info.getValue(), 20)}</p>
+            <p className="w-[160px] whitespace-nowrap">{info.getValue()? formatName(info.getValue(), 20) : ''}</p>
             <Link
-              to={`/listing/${info.row.original.stay.id}`}
+              to={`/listing/${info.row.original.stay?.id}`}
               className="block mt-1 fw-600 syne text-pri underline"
             >
               View Stay

@@ -1,9 +1,4 @@
-import {
-  Menu,
-  MenuHandler,
-  MenuItem,
-  MenuList,
-} from "@material-tailwind/react";
+import { Menu, Button, MenuItem, MenuList, MenuHandler } from "@material-tailwind/react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 const ProfileMore = () => {
@@ -11,9 +6,11 @@ const ProfileMore = () => {
     <div>
       <Menu>
         <MenuHandler>
+        <Button className="bg-transparent p-0 m-0 text-black shadow-none">
           <div className="flex gap-x-2 items-center">
             <BsThreeDotsVertical size={19} className="text-2xl" />
           </div>
+        </Button>
         </MenuHandler>
         <MenuList className="text-black !w-[200px]">
           <MenuItem>

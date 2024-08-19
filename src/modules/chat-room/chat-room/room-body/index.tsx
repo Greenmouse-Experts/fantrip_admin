@@ -1,9 +1,14 @@
+import { FC } from "react";
 import RenderPostsIndex from "./render-posts"
 
-const RoomBodyIndex = () => {
+interface Props {
+  reloadSocket: string;
+  socket: any
+}
+const RoomBodyIndex:FC<Props> = ({reloadSocket, socket}) => {
   return (
     <div className="h-full overflow-y-auto scroll-pro">
-        <RenderPostsIndex/>
+        <RenderPostsIndex socket={socket} reload={reloadSocket}/>
     </div>
   )
 }

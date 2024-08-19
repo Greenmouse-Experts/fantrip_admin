@@ -94,3 +94,25 @@ export interface CommunityItem {
   activeId: string;
   name: string;
 }
+
+export interface PostTyping {
+  id: string;
+  message: string;
+  file: string;
+  isMuted: boolean;
+  communityId: string;
+  createdDate: string;
+  updatedDate: string;
+  user: {
+    firstName: string;
+    lastName: string;
+    nickname: string;
+    verifiedAsHost: boolean;
+    role: string;
+    picture: string;
+    isNickname: boolean;
+  };
+  downvotes: number;
+  upvotes: number;
+  threads: number;
+}

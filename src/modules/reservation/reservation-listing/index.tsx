@@ -17,7 +17,7 @@ const ReservationListing = () => {
   });
   const count = data?.count;
   const handleNext = () => {
-    if (params.page * 10 >= count) {
+    if (params.page * 12 >= count) {
       toast.info("This is the last page");
     } else {
       setParams({

@@ -3,9 +3,11 @@ import PostActions from "../post-actions";
 import LeaveComment from "../leave-a-comment";
 import ProfileMore from "../profile-more";
 import ReactPlayer from "react-player";
+import { PostTyping } from "@/lib/contracts/chat";
+import dayjs from "dayjs"
 
 interface Props {
-  item: any;
+  item: PostTyping;
 }
 const VideoPostRender: FC<Props> = ({ item }) => {
   return (
@@ -18,7 +20,7 @@ const VideoPostRender: FC<Props> = ({ item }) => {
                 <div className="w-[35px] lg:w-[40px] h-[35px] lg:h-[40px] bg-gradient p-[1px] circle">
                   <img
                     src={
-                      item.image ||
+                      item.user.picture ||
                       "https://res.cloudinary.com/greenmouse-tech/image/upload/v1721902661/fantrip/avatars_cyhkdy.webp"
                     }
                     alt="profile"
@@ -26,18 +28,18 @@ const VideoPostRender: FC<Props> = ({ item }) => {
                   />
                 </div>
                 <div>
-                  <p className="fw-500 fs-500">{item.posterName}</p>
+                  <p className="fw-500 fs-500">{`${item.user.firstName} ${item.user.lastName}`}</p>
                   <p className="opacity-80 fs-300">
-                    <span className="capitalize fw-500">{item.role}</span>
+                    <span className="capitalize fw-500">{item.user.role}</span>
                     {" - "}
-                    <span>{item.time}</span>
+                    <span>{dayjs(item.createdDate).fromNow()}</span>
                   </p>
                 </div>
               </div>
               <ProfileMore />
             </div>
             <div className="mt-3">
-              <p>{item.post}</p>
+              <p>{item.message}</p>
             </div>
           </div>
           <div className="bg-gradient-to-r from-gray-400 to-gray-500 h-[300px]">
@@ -52,9 +54,9 @@ const VideoPostRender: FC<Props> = ({ item }) => {
         <div className="mt-3">
           <PostActions
             id=""
-            like={item.like}
-            dislike={item.dislike}
-            comment={item.comment}
+            like={item.upvotes}
+            dislike={item.downvotes}
+            comment={item.threads}
             type="image"
           />
         </div>

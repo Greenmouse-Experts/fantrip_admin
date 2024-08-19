@@ -78,9 +78,9 @@ const ApproveStay: FC<Props> = ({ id, status }) => {
       </Menu>
       <Dialog title="" size="md">
         <ReusableModal
-          title="Are you sure you want to approve this stay"
+          title={`Are you sure you want to ${!status? 'approve' : 'suspend'} this stay`}
           action={() => approveAction()}
-          actionTitle="Approve Stay"
+          actionTitle={`${!status? 'Approve' : 'Suspend'} Stay`}
           cancelTitle="Close"
           closeModal={() => setShowModal(false)}
           isBusy={isBusy}

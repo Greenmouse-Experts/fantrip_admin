@@ -111,6 +111,7 @@ export interface PostTyping {
     role: string;
     picture: string;
     isNickname: boolean;
+    id: string;
   };
   downvotes: number;
   upvotes: number;

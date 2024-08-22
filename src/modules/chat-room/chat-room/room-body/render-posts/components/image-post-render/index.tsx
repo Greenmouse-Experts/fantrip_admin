@@ -2,13 +2,14 @@ import { FC } from "react";
 import LeaveComment from "../leave-a-comment";
 import PostActions from "../post-actions";
 import ProfileMore from "../profile-more";
-import { PostTyping } from "@/lib/contracts/chat";
 import dayjs from "dayjs";
+import { PostTyping } from "../../../../../../../contracts/chat";
 
 interface Props {
   item: PostTyping;
+  socket: any;
 }
-const ImagePostRender: FC<Props> = ({ item }) => {
+const ImagePostRender: FC<Props> = ({ item, socket }) => {
   return (
     <div className="border-b pb-3 border-[#D2D2D2]">
       <div className="">
@@ -35,7 +36,7 @@ const ImagePostRender: FC<Props> = ({ item }) => {
                   </p>
                 </div>
               </div>
-              <ProfileMore />
+              <ProfileMore socket={socket} id={item.id} user={item.user}/>
             </div>
             <div className="mt-3">
               <p>{item.message}</p>

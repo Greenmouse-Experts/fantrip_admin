@@ -1,5 +1,5 @@
 import { FC } from "react";
-import dayjs from "dayjs"
+import dayjs from "dayjs";
 import ReactPlayer from "react-player";
 import PostActions from "../post-actions";
 import LeaveComment from "../leave-a-comment";
@@ -8,8 +8,9 @@ import { PostTyping } from "../../../../../../../contracts/chat";
 
 interface Props {
   item: PostTyping;
+  socket: any;
 }
-const VideoPostRender: FC<Props> = ({ item }) => {
+const VideoPostRender: FC<Props> = ({ item, socket }) => {
   return (
     <div className="border-b pb-3 border-[#D2D2D2]">
       <div className="">
@@ -36,7 +37,7 @@ const VideoPostRender: FC<Props> = ({ item }) => {
                   </p>
                 </div>
               </div>
-              <ProfileMore />
+              <ProfileMore socket={socket} id={item.id} user={item.user} />
             </div>
             <div className="mt-3">
               <p>{item.message}</p>

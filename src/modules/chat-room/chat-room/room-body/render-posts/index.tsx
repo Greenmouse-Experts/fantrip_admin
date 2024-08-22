@@ -12,7 +12,7 @@ interface Props {
   socket: any;
 }
 const RenderPostsIndex: FC<Props> = ({ reload, socket }) => {
-  const {token, userId} = useAuth()
+  const { token, userId } = useAuth();
   const { community } = useChat();
   const [prevPosts, setPrevPosts] = useState<PostTyping[]>([]);
 
@@ -30,7 +30,7 @@ const RenderPostsIndex: FC<Props> = ({ reload, socket }) => {
     const payload = {
       page: 1,
       token: token,
-      ...community.name !== 'all' && {slug: community.name}
+      ...(community.name !== "all" && { slug: community.name }),
     };
     socket.emit("retrievePosts", payload);
   }, [community, reload]);
@@ -39,18 +39,15 @@ const RenderPostsIndex: FC<Props> = ({ reload, socket }) => {
     getPosts();
   }, [socket, reload]);
 
-  console.log(prevPosts);
-  
-
-  
   return (
     <div className="grid mt-4 gap-4">
       {prevPosts.map((item, i) => {
-        if (item.file === null) return <TextPostRender item={item} key={i} />;
+        if (item.file === null)
+          return <TextPostRender socket={socket} item={item} key={i} />;
         if (isImageUrl(item.file))
-          return <ImagePostRender item={item} key={i} />;
+          return <ImagePostRender socket={socket} item={item} key={i} />;
         if (isVideoUrl(item.file))
-          return <VideoPostRender item={item} key={i} />;
+          return <VideoPostRender socket={socket} item={item} key={i} />;
       })}
     </div>
   );

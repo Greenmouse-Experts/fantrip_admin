@@ -2,15 +2,16 @@ import { FC } from "react";
 import LeaveComment from "../leave-a-comment";
 import PostActions from "../post-actions";
 import ProfileMore from "../profile-more";
-import { PostTyping } from "@/lib/contracts/chat";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { PostTyping } from "../../../../../../../contracts/chat";
 dayjs.extend(relativeTime);
 
 interface Props {
   item: PostTyping;
+  socket: any;
 }
-const TextPostRender: FC<Props> = ({ item }) => {
+const TextPostRender: FC<Props> = ({ item, socket }) => {
   return (
     <div className="border-b pb-3 border-[#D2D2D2]">
       <div className="bg-[#EDEDFF] rounded-[12px] p-4">
@@ -35,7 +36,7 @@ const TextPostRender: FC<Props> = ({ item }) => {
               </p>
             </div>
           </div>
-          <ProfileMore />
+          <ProfileMore socket={socket} id={item.id} user={item.user} />
         </div>
         <div className="my-3">
           <p>{item.message}</p>

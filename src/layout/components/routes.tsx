@@ -1,8 +1,8 @@
 
 import { BsChatDots, BsGear } from "react-icons/bs";
 import { GrTransaction } from "react-icons/gr";
-import { IoChatbubblesOutline, IoExtensionPuzzleSharp } from "react-icons/io5";
-import { MdOutlineFeaturedPlayList } from "react-icons/md";
+import { IoChatbubblesOutline } from "react-icons/io5";
+// import { MdOutlineFeaturedPlayList } from "react-icons/md";
 import { PiBookOpen, PiChartPieSliceFill, PiShoppingBagOpen } from "react-icons/pi";
 import { RiHotelLine, RiProfileLine } from "react-icons/ri";
 export interface RouteType {
@@ -98,12 +98,12 @@ export const Routes2 = [
         route: "/users",
         submenu: [],
       },
-      {
-        name: "Messages",
-        icon: <RiProfileLine className="text-xl" />,
-        route: "/",
-        submenu: [],
-      },
+      // {
+      //   name: "Messages",
+      //   icon: <RiProfileLine className="text-xl" />,
+      //   route: "/",
+      //   submenu: [],
+      // },
       {
         name: "Notifications",
         icon: <RiProfileLine className="text-xl" />,
@@ -118,37 +118,37 @@ export const Routes2 = [
       },
     ],
   },
-  {
-    name: "Features",
-    icon: <MdOutlineFeaturedPlayList className="text-xl"/>,
-    route: "",
-    submenu: [
-      {
-        name: "",
-        icon: <IoChatbubblesOutline className="text-xl"/>,
-        route: "/places",
-        submenu: [],
-      },
-    ],
-  },
+  // {
+  //   name: "Features",
+  //   icon: <MdOutlineFeaturedPlayList className="text-xl"/>,
+  //   route: "",
+  //   submenu: [
+  //     {
+  //       name: "",
+  //       icon: <IoChatbubblesOutline className="text-xl"/>,
+  //       route: "/places",
+  //       submenu: [],
+  //     },
+  //   ],
+  // },
   {
     name: "Transactions",
     icon: <GrTransaction className="text-xl" />,
     route: "/transact",
     submenu: [],
   },
-  {
-    name: "Analytics",
-    icon: <IoExtensionPuzzleSharp className="text-xl" />,
-    route: "/",
-    submenu: [],
-  },
-  {
-    name: "Reports",
-    icon: <IoChatbubblesOutline className="text-xl"/>,
-    route: "/",
-    submenu: [],
-  },
+  // {
+  //   name: "Analytics",
+  //   icon: <IoExtensionPuzzleSharp className="text-xl" />,
+  //   route: "/",
+  //   submenu: [],
+  // },
+  // {
+  //   name: "Reports",
+  //   icon: <IoChatbubblesOutline className="text-xl"/>,
+  //   route: "/",
+  //   submenu: [],
+  // },
   {
     name: "Settings",
     icon: <BsGear className="text-xl"/>,

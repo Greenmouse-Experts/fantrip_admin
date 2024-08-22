@@ -80,7 +80,7 @@ interface Props {
                 <div>Page</div>
                 <strong>
                   {page} of{" "}
-                  {getPageCount(count, 10)}
+                  {getPageCount(count, 12)}
                 </strong>
               </span>
             </div>

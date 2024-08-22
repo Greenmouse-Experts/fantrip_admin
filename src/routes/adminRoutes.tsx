@@ -18,6 +18,7 @@ import ReservationPage from "../pages/reservation";
 import ProfileSettings from "../pages/settings";
 import SpecialListing from "../pages/special-listing";
 import StayTaxes from "../pages/taxes";
+import Transaction from "../pages/transaction";
 import UsersPage from "../pages/users";
 
 export const adminRooutes = [
@@ -108,6 +109,10 @@ export const adminRooutes = [
       {
         path: "special-listing",
         element: <SpecialListing />,
+      },
+      {
+        path: "transact",
+        element: <Transaction />,
       },
     ],
   },

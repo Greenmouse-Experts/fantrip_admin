@@ -10,13 +10,13 @@ const ReccomendationsListing = () => {
     page: 1,
     status: "pending",
   });
-  const { isLoading, data } = useQuery({
-    queryKey: ["get-places"],
-    queryFn: getPlaces,
+  const { isLoading, data, refetch } = useQuery({
+    queryKey: ["get-places", params],
+    queryFn: () => getPlaces(params),
   });
   const count = data?.count;
   const handleNext = () => {
-    if (params.page * 10 >= count) {
+    if (params.page * 12 >= count) {
       toast.info("This is the last page");
     } else {
       setParams({
@@ -49,6 +49,7 @@ const ReccomendationsListing = () => {
           page={params.page}
           next={handleNext}
           prev={handlePrev}
+          refetch={refetch}
         />
       )}
     </div>

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { DynamicTable } from "../../../components/DynamicTable";
 import { createColumnHelper } from "@tanstack/react-table";
 import dayjs from "dayjs";
@@ -14,6 +14,12 @@ import { BiEdit } from "react-icons/bi";
 import { ReccomendationItem } from "../../../contracts/reccomendation";
 import UserInfoAvatar from "../../../utils/user-info";
 import { useNavigate } from "react-router-dom";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import useDialog from "../../../hooks/useDialog";
+import ReusableModal from "../../../components/ReusableModal";
+import { toast } from "react-toastify";
+import { deletePlace } from "../../../services/api/place-api";
+import UpdatePlaceStatus from "./update-place-status";
 
 interface Props {
   data: ReccomendationItem[];
@@ -21,6 +27,7 @@ interface Props {
   page: number;
   next: () => void;
   prev: () => void;
+  refetch: () => void;
 }
 const ReccomendationsTableListing: FC<Props> = ({
   data,
@@ -28,8 +35,34 @@ const ReccomendationsTableListing: FC<Props> = ({
   count,
   next,
   prev,
+  refetch,
 }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  // delete modal and action
+  const [isBusy, setIsBusy] = useState(false);
+  const { Dialog, setShowModal } = useDialog();
+  const [selectedId, setSelectedId] = useState("");
+
+  const openDelete = (id: string) => {
+    setSelectedId(id);
+    setShowModal(true);
+  };
+
+  const handleDelete = async () => {
+    setIsBusy(true);
+    await deletePlace(selectedId || "")
+      .then(() => {
+        toast.success("Deleted successfully");
+        refetch();
+        setShowModal(false);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+        setIsBusy(false);
+      });
+  };
+
   // table column configuration and formating
   const columnHelper = createColumnHelper<ReccomendationItem>();
   const columns = [
@@ -71,17 +104,10 @@ const ReccomendationsTableListing: FC<Props> = ({
       id: "Status",
       cell: (info) => (
         <div>
-          {info.getValue() ? (
-            <p className="flex gap-x-2 items-center">
-              <span className="w-3 h-3 bg-green-600 circle"></span>{" "}
-              <span className="text-green-600">Active</span>
-            </p>
-          ) : (
-            <p className="flex gap-x-2 items-center">
-              <span className="w-3 h-3 bg-orange-600 circle"></span>{" "}
-              <span className="text-orange-600">Inactive</span>
-            </p>
-          )}
+          <UpdatePlaceStatus
+            status={info.getValue()}
+            id={info.row.original.id}
+          />
         </div>
       ),
       header: (info) => info.column.id,
@@ -98,10 +124,17 @@ const ReccomendationsTableListing: FC<Props> = ({
           <MenuList>
             <MenuItem
               className="flex gap-x-2 items-center"
-              onClick={() => navigate(`/reccomendations/${info.row.original.id}`)}
+              onClick={() => navigate(`/reccomendations/${info.getValue()}`)}
             >
               <BiEdit className="text-lg" />
               View Details
+            </MenuItem>
+            <MenuItem
+              className="flex gap-x-2 items-center"
+              onClick={() => openDelete(info.getValue())}
+            >
+              <RiDeleteBin5Line className="text-red-500 text-lg" />
+              Delete
             </MenuItem>
           </MenuList>
         </Menu>
@@ -121,6 +154,16 @@ const ReccomendationsTableListing: FC<Props> = ({
           count={count}
         />
       </div>
+      <Dialog title="" size="sm">
+        <ReusableModal
+          title="Are you sure you want to delete this area guide reccomendation?"
+          action={handleDelete}
+          actionTitle="Yes, Delete"
+          cancelTitle="No, Close"
+          closeModal={() => setShowModal(false)}
+          isBusy={isBusy}
+        />
+      </Dialog>
     </div>
   );
 };

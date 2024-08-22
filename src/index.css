@@ -350,4 +350,7 @@
     border: none;
     outline: none;
   }
+  .chat-gradient{
+    background: linear-gradient(180deg, #FC819F 0%,#9847FE 70%,  #9847FE 100%);
+  }
 }

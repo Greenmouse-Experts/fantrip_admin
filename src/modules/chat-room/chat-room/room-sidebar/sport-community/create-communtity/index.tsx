@@ -19,8 +19,9 @@ export interface CreateProps {
 interface Props{
   socket:any
   close: () => void;
+  setChange: React.Dispatch<React.SetStateAction<string>>;
 }
-const CreateCommunity:FC<Props> = ({socket, close}) => {
+const CreateCommunity:FC<Props> = ({socket, close, setChange}) => {
   const { token } = useAuth();
   const [isBusy, setIsBusy] = useState(false);
   const [iconInput, setIconInput] = useState<File[] | undefined>([]);
@@ -46,6 +47,7 @@ const CreateCommunity:FC<Props> = ({socket, close}) => {
       token: `${token}`,
     });
     setIsBusy(false)
+    setChange(`${new Date()}`)
     close()
   };
 

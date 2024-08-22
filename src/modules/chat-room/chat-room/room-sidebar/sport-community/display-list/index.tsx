@@ -32,7 +32,7 @@ const DisplayList: FC<Props> = ({ socket, change, setChange }) => {
       page: 1,
     };
     socket.emit("retrieveCommunities", payload);
-  }, []);
+  }, [change]);
 
   useEffect(() => {
     getCommunities();

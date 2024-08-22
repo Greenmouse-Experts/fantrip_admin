@@ -36,7 +36,7 @@ const SportCommunityIndex: FC<Props> = ({ socket }) => {
       </div>
       <div className="text-black">
         <Dialog title="Add a community" size="sm">
-          <CreateCommunity socket={socket} close={() => setShowModal(false)} />
+          <CreateCommunity socket={socket} setChange={setChangeCheck} close={() => setShowModal(false)} />
         </Dialog>
         <Display title="Communities" size="sm">
           <DisplayList

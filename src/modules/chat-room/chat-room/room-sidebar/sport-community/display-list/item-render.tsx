@@ -20,6 +20,7 @@ const ItemRender: FC<Props> = ({ item, socket, setChange }) => {
   const [showDelete, setShowDelete] = useState(false);
   const [name, setName] = useState(item.name);
   const [isBusy, setIsBusy] = useState(false);
+  const [isDisclosed, setIsDisclosed] = useState(item.isDisclosed)
 
   const [image, setImage] = useState<File[] | undefined>();
 
@@ -38,7 +39,7 @@ const ItemRender: FC<Props> = ({ item, socket, setChange }) => {
       id: item.id,
       name: data.name,
       icon: data.imageUrl ? data.imageUrl : item.icon,
-      isDisclosed: true,
+      isDisclosed: isDisclosed,
       token: `${token}`,
     });
     setIsBusy(false);
@@ -106,6 +107,8 @@ const ItemRender: FC<Props> = ({ item, socket, setChange }) => {
               name={name}
               setName={setName}
               setImage={setImage}
+              active={isDisclosed}
+              setActive={setIsDisclosed}
               isBusy={isBusy}
             />
           </div>

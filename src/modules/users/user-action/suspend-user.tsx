@@ -31,6 +31,8 @@ const SuspendUser: FC<Props> = ({ id, status }) => {
         toast.success(res.message);
         setIsBusy(false);
         revalidateRoute("get-guests");
+        revalidateRoute("get-hosts");
+        revalidateRoute("get-guests-details")
         setShowModal(false);
       })
       .catch((err: any) => {

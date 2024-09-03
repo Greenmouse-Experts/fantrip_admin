@@ -5,8 +5,8 @@ import { HostDetailItem } from "../../../../../contracts/users";
 import { FC } from "react";
 import {
   formatPhoneNumber,
-  formatStatus,
 } from "../../../../../utils/formatHelp";
+import SuspendUser from "../../../user-action/suspend-user";
 
 interface Props {
   user: HostDetailItem;
@@ -22,6 +22,7 @@ const ProfileSidebar: FC<Props> = ({ user }) => {
     isSuspended,
     state,
     country,
+    id
   } = user;
   return (
     <div>
@@ -40,8 +41,9 @@ const ProfileSidebar: FC<Props> = ({ user }) => {
         <p className="text-lg lg:text-xl fw-600 syne">{`${firstName} ${lastName}`}</p>
         <p className="text-gradient fw-600">Host</p>
         <div className="flex mt-2 gap-x-2 items-center fw-500 syne justify-center text-green-600">
-          {isSuspended ? formatStatus["inactive"] : formatStatus["active"]}
-          <RiExchange2Line className="text-red-600 cursor-pointer" />
+          {/* {isSuspended ? formatStatus["inactive"] : formatStatus["active"]}
+           */}
+          <SuspendUser id={id} status={isSuspended} /><RiExchange2Line className="text-red-600 cursor-pointer" />
         </div>
       </div>
       <div className="mt-5 text-center">

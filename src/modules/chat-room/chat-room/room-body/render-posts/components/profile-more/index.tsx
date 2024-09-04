@@ -1,3 +1,5 @@
+import { FC } from "react";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import {
   Menu,
   Button,
@@ -5,8 +7,6 @@ import {
   MenuList,
   MenuHandler,
 } from "@material-tailwind/react";
-import { FC } from "react";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import useAuth from "../../../../../../../hooks/authUser";
 import { useChat } from "../../../../../../../hooks/useChat";
 import { useUtils } from "../../../../../../../hooks/useUtils";
@@ -26,8 +26,11 @@ interface Props {
   };
   id: string;
   socket: any;
+  openUser: () => void;
+  reload: () => void;
+  type?: string;
 }
-const ProfileMore: FC<Props> = ({ user, id, socket }) => {
+const ProfileMore: FC<Props> = ({ user, id, socket, type,  openUser, reload }) => {
   const { token } = useAuth();
   const { saveGuestInfo } = useChat();
   const { toggleStayChatmodal: setShowModal } = useUtils();
@@ -48,20 +51,36 @@ const ProfileMore: FC<Props> = ({ user, id, socket }) => {
     close();
   };
 
-  const deleteUserPost = () => {
-    const payload = {
-      token: token,
-      id: id,
-    };
-    socket.emit("deletePost", payload);
-  };
+   const deleteUserPost = (payload: { id: string; token: string }) => {
+     socket.emit("deletePost", payload);
+     ShowDialog(false);
+     reload();
+   };
+
+   const deleteUserCooment = (payload: { id: string; token: string }) => {
+     socket.emit("deleteComment", payload);
+     ShowDialog(false);
+     reload();
+   };
+
+   const handleDelete = () => {
+     const payload = {
+       token: token || "",
+       id: id,
+     };
+     if (type === "comment") {
+       deleteUserCooment(payload);
+     } else {
+       deleteUserPost(payload);
+     }
+   };
 
   return (
     <div>
       <div>
         <Menu>
           <MenuHandler>
-            <Button className="bg-transparent p-0 m-0 text-black shadow-none">
+            <Button className="bg-transparent p-0 m-0 text-black dark:text-white shadow-none">
               <div className="flex gap-x-2 items-center">
                 <BsThreeDotsVertical size={19} className="text-2xl" />
               </div>
@@ -71,7 +90,7 @@ const ProfileMore: FC<Props> = ({ user, id, socket }) => {
             <MenuItem onClick={openChatWithUser}>
               <p className="text-black fs-400">Start Chat</p>
             </MenuItem>
-            <MenuItem>
+            <MenuItem onClick={openUser}>
               <p className="text-black fs-400">View User Profile</p>
             </MenuItem>
             <MenuItem onClick={() => ShowDialog(true)}>
@@ -83,7 +102,7 @@ const ProfileMore: FC<Props> = ({ user, id, socket }) => {
       <Dialog title="" size="sm">
         <ReusableModal
           title="Are you sure you want to delete this post"
-          action={deleteUserPost}
+          action={handleDelete}
           actionTitle="Yes, Delete"
           cancelTitle="No, Close"
           closeModal={() => ShowDialog(false)}

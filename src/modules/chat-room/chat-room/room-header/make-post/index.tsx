@@ -1,10 +1,15 @@
+import { FC } from "react";
 import IndexDisplayUi from "./index-display";
 
-const MakePostIndex = () => {
+interface Props {
+  socket: any;
+  setReload: () => void;
+}
+const MakePostIndex: FC<Props> = ({ socket, setReload }) => {
   return (
     <div>
       <div>
-        <IndexDisplayUi />
+        <IndexDisplayUi socket={socket} setReload={setReload} />
       </div>
     </div>
   );

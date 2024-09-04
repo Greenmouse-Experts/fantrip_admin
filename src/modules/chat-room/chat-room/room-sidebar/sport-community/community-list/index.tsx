@@ -1,6 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import useAuth from "../../../../../../hooks/authUser";
 import ItemRender from "./item-render";
+import dayjs from "dayjs";
+import { useChat } from "../../../../../../hooks/useChat";
 
 export interface CommunityItemTyping {
   id: string;
@@ -15,6 +17,7 @@ interface Props{
   socket:any
 }
 const CommunityList:FC<Props> = ({socket}) => {
+  const { community, saveCommunity } = useChat();
   const [prevCommunities, setPrevCommunities] = useState<CommunityItemTyping[]>(
     []
   );
@@ -41,6 +44,20 @@ const CommunityList:FC<Props> = ({socket}) => {
   useEffect(() => {
     getCommunities();
   }, [socket]);
+
+   const sortedList = prevCommunities?.length
+     ? prevCommunities.sort(
+         (a: CommunityItemTyping, b: CommunityItemTyping) =>
+           dayjs(a.createdDate).unix() - dayjs(b.createdDate).unix()
+       )
+     : [];
+
+   useEffect(() => {
+     saveCommunity({
+       ...community,
+       communities: sortedList,
+     });
+   }, [prevCommunities]);
   
   return (
     <div className="mt-3 grid gap-1">

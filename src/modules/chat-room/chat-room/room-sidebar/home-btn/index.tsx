@@ -9,6 +9,7 @@ const HomeButton = () => {
         type="button"
         onClick={() =>
           saveCommunity({
+            ...community,
             name: 'all',
             activeId: 'all',
           })

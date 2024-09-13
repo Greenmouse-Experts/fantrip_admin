@@ -53,7 +53,7 @@ const BookingInformation: FC<Props> = ({ no, reservation, time }) => {
               <p className="fw-600 mt-2">
                 {`${reservation?.stay?.host?.firstName} ${reservation?.stay?.host?.lastName}`}{" "}
                 <Link
-                  to={`/users/host/${reservation?.stay.host?.id}`}
+                  to={`/users/host/${reservation?.stay?.host?.id}`}
                   className="text-primary"
                 >
                   View Details

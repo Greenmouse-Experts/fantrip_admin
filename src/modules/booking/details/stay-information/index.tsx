@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { formatNumber, formatStatus } from "../../../../utils/formatHelp";
-import { FaStar } from "react-icons/fa6";
+// import { FaStar } from "react-icons/fa6";
 
 interface Props {
   status: string;
@@ -32,7 +32,7 @@ const StayInformation: FC<Props> = ({ status, currency, amount }) => {
               Booking Review:
             </p>
             <div className="">
-              <p className="fw-400 text-lg lg:w-6/12">
+              {/* <p className="fw-400 text-lg lg:w-6/12">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam
                 odit aliquid hic placeat, doloremque vel aut autem neque
                 explicabo saepe minima ad consequatur voluptate molestiae enim
@@ -44,7 +44,7 @@ const StayInformation: FC<Props> = ({ status, currency, amount }) => {
                 <FaStar className="text-orange-500 text-lg" />
                 <FaStar className="text-orange-500 text-lg" />
                 <FaStar className="text-orange-500 text-lg" />
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="flex gap-x-4 items-center">

@@ -42,13 +42,13 @@ const BookingTableListing: FC<Props> = ({ data }) => {
       ),
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.reservation.stay.host.picture, {
+    columnHelper.accessor((row) => row.reservation.stay?.host?.picture, {
       id: "Host",
       cell: (info) => (
         <UserInfoAvatar
           url={info.getValue()}
-          fname={info.row.original.reservation.stay.host.firstName}
-          lname={info.row.original.reservation.stay.host.lastName}
+          fname={info.row.original.reservation.stay?.host?.firstName}
+          lname={info.row.original.reservation.stay?.host?.lastName}
         />
       ),
       header: (info) => info.column.id,
@@ -58,7 +58,7 @@ const BookingTableListing: FC<Props> = ({ data }) => {
       cell: (info) =>
         info.getValue() && (
           <div className="min-w-[230px] flex gap-x-2 items-center">
-            {!!info.getValue().photos.length && (
+            {!!info.getValue()?.photos?.length && (
               <img
                 src={info.getValue().photos[0]}
                 alt="condo-img"

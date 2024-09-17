@@ -27,7 +27,8 @@ const chatInitState = {
   },
   community: {
     activeId: "all",
-    name: "all"
+    name: "all",
+    communities: []
   }
 };
 const useChatStore = create<Props>()(

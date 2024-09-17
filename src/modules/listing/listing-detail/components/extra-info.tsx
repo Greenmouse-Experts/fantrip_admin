@@ -29,7 +29,7 @@ const ExtraInfo: FC<Props> = ({ stay }) => {
           </div>
         </div>
         <div className="flex gap-x-3">
-          <p>Approval Status:</p>
+          <p>Admin Approval Status:</p>
           <div>
             {stay.approved ? (
               <p className="flex gap-x-2 capitalize fw-400 fs-600 items-center">
@@ -45,17 +45,17 @@ const ExtraInfo: FC<Props> = ({ stay }) => {
           </div>
         </div>
         <div className="flex gap-x-3">
-          <p>Stay Status:</p>
+          <p>Host Stay Status:</p>
           <div>
             {stay.isDisclosed ? (
               <p className="flex gap-x-2 capitalize fw-400 fs-600 items-center">
                 <span className="w-3 h-3 bg-green-600 circle"></span>{" "}
-                <span className="text-green-600">Approved</span>
+                <span className="text-green-600">Published</span>
               </p>
             ) : (
               <p className="flex gap-x-2 capitalize fw-400 fs-600 items-center">
                 <span className="w-3 h-3 bg-orange-600 circle"></span>{" "}
-                <span className="text-orange-600">Pending</span>
+                <span className="text-orange-600">Unpublished</span>
               </p>
             )}
           </div>
@@ -73,7 +73,7 @@ const ExtraInfo: FC<Props> = ({ stay }) => {
         </div>
         <div className="flex gap-x-3">
           <p>Available To:</p>
-          <p className="fw-500">{stay.availableFrom}</p>
+          <p className="fw-500">{stay.availableTo}</p>
         </div>
         <div className="flex gap-x-3">
           <p>Maximum Guest(s):</p>

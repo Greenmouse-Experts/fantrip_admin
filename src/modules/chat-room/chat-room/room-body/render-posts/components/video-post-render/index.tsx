@@ -1,16 +1,25 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import dayjs from "dayjs";
 import ReactPlayer from "react-player";
 import PostActions from "../post-actions";
 import LeaveComment from "../leave-a-comment";
 import ProfileMore from "../profile-more";
 import { PostTyping } from "../../../../../../../contracts/chat";
+import useDialog from "../../../../../../../hooks/useDialog";
+import ProfileModal from "../profile-more/profile-modal";
 
 interface Props {
   item: PostTyping;
   socket: any;
+  reload: () => void;
 }
-const VideoPostRender: FC<Props> = ({ item, socket }) => {
+const VideoPostRender: FC<Props> = ({ item, socket, reload }) => {
+  const { Dialog, setShowModal } = useDialog();
+  const [commentCount, setCommentCount] = useState<number>(item.threads);
+  const addComment = () => {
+    const currentComment = item.threads;
+    setCommentCount(Number(currentComment) + 1);
+  };
   return (
     <div className="border-b pb-3 border-[#D2D2D2]">
       <div className="">
@@ -37,7 +46,13 @@ const VideoPostRender: FC<Props> = ({ item, socket }) => {
                   </p>
                 </div>
               </div>
-              <ProfileMore socket={socket} id={item.id} user={item.user} />
+              <ProfileMore
+                socket={socket}
+                id={item.id}
+                user={item.user}
+                openUser={() => setShowModal(true)}
+                reload={reload}
+              />
             </div>
             <div className="mt-3">
               <p>{item.message}</p>
@@ -57,14 +72,19 @@ const VideoPostRender: FC<Props> = ({ item, socket }) => {
             id=""
             like={item.upvotes}
             dislike={item.downvotes}
-            comment={item.threads}
+            comment={commentCount}
             type="image"
+            socket={socket}
+            reaction={item.myReaction}
           />
         </div>
       </div>
       <div className="mt-3">
-        <LeaveComment />
+        <LeaveComment id={item.id} socket={socket} addComment={addComment} />
       </div>
+      <Dialog title={`User Profile`} size="md">
+        <ProfileModal user={item.user} close={() => setShowModal(false)} />
+      </Dialog>
     </div>
   );
 };

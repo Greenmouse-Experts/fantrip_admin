@@ -13,31 +13,37 @@
 .monts {
   font-family: "Montserrat", sans-serif;
 }
-@media (prefers-color-scheme: dark){
-  .css-14xmt93 >.ps-menu-button{
+@media (prefers-color-scheme: dark) {
+  .css-14xmt93 > .ps-menu-button {
     background: #0e1624 !important;
   }
 }
 
-.css-jn69v9{
+.css-jn69v9 {
   position: relative !important;
   top: -2px !important;
 }
-.css-1cuxlhl{
+.css-1cuxlhl {
   position: relative !important;
   top: -2px !important;
 }
-.css-12w9als{
+.css-12w9als {
   font-size: 14px !important;
 }
-.react-calendar{
+.react-calendar {
   border-radius: 10px;
   padding-bottom: 10px;
   border: 1.5px solid #9847fe;
 }
 @media (max-width: 380px) {
-  .react-calendar{
+  .react-calendar {
     width: 260px;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .react-calendar__tile:disabled {
+    background: #443f3f !important;
+    color: #a58686 !important;
   }
 }
 
@@ -180,7 +186,7 @@
   }
 
   .bg-secondary {
-    background: #FC819F;
+    background: #fc819f;
   }
 
   .text-primary {
@@ -216,7 +222,7 @@
     border-radius: 50px;
   }
   .btn-int {
-    background:  #9847FE ;
+    background: #9847fe;
     color: white;
     font-weight: 500;
     border-radius: 6.75px;
@@ -302,23 +308,28 @@
     background: linear-gradient(86.78deg, #0e1624 1.8%, #2f1840 97.69%);
   }
   .bg-faq {
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 100%),  url('/src/assets/images/resized-3.png');
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.75) 0%,
+        rgba(0, 0, 0, 0) 100%
+      ),
+      url("/src/assets/images/resized-3.png");
     background-position: fixed;
   }
-  .footer-gradient{
-    background: linear-gradient(106.7deg, #341C5B 2.13%, #14131E 100%);
+  .footer-gradient {
+    background: linear-gradient(106.7deg, #341c5b 2.13%, #14131e 100%);
   }
-  .form-shadow{
+  .form-shadow {
     box-shadow: 0px 4px 26px 0px #00000021;
   }
-  .circle-shadow{
+  .circle-shadow {
     box-shadow: 0px 4px 4px 0px #00000040;
   }
-  .sidebar-shadow{
-    box-shadow: 0px 4px 73px 0px #0000000F;
+  .sidebar-shadow {
+    box-shadow: 0px 4px 73px 0px #0000000f;
   }
-  .logout-grad{
-    background: linear-gradient(128.49deg, #9847FE 19.86%, #FC819F 68.34%);
+  .logout-grad {
+    background: linear-gradient(128.49deg, #9847fe 19.86%, #fc819f 68.34%);
   }
   .bg-background {
     width: 100%;
@@ -327,7 +338,7 @@
     --c1: #9847fe;
     --c2: #5c4f89;
     --c3: #7209f2;
-  
+
     background: repeating-conic-gradient(
           from 30deg,
           #0000 0 120deg,
@@ -342,7 +353,7 @@
       );
     background-size: var(--s) calc(var(--s) * 0.577);
   }
-  .call-btn{
+  .call-btn {
     background: transparent !important;
     box-shadow: none !important;
     padding: 0 !important;
@@ -350,7 +361,7 @@
     border: none;
     outline: none;
   }
-  .chat-gradient{
-    background: linear-gradient(180deg, #FC819F 0%,#9847FE 70%,  #9847FE 100%);
+  .chat-gradient {
+    background: linear-gradient(180deg, #fc819f 0%, #9847fe 70%, #9847fe 100%);
   }
 }

@@ -33,10 +33,10 @@ const StayDetailsIndex: FC<Props> = ({ data }) => {
         <div className="lg:w-7/12 relative">
           <StayGallery data={photos} />
           <div className="absolute z-20 top-3 left-3 w-[150px]">
-            <div className="bg-[#FFEDF2] rounded-t-[10px] text-center p-4 pb-7">
+            <div className="bg-[#FFEDF2] dark:bg-[#131313] rounded-t-[10px] text-center p-4 pb-7">
               <p className="fs-300 fw-500">5 Star Rating</p>
             </div>
-            <div className="p-2 pb-4 pt-6 relative bg-white rounded-b-[10px]">
+            <div className="p-2 pb-4 pt-6 relative bg-white dark:bg-black rounded-b-[10px]">
               <li className="fs-300">Recommended</li>
               <li className="fs-300 mt-1">{highlightFeature}</li>
               <div className="absolute left-0 w-full -top-[12px]  flex justify-center">
@@ -67,11 +67,11 @@ const StayDetailsIndex: FC<Props> = ({ data }) => {
           </div>
         </div>
         <div className="w-5/12">
-          <ExtraInfo stay={data}/>
+          <ExtraInfo stay={data} />
         </div>
       </div>
-      <div className="mt-12 lg:mt-20 bg-[#EDEDFF] p-4 lg:px-8 lg:py-12 rounded-[11px]">
-        <p className="text-[#494949] lg:w-9/12 mx-auto text-center">
+      <div className="mt-12 lg:mt-20 bg-[#EDEDFF] dark:bg-[#131313] p-4 lg:px-8 lg:py-12 rounded-[11px]">
+        <p className="text-[#494949] dark:text-gray-200 lg:w-9/12 mx-auto text-center">
           Make your next game day unforgettable by staying in the heart of the
           action. Ready to feel the roar of the crowd and the comfort of home?
           Book now or message us for more details!

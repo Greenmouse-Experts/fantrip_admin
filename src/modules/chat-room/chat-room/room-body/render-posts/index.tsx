@@ -10,8 +10,9 @@ import useAuth from "../../../../../hooks/authUser";
 interface Props {
   reload: string;
   socket: any;
+  reloadAction: () => void;
 }
-const RenderPostsIndex: FC<Props> = ({ reload, socket }) => {
+const RenderPostsIndex: FC<Props> = ({ reload, socket, reloadAction }) => {
   const { token, userId } = useAuth();
   const { community } = useChat();
   const [prevPosts, setPrevPosts] = useState<PostTyping[]>([]);
@@ -43,11 +44,25 @@ const RenderPostsIndex: FC<Props> = ({ reload, socket }) => {
     <div className="grid mt-4 gap-4">
       {prevPosts.map((item, i) => {
         if (item.file === null)
-          return <TextPostRender socket={socket} item={item} key={i} />;
+          return <TextPostRender socket={socket} item={item} key={i} reload={reloadAction} />;
         if (isImageUrl(item.file))
-          return <ImagePostRender socket={socket} item={item} key={i} />;
+          return (
+            <ImagePostRender
+              socket={socket}
+              item={item}
+              key={i}
+              reload={reloadAction}
+            />
+          );
         if (isVideoUrl(item.file))
-          return <VideoPostRender socket={socket} item={item} key={i} />;
+          return (
+            <VideoPostRender
+              socket={socket}
+              item={item}
+              key={i}
+              reload={reloadAction}
+            />
+          );
       })}
     </div>
   );

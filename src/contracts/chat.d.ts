@@ -90,9 +90,57 @@ export interface ChatStoreItem {
   guest: ChatUserItem;
 }
 
+export interface CommunityItemTyping {
+  id: string;
+  name: string;
+  icon: string;
+  isDisclosed: boolean;
+  type: string;
+  createdDate: string;
+  updatedDate: string;
+}
+
 export interface CommunityItem {
+  communities: CommunityItemTyping[];
   activeId: string;
   name: string;
+}
+
+export interface PollQuestion {
+  createdDate: string;
+  deletedDate: string | null;
+  expiryDate: string;
+  id: string;
+  multipleVote: boolean;
+  options: string[];
+  postId: string;
+  question: string;
+  updatedDate: string;
+  voteResults: {
+    myVote: boolean;
+    option: string;
+    percentage: number;
+    total: number;
+  }[];
+}
+
+export interface QuizQuestion {
+  createdDate: string;
+  deletedDate: string | null;
+  expiryDate: string;
+  id: string;
+  multipleVote: boolean;
+  options: string[];
+  postId: string;
+  question: string;
+  updatedDate: string;
+  rightAnswer: string;
+  attemptResults: {
+    myAttempt: boolean;
+    option: string;
+    percentage: number;
+    total: number;
+  }[];
 }
 
 export interface PostTyping {
@@ -103,6 +151,9 @@ export interface PostTyping {
   communityId: string;
   createdDate: string;
   updatedDate: string;
+  myReaction?: string;
+  pollQuestion?: PollQuestion;
+  quizQuestion?: QuizQuestion;
   user: {
     firstName: string;
     lastName: string;
@@ -112,8 +163,39 @@ export interface PostTyping {
     picture: string;
     isNickname: boolean;
     id: string;
+    reviews: [];
+    favTeam: string;
+    bio: string;
   };
   downvotes: number;
   upvotes: number;
   threads: number;
+}
+
+export interface CommentItem {
+  createdDate: string;
+  downvotes: number;
+  id: string;
+  message: string;
+  postId: string;
+  published: boolean;
+  totalReplies: number;
+  updatedDate: string;
+  upvotes: number;
+  user: {
+    avgRating: null;
+    firstName: string;
+    id: string;
+    isNickname: boolean;
+    lastName: string;
+    nickname: string;
+    picture: string;
+    reviews: string[];
+    role: string;
+    totalReviews: number;
+    verifiedAsHost: boolean;
+    favTeam: string;
+    bio: string;
+  };
+  userId: string;
 }

@@ -15,10 +15,11 @@ import {
 } from "@material-tailwind/react";
 import { FcApproval } from "react-icons/fc";
 import useDialog from "../../../../hooks/useDialog";
-import { verifyHost } from "../../../../services/api/users-api";
+import { unverifyHost, verifyHost } from "../../../../services/api/users-api";
 import { toast } from "react-toastify";
 import ReusableModal from "../../../../components/ReusableModal";
 import SuspendUser from "../../user-action/suspend-user";
+import { TbUserCancel } from "react-icons/tb";
 
 interface Props {
   data: UserItem[];
@@ -31,10 +32,17 @@ const HostTableListing: FC<Props> = ({ data, count, next, prev, refetch }) => {
   const [selectedId, setSelectedId] = useState("");
   const [isBusy, setIsBusy] = useState(false);
   const { Dialog: Verify, setShowModal: ShowVerify } = useDialog();
+  const { Dialog: Unverify, setShowModal: ShowUnverify } = useDialog();
 
   const openVerify = (id: string) => {
     setSelectedId(id);
     ShowVerify(true);
+  };
+
+
+  const openUnverify = (id: string) => {
+    setSelectedId(id);
+    ShowUnverify(true);
   };
 
   // function to verify host
@@ -52,6 +60,23 @@ const HostTableListing: FC<Props> = ({ data, count, next, prev, refetch }) => {
         toast.error(err.response.data.message);
       });
   };
+
+  // function to unverify host
+  const unverifyHostAction = async () => {
+    setIsBusy(true);
+    await unverifyHost(selectedId)
+      .then((res) => {
+        setIsBusy(false);
+        toast.success(res.message);
+        refetch();
+        ShowUnverify(false);
+      })
+      .catch((err: any) => {
+        setIsBusy(false);
+        toast.error(err.response.data.message);
+      });
+  };
+
   const columnHelper = createColumnHelper<UserItem>();
   const columns = [
     columnHelper.accessor((row) => row.picture, {
@@ -108,13 +133,23 @@ const HostTableListing: FC<Props> = ({ data, count, next, prev, refetch }) => {
               </Button>
             </MenuHandler>
             <MenuList>
-              <MenuItem
-                className="flex text-black gap-x-2 items-center"
-                onClick={() => openVerify(info.row.original.id)}
-              >
-                <FcApproval className="text-xl relative top-[1px]" />
-                Verify Host
-              </MenuItem>
+              {!info.getValue() ? (
+                <MenuItem
+                  className="flex text-black gap-x-2 items-center"
+                  onClick={() => openVerify(info.row.original.id)}
+                >
+                  <FcApproval className="text-xl relative top-[1px]" />
+                  Verify Host
+                </MenuItem>
+              ) : (
+                <MenuItem
+                  className="flex text-red-600 gap-x-2 items-center"
+                  onClick={() => openUnverify(info.row.original.id)}
+                >
+                  <TbUserCancel className="text-xl tex-red-600 relative top-[1px]" />
+                  Unverify Host
+                </MenuItem>
+              )}
             </MenuList>
           </Menu>
         </div>
@@ -161,6 +196,16 @@ const HostTableListing: FC<Props> = ({ data, count, next, prev, refetch }) => {
           isBusy={isBusy}
         />
       </Verify>
+      <Unverify title="" size="md">
+        <ReusableModal
+          title="Do you want to unverify this host?"
+          action={() => unverifyHostAction()}
+          actionTitle="Unverify Host"
+          cancelTitle="Close"
+          closeModal={() => ShowUnverify(false)}
+          isBusy={isBusy}
+        />
+      </Unverify>
     </div>
   );
 };

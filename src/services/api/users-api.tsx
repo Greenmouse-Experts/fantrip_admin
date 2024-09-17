@@ -49,6 +49,12 @@ export const verifyHost = async (id: string) => {
     .then((response) => response.data);
 };
 
+export const unverifyHost = async (id: string) => {
+  return axios
+    .patch(`${ENDPOINT.UNVERIFY_HOST}/${id}`)
+    .then((response) => response.data);
+};
+
 export const suspendUser = async (id: string, payload:SuspendUserPayload ) => {
   return axios
     .patch(`${ENDPOINT.SUSUPEND_USER}/${id}`, payload)

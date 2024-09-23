@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import { MdReadMore } from "react-icons/md";
 import SuspendUser from "../../user-action/suspend-user";
+import { checkIfIsoAndFormat } from "../../../../utils/helper-function";
 
 interface Props {
   data: UserItem[];
@@ -40,7 +41,7 @@ const GuestTableListing: FC<Props> = ({ data, count, next, prev }) => {
     }),
     columnHelper.accessor((row) => row.country, {
       id: "Country",
-      cell: (info) => info.getValue(),
+      cell: (info) => checkIfIsoAndFormat(info.getValue()),
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.isSuspended, {

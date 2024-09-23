@@ -20,6 +20,7 @@ import { toast } from "react-toastify";
 import ReusableModal from "../../../../components/ReusableModal";
 import SuspendUser from "../../user-action/suspend-user";
 import { TbUserCancel } from "react-icons/tb";
+import { checkIfIsoAndFormat } from "../../../../utils/helper-function";
 
 interface Props {
   data: UserItem[];
@@ -102,7 +103,7 @@ const HostTableListing: FC<Props> = ({ data, count, next, prev, refetch }) => {
     }),
     columnHelper.accessor((row) => row.country, {
       id: "Country",
-      cell: (info) => info.getValue(),
+      cell: (info) => checkIfIsoAndFormat(info.getValue()),
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.isSuspended, {

@@ -7,6 +7,7 @@ import {
   formatPhoneNumber,
 } from "../../../../../utils/formatHelp";
 import SuspendUser from "../../../user-action/suspend-user";
+import { checkIfIsoAndFormat } from "../../../../../utils/helper-function";
 
 interface Props {
   user: HostDetailItem;
@@ -66,7 +67,7 @@ const ProfileSidebar: FC<Props> = ({ user }) => {
           </div>
           <div className="">
             <p>Country:</p>
-            <p className="opacity-60">{country}</p>
+            <p className="opacity-60">{checkIfIsoAndFormat(country)}</p>
           </div>
         </div>
       </div>

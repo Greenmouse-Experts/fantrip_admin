@@ -5,6 +5,7 @@ import SocialLinks from "./social-links";
 import { FC } from "react";
 import { UserItem } from "../../../../../contracts/users";
 import { formatPhoneNumber, formatStatus } from "../../../../../utils/formatHelp";
+import { checkIfIsoAndFormat } from "../../../../../utils/helper-function";
 
 interface Props{
   data: UserItem
@@ -52,7 +53,7 @@ const ProfileSidebar:FC<Props> = ({data}) => {
           </div>
           <div className="">
             <p>Country:</p>
-            <p className="opacity-60">{data.country}</p>
+            <p className="opacity-60">{checkIfIsoAndFormat(data.country)}</p>
           </div>
           <div>
             <SocialLinks insta={data.instagramUrl} fb={data.facebookUrl} link={data.linkedinUrl} tweet={data.twitterUrl}/>

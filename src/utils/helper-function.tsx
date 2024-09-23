@@ -1,3 +1,5 @@
+import { Country } from "country-state-city";
+
 export const  isImageUrl = (url: string): boolean => {
     if (!url) return false;
     const imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "webp", "svg"];
@@ -27,3 +29,10 @@ export const  isImageUrl = (url: string): boolean => {
     // Return the matches, or an empty array if no matches found
     return matches ? matches : [];
   };
+
+  export const checkIfIsoAndFormat = (country:string): string => {
+    if(!country) return '';
+    const length = country.length
+    const formatted = length > 2? country : Country.getCountryByCode(country)?.name
+    return `${formatted}`
+  }

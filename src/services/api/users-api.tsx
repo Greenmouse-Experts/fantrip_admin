@@ -31,9 +31,9 @@ axios.interceptors.response.use(
   }
 );
 
-export const getUser = async (type: ENDPOINT.USER_TYPES, page: number) => {
+export const getUser = async (type: ENDPOINT.USER_TYPES, page: number, searchParams: string) => {
   return axios
-    .get(`${ENDPOINT.GET_USERS}/${type}?page=${page}`)
+    .get(`${ENDPOINT.GET_USERS}/${type}?page=${page}&searchKey=${searchParams}`)
     .then((response) => response.data);
 };
 
@@ -46,6 +46,12 @@ export const getUserDetails = async (id:string, type: ENDPOINT.USER_TYPES) => {
 export const verifyHost = async (id: string) => {
   return axios
     .patch(`${ENDPOINT.VERIFY_HOST}/${id}`)
+    .then((response) => response.data);
+};
+
+export const unverifyHost = async (id: string) => {
+  return axios
+    .patch(`${ENDPOINT.UNVERIFY_HOST}/${id}`)
     .then((response) => response.data);
 };
 

@@ -14,7 +14,8 @@ export const UPDATE_PASSWORD = `/auth/update-password`
 // user endpoints
 export const GET_USERS = `/user/clients`
 export const GET_USER_DETAIL = `/user/details`
-export const VERIFY_HOST = `user/validate-host`
+export const VERIFY_HOST = `/user/validate-host`
+export const UNVERIFY_HOST = `/user/unverify-host`
 export const SUSUPEND_USER = `/user/suspend-unsuspend-user`
 
 // properties endpoints

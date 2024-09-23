@@ -17,7 +17,7 @@ const BookingListing = () => {
   return (
     <div>
       <div className="mb-3">
-        <BookingFilter param={params} setParams={setParams}/>
+        <BookingFilter param={params} setParams={setParams} />
       </div>
       {isLoading && (
         <div className="place-center py-12 lg:py-24">

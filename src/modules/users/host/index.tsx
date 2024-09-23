@@ -4,12 +4,14 @@ import { USER_TYPES } from "../../../services/constant";
 import HueSpinner from "../../../components/loaders/hue-spinner";
 import HostTableListing from "./components/host-table-listing";
 import { useState } from "react";
+import ReusableSearchBox from "../../../components/reusable-search";
 
 const HostListing = () => {
-  const [page, setPage] = useState(1);
+  const [searchParams, setSearchParams] = useState<string>('')
+  const [page, setPage] = useState<number>(1);
   const { isLoading, data, refetch } = useQuery({
-    queryKey: ["get-hosts", page],
-    queryFn: () => getUser(USER_TYPES.HOST, page),
+    queryKey: ["get-hosts", page, searchParams],
+    queryFn: () => getUser(USER_TYPES.HOST, page, searchParams),
   });
 
   const handleNext = () => {
@@ -25,6 +27,9 @@ const HostListing = () => {
   };
   return (
     <div>
+        <div className="w-[300px] lg:w-[400px] mb-3 mt-2">
+        <ReusableSearchBox setParams={setSearchParams} params={searchParams} />
+      </div>
       {isLoading && (
         <div className="place-center py-12 lg:py-24">
           <HueSpinner size={1.3} />

@@ -31,9 +31,9 @@ axios.interceptors.response.use(
   }
 );
 
-export const getUser = async (type: ENDPOINT.USER_TYPES, page: number) => {
+export const getUser = async (type: ENDPOINT.USER_TYPES, page: number, searchParams: string) => {
   return axios
-    .get(`${ENDPOINT.GET_USERS}/${type}?page=${page}`)
+    .get(`${ENDPOINT.GET_USERS}/${type}?page=${page}&searchKey=${searchParams}`)
     .then((response) => response.data);
 };
 

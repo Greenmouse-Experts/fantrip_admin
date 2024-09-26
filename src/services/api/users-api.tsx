@@ -61,3 +61,15 @@ export const suspendUser = async (id: string, payload:SuspendUserPayload ) => {
     .then((response) => response.data);
 };
 
+export const getNotify = async (page: number) => {
+  return axios
+    .get(`${ENDPOINT.GET_NOTIFY}?page=${page}`)
+    .then((response) => response.data);
+};
+
+export const markNotify = async (id:string) => {
+  return axios
+    .patch(`${ENDPOINT.MARK_AS_READ}/${id}`)
+    .then((response) => response.data);
+};
+

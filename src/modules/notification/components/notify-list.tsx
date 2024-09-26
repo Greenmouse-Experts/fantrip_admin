@@ -19,7 +19,7 @@ const NotifyList: FC<Props> = ({ data, type, refetch }) => {
   let notifyToRender = data;
 
   if (type === "read") {
-    notifyToRender = data.filter((item) => item.read);
+    notifyToRender = data.filter((item) => !item.read);
   }
 
   const readNotify = useMutation({

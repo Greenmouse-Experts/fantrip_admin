@@ -31,7 +31,7 @@ const NotificationIndex = () => {
   };
 
   const unreadLength =
-    data?.data?.filter((item: NotifyItem) => item.read)?.length || 0;
+    data?.data?.filter((item: NotifyItem) => !item.read)?.length || 0;
 
   const notifyTabs = [
     {

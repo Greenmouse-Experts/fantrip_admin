@@ -16,7 +16,7 @@ const GuestListing = () => {
   });
 
   const handleNext = () => {
-    if (data.count > page * 10) {
+    if (data.count > page * 12) {
       setPage(page + 1);
     }
   };

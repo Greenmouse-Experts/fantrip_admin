@@ -63,3 +63,7 @@ export const GET_RESERVATION = `/reservations`
 export const GET_BOOKINGS = `/bookings/fetch-guest-trx`
 export const GET_SINGLE_BOOKING = `/bookings/fetch-trx`
 export const GET_BOOKING_STAT = `/bookings/count`;
+
+// notification endpoints
+export const GET_NOTIFY = `/notifications/admin`
+export const MARK_AS_READ = `/notifications/mark-as-read`

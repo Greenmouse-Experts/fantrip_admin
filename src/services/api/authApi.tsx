@@ -49,3 +49,4 @@ export const updatePassword = async (payload:any) => {
     .post(`${ENDPOINT.UPDATE_PASSWORD}`, payload)
     .then((response) => response.data);
 };
+

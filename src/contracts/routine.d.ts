@@ -58,11 +58,10 @@ export interface PlaceItemLocation {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   spot: string | any;
   imageUrl?: string;
-  published:boolean;
-  picture:string;
-  createdDate:string;
+  published: boolean;
+  picture: string;
+  createdDate: string;
 }
-
 
 export interface PlaceLocation {
   id: string;
@@ -73,12 +72,10 @@ export interface PlaceLocation {
   picture: string | null;
 }
 
-
 export interface PlaceItemInput {
   name: string;
   imageUrl?: string;
 }
-
 
 export interface PlaceItem {
   id: string;
@@ -118,4 +115,13 @@ export interface TaxItem {
   id: string;
   isActive: boolean;
   createdDate: string;
+}
+
+export interface NotifyItem {
+  body: string;
+  createdDate: string;
+  id: string;
+  read: boolean;
+  title: string;
+  userGroup:string;
 }

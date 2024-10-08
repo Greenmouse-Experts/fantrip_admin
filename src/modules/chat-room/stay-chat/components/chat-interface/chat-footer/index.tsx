@@ -5,8 +5,9 @@ import useAuth from "../../../../../../hooks/authUser";
 
 interface Props {
   socket: any;
+  refetch: React.Dispatch<React.SetStateAction<string>>
 }
-const ChatFooter: FC<Props> = ({socket}) => {
+const ChatFooter: FC<Props> = ({socket, refetch}) => {
   const { guestInfo } = useChat();
   const { token } = useAuth();
   const [msgInput, setMsgInput] = useState("");
@@ -15,12 +16,12 @@ const ChatFooter: FC<Props> = ({socket}) => {
     if (msgInput === "") {
       return;
     }
-    console.log({
-      chatBuddy: guestInfo.id,
-      message: msgInput,
-      file: null,
-      token: `${token}`,
-    });
+    // console.log({
+    //   chatBuddy: guestInfo.id,
+    //   message: msgInput,
+    //   file: null,
+    //   token: `${token}`,
+    // });
     
     socket.emit("sendMessage", {
       chatBuddy: guestInfo.id,
@@ -29,6 +30,7 @@ const ChatFooter: FC<Props> = ({socket}) => {
       token: `${token}`,
     });
     setMsgInput("");
+    refetch(new Date().toLocaleString())
   };
   return (
     <div className="p-2">

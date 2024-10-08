@@ -1,9 +1,9 @@
 import { FC } from "react";
+import dayjs from "dayjs";
 import { LuClock } from "react-icons/lu";
 import { MdOutlineLocalHotel } from "react-icons/md";
 import { NotifyItem } from "../../../contracts/routine";
 import { formatText } from "../../../utils/helper-function";
-import dayjs from "dayjs";
 import { useMutation } from "@tanstack/react-query";
 import { markNotify } from "../../../services/api/users-api";
 import { toast } from "react-toastify";

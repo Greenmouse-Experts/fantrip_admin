@@ -14,13 +14,9 @@ interface Props{
 }
 const AllUsersList:FC<Props> = ({close}) => {
   const [searchParams, setSearchParams] = useState<string>('')
-  const [params, setParams] = useState({
-    page: 1,
-    q: "",
-  });
   const { isLoading, data } = useQuery({
-    queryKey: ["get-hosts", params.page, searchParams],
-    queryFn: () => getUser(USER_TYPES.HOST, params.page, searchParams),
+    queryKey: ["get-hosts", searchParams],
+    queryFn: () => getUser(USER_TYPES.GUEST, 1, searchParams),
   });
 
   const { saveGuestInfo} = useChat();
@@ -37,7 +33,6 @@ const AllUsersList:FC<Props> = ({close}) => {
     };
     saveGuestInfo(payload, "");
     setShowModal(true);
-    setParams({...params}) // remove later
     close()
   };
 

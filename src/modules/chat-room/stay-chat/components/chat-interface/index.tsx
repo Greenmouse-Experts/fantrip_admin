@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import ChatBody from "./chat-body";
 import ChatFooter from "./chat-footer";
 import ChatHeader from "./chat-header";
@@ -12,16 +12,17 @@ interface Props {
 const socket = io(`${SOCKET_URL}`);
 
 const ChatInterface: FC<Props> = ({ close }) => {
+  const [refetch, setRefetch] = useState("");
   return (
     <div className="h-full">
       <div className="h-[64px]">
         <ChatHeader close={close} />
       </div>
       <div className="h-[calc(100%_-_130px)]">
-        <ChatBody socket={socket} />
+        <ChatBody socket={socket} refetch={refetch} />
       </div>
       <div className="h-[66px] border">
-        <ChatFooter socket={socket} />
+        <ChatFooter socket={socket} refetch={setRefetch} />
       </div>
     </div>
   );

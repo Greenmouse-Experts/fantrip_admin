@@ -67,3 +67,6 @@ export const GET_BOOKING_STAT = `/bookings/count`;
 // notification endpoints
 export const GET_NOTIFY = `/notifications/admin`
 export const MARK_AS_READ = `/notifications/mark-as-read`
+
+// dashboard analytics
+export const GET_ANALYTICS = `/analytics/admin-stat`

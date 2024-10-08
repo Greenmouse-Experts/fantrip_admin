@@ -47,7 +47,7 @@ const DashboardLayout = () => {
                 </div>
                 <div className="flex gap-x-2 lg:gap-x-3">
                   <ThemeSwitch/>
-                  <BsBell className='text-xl cursor-pointer'/>
+                  <BsBell className='text-xl cursor-pointer' onClick={() => navigate('/notifications')}/>
                   <ImSwitch className='text-xl cursor-pointer' onClick={() => setShowModal(true)}/>
                 </div>
               </div>

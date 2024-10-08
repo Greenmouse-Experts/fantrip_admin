@@ -6,8 +6,9 @@ import { useChat } from "../../../../../../hooks/useChat";
 
 interface Props {
   socket: any;
+  refetch: string;
 }
-const ChatBody: FC<Props> = ({ socket }) => {
+const ChatBody: FC<Props> = ({ socket, refetch }) => {
   const {
     guestId,
     chatWithGuest,
@@ -21,8 +22,10 @@ const ChatBody: FC<Props> = ({ socket }) => {
 
   // on load get previous messages or message history
   const getMessages = () => {
+    
     const onListenEvent = (value: any) => {
       setIsLoaded(true);
+      
       saveChatWithGuest(value.data.result);
     };
     socket.on(`messagesRetrieved:${userId}`, onListenEvent);
@@ -56,7 +59,7 @@ const ChatBody: FC<Props> = ({ socket }) => {
     if (!chatWithGuest.length) {
       getMessages();
     }
-  }, [socket, guestId]);
+  }, [socket, guestId, refetch]);
 
   useEffect(() => {
     if (isLoaded) {
@@ -74,6 +77,9 @@ const ChatBody: FC<Props> = ({ socket }) => {
       }
     }
   }, [newMsg, socket]);
+
+  console.log(newMsg, chatWithGuest);
+  
 
   // Scroll to the bottom of the div when new message is added
   const scrollRef = useRef<HTMLDivElement | null>(null);

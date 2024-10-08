@@ -1,7 +1,16 @@
 import { PiChartLineDown, PiChartLineUp } from "react-icons/pi";
 import { formatNumber } from "../../utils/formatHelp";
+import { FC } from "react";
 
-const BoxAnalysis = () => {
+interface Props {
+  data: {
+    newUsers: number | undefined;
+    totalGuests: number | undefined;
+    totalHosts: number | undefined;
+    totalListings: number | undefined;
+  };
+}
+const BoxAnalysis:FC<Props> = ({data:item}) => {
   const bgs: string[] = [
     "bg-[#9847FE]",
     "bg-[#FC819F]",
@@ -11,25 +20,25 @@ const BoxAnalysis = () => {
   const data = [
     {
       name: "Listings",
-      number: "7265",
-      rise: "+11.02%",
+      number: item?.totalListings || 0,
+      rise: "+00.00%",
       up: true,
     },
     {
       name: "Guests",
-      number: "3617",
-      rise: "-0.02%",
+      number: item?.totalGuests || 0,
+      rise: "-0.00%",
       up: false,
     },
     {
       name: "New Users",
-      number: "156",
+      number: item?.newUsers || 0,
       rise: "+15.02%",
       up: true,
     },
     {
       name: "Hosts",
-      number: "3145",
+      number: item?.totalHosts || 0,
       rise: "+6.02%",
       up: true,
     },
@@ -41,12 +50,15 @@ const BoxAnalysis = () => {
           const colorIndex = index % bgs.length;
           const color = bgs[colorIndex];
           return (
-            <div className={`${color} text-white p-6 rounded-[21px]`} key={item.name}>
+            <div
+              className={`${color} text-white p-6 rounded-[21px]`}
+              key={item.name}
+            >
               <p>{item.name}</p>
               <div className="flex mt-6 items-center justify-between">
                 <p className="fw-600 text-2xl">{formatNumber(item.number)}</p>
                 <div className="flex gap-x-1 items-center">
-                  <p className="fs-500">{item.rise}</p>
+                  {/* <p className="fs-500">{item.rise}</p> */}
                   {item.up ? <PiChartLineUp /> : <PiChartLineDown />}
                 </div>
               </div>
